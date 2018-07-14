@@ -1,19 +1,19 @@
-<div *ngIf="selectedHero">
+<div *ngIf="hero">
   <label> Hero Info: </label>
-  <span> {{selectedHero.id}}</span>
-  <h2> {{selectedHero.name}}</h2>
-  <span> {{selectedHero.phoneNumber}}</span>
+  <span> {{hero.id}}</span>
+  <h2> {{hero.name}}</h2>
+  <span> {{hero.phoneNumber}}</span>
 </div>
-<h2>{{selectedHero.name | uppercase}} Details</h2>
-<div *ngIf="selectedHero" ><span>id: </span>{{selectedHero.id}}
+<h2>{{hero.name | uppercase}} Details</h2>
+<div *ngIf="hero" ><span>id: </span>{{hero.id}}
   <label>name:
-    <input [(ngModel)]="selectedHero.name" placeholder="name">
+    <input [(ngModel)]="hero.name" placeholder="name">
   </label>
 </div>
 <div>
   <h2> demanding superheroes</h2>
   <ul class="heroes" >
-    <li *ngFor="let hero of heroes" (click)="onSelect(hero)" [class.selected]="hero === selectedHero">
+    <li *ngFor="let hero of heroes" (click)="onSelect(hero)" [class.selected]="hero === hero">
       <span class="badge">
         {{hero.id}}
       </span>
@@ -26,3 +26,4 @@
     </li>
   </ul>
 </div>
+<app-hero-detail [hero]="selectedHero"></app-hero-detail>
