@@ -2,7 +2,7 @@
  * Created by Arya on 7/14/2018.
  */
 import {Hero} from './Hero';
-export const superHeros: Hero[] = [
+export const superHeroes: Hero[] = [
     { id: 1 , name: 'batman' , phoneNumber: '62538568'},
     { id: 2 , name: 'watman' , phoneNumber: '574298'},
     { id: 3 , name: 'spiderman' , phoneNumber: '5794857'},
