@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {Hero} from './Hero';
 import {superHeroes} from './Superheroes';
-import {Observable, of} from 'rxjs'; // for handling async data sync :)
+import {BehaviorSubject, Observable, of} from 'rxjs'; // for handling async data sync :)
 import { MessageService } from './message.service';
 import {HttpClient} from '@angular/common/http'; // for handling messages and shit
 // service in service scenario common
@@ -9,24 +9,26 @@ import {HttpClient} from '@angular/common/http'; // for handling messages and sh
   providedIn: 'root'
 })
 export class HeroService {
+  private _Heroes: BehaviorSubject<Hero[]>;
   private dataStore: {
     heroes: Hero[]
   };
   constructor(private messageService: MessageService, private http: HttpClient) {
     this.dataStore = {heroes : []};
+    this._Heroes = new BehaviorSubject<Hero[]>([]);
   }
-  fetchData(): void{
+  fetchData() {
     this.messageService.add('HeroService: fetched heroes');
-    const heroesUrl = 'https://localhost:5001/api/Person';
-    return this.http.get<Hero>(heroesUrl)
+    const heroesUrl = 'https://raw.githubusercontent.com/Arya11b/AngularMaterialApp/master/datas';
+    return this.http.get<Hero[]>(heroesUrl)
       .subscribe(data => {
         this.dataStore.heroes = data;
+        this._Heroes.next(Object.assign({}, this.dataStore).heroes);
       }, error => {
-        console.log('failed to load data');
+        console.log(console.log(error));
       });
   }
   getHeroes(): Observable<Hero[]> {
-    this.fetchData();
-    return of(this.dataStore.heroes);
+    return this._Heroes.asObservable();
   }
 }

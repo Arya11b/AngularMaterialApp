@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Hero} from '../Hero';
 import {HeroService} from '../hero.service';
+import {Observable} from "rxjs/index";
 @Component({
   selector: 'app-heroes',
   templateUrl: './heroes.component.html',
@@ -8,6 +9,7 @@ import {HeroService} from '../hero.service';
 })
 export class HeroesComponent implements OnInit {
   heroes: Hero[];
+  oHeroes: Observable<Hero[]>;
   selectedHero: Hero;
   constructor(private heroService: HeroService) {
     // this.heroes = [{
@@ -20,8 +22,10 @@ export class HeroesComponent implements OnInit {
     this.getHeroes();
   }
   getHeroes(): void {
-    this.heroService.getHeroes()
-      .subscribe(heroes => this.heroes = heroes);
+    this.oHeroes = this.heroService.getHeroes();
+    this.heroService.fetchData();
+    this.oHeroes
+      .subscribe(data => this.heroes = data);
   }
 
   onSelect(hero: Hero): void {
