@@ -13,8 +13,11 @@
   text-align: center;
 }
 .heroes li {
+  flex: 1;
+  width: 100%;
   cursor: pointer;
   position: relative;
+  alignment: center;
   left: 0;
   background-color: #EEE;
   margin: .5em;
@@ -32,7 +35,6 @@
   left: .1em;
 }
 .heroes .text {
-  position: relative;
   top: -3px;
 }
 .heroes .badge {
@@ -49,17 +51,7 @@
   margin-right: .8em;
   border-radius: 4px 0 0 4px;
 }
-.heroes .badgerl {
-  display: inline-block;
-  font-size: small;
-  color: white;
-  padding: 0.8em 0.7em 0 0.7em;
-  background-color: #607D8B;
-  line-height: 1em;
-  position: relative;
-  right: -1px;
-  top: -4px;
-  height: 1.8em;
-  margin-left: .8em;
-  border-radius: 0 4px 4px 0;
+.minipro{
+  border: solid 1px;
+
 }

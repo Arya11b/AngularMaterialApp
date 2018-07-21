@@ -11,6 +11,8 @@ import {MaterialModule} from './shared/material.module';
 import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
+import { ToolbarComponent } from './toolbar/toolbar.component';
+import {HttpClientModule} from "@angular/common/http";
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,12 +20,14 @@ import {FlexLayoutModule} from '@angular/flex-layout';
     HeroDetailComponent,
     MessagesComponent,
     HomeComponent,
-    MenuComponent
+    MenuComponent,
+    ToolbarComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
     AppRoutingModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule

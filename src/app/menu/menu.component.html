@@ -1,3 +1,14 @@
-<p>
-  menu works!
-</p>
+<mat-sidenav-container class="bar-container">
+  <mat-sidenav #sidenav class="bar-sidenav mat-elevation-z12" [opened]="!isScreenSmall()" [mode]="isScreenSmall()?'over':'side'">
+    <mat-toolbar color="primary" class="bar-sidenav-title">In Demand Superheroes</mat-toolbar>
+    <mat-list>
+      <app-heroes></app-heroes>
+    </mat-list>
+  </mat-sidenav>
+  <div class="bar-sidenav-content">
+    <app-toolbar (toggleSideNav)="sidenav.toggle()"></app-toolbar>
+    <mat-card>
+      <router-outlet></router-outlet>
+    </mat-card>
+  </div>
+</mat-sidenav-container>

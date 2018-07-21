@@ -1,0 +1,9 @@
+[{ id: 1 , alias: 'batman' , firstName: 'bruce' , lastName: 'wayne' , phoneNumber: '62538568', picture: ''},
+    { id: 2 , alias: 'watman' , firstName: 'Arya' , lastName: 'wat' , phoneNumber: '574298', picture: ''},
+    { id: 3 , alias: 'spiderman' , phoneNumber: '5794857', picture: ''},
+    { id: 4 , alias: 'hindsight' , phoneNumber: '5297985', picture: ''},
+    { id: 5 , alias: 'coon' , firstName: 'eric', lastName: 'cartman' , phoneNumber: '239875', picture: ''},
+    { id: 6 , alias: 'mysterion' , firstName: 'eric', lastName: 'cartman' , phoneNumber: '528765', picture: ''},
+    { id: 7 , alias: 'toolshed' , firstName: 'stan', lastName: 'marsh' , phoneNumber: '1579531', picture: ''},
+    { id: 8 , alias: 'chaos' , firstName: 'leopold', lastName: 'stotch' , phoneNumber: '513978', picture: ''},
+    { id: 9 , alias: 'olio' , firstName: 'o', lastName: 'lio' , phoneNumber: '751893', picture: ''}]

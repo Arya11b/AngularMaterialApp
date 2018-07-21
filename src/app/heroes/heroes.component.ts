@@ -4,7 +4,7 @@ import {HeroService} from '../hero.service';
 @Component({
   selector: 'app-heroes',
   templateUrl: './heroes.component.html',
-  styleUrls: ['./heroes.component.css']
+  styleUrls: ['./heroes.component.scss']
 })
 export class HeroesComponent implements OnInit {
   heroes: Hero[];
@@ -12,7 +12,7 @@ export class HeroesComponent implements OnInit {
   constructor(private heroService: HeroService) {
     // this.heroes = [{
     //   id: 312,
-    //   name: 'this is wrong',
+    //   alias: 'this is wrong',
     //   phoneNumber: '75298'
     // }];
   }
