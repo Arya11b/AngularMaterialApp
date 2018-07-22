@@ -1,9 +1,12 @@
 <mat-nav-list>
-<mat-list-item *ngFor="let hero of heroes" (click)="onSelect(selectedHero)" [class.selected]="selectedHero === hero" >
+<mat-list-item class="item" *ngFor="let hero of heroes" >
       <!--<span>{{hero.id}}</span>-->
-          <mat-icon svgIcon={{hero.picture}} class="heroes"></mat-icon> <span class="heroesText">{{ hero.alias }} </span>
+  <div class="heroes">
+  <a matLine [routerLink]="['hero', hero.id]">
+    <mat-icon svgIcon={{hero.picture}} class="heroesPic"></mat-icon> <span class="heroes">{{ hero.alias }}</span>
+  </a>
+  </div>
       <!--<span>{{hero.phoneNumber}}</span>-->
 </mat-list-item>
 </mat-nav-list>
-<!--<app-hero-detail [hero]="selectedHero"></app-hero-detail>-->
-
+<!--[class.selected]="selectedHero === hero" (click)="onSelect(hero)"-->

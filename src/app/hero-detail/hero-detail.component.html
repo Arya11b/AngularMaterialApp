@@ -1,7 +1,11 @@
+<div *ngIf="!hero">
+  <mat-spinner></mat-spinner>
+</div>
 <div *ngIf="hero" >
-  <h2>{{hero.alias | uppercase}} Details</h2>
-  <span>id: </span>{{hero.id}}
-  <label>name:
-    <input [(ngModel)]="hero.alias" placeholder="name">
-  </label>
+  <mat-card class="mat-elevation-z10" class="contactCard">
+    <mat-icon mat-card-avatar svgIcon="{{hero.picture}}" class="heroesPicLarge"></mat-icon>
+    <mat-card-title>{{hero.firstName}} {{hero.lastName}}</mat-card-title>
+    <mat-card-subtitle>also known as: <span>{{hero.alias}}</span></mat-card-subtitle>
+    <mat-card-content> phone Number: {{hero.phoneNumber}}</mat-card-content>
+  </mat-card>
 </div>

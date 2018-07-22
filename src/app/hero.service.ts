@@ -17,6 +17,9 @@ export class HeroService {
     this.dataStore = {heroes : []};
     this._Heroes = new BehaviorSubject<Hero[]>([]);
   }
+  getHeroById(id) {
+    return this.dataStore.heroes.find(x => x.id == id);
+  }
   fetchData() {
     this.messageService.add('HeroService: fetched heroes');
     const heroesUrl = 'https://localhost:44392/api/hero';

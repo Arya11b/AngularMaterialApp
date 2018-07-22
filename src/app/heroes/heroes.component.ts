@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {Hero} from '../Hero';
 import {HeroService} from '../hero.service';
-import {Observable} from "rxjs/index";
+import {Observable} from 'rxjs/index';
 @Component({
   selector: 'app-heroes',
   templateUrl: './heroes.component.html',
@@ -10,7 +10,7 @@ import {Observable} from "rxjs/index";
 export class HeroesComponent implements OnInit {
   heroes: Hero[];
   oHeroes: Observable<Hero[]>;
-  selectedHero: Hero;
+  public selectedHero: Hero;
   constructor(private heroService: HeroService) {
     // this.heroes = [{
     //   id: 312,
@@ -20,6 +20,7 @@ export class HeroesComponent implements OnInit {
   }
   ngOnInit() {
     this.getHeroes();
+    console.log('22');
   }
   getHeroes(): void {
     this.oHeroes = this.heroService.getHeroes();
