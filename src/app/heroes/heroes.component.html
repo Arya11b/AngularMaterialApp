@@ -1,9 +1,9 @@
-    <mat-list-item *ngFor="let hero of heroes" (click)="onSelect(selectedHero)" [class.selected]="selectedHero === hero" >
+<mat-nav-list>
+<mat-list-item *ngFor="let hero of heroes" (click)="onSelect(selectedHero)" [class.selected]="selectedHero === hero" >
       <!--<span>{{hero.id}}</span>-->
-      <span>
-        {{hero.alias}}
-      </span>
+          <mat-icon svgIcon={{hero.picture}} class="heroes"></mat-icon> <span class="heroesText">{{ hero.alias }} </span>
       <!--<span>{{hero.phoneNumber}}</span>-->
-    </mat-list-item>
-  <!--<app-hero-detail [hero]="selectedHero"></app-hero-detail>-->
+</mat-list-item>
+</mat-nav-list>
+<!--<app-hero-detail [hero]="selectedHero"></app-hero-detail>-->
 
