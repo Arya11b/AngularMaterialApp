@@ -19,7 +19,7 @@ export class HeroService {
   }
   fetchData() {
     this.messageService.add('HeroService: fetched heroes');
-    const heroesUrl = 'https://raw.githubusercontent.com/Arya11b/AngularMaterialApp/master/datas';
+    const heroesUrl = 'https://localhost:44392/api/hero';
     return this.http.get<Hero[]>(heroesUrl)
       .subscribe(data => {
         this.dataStore.heroes = data;

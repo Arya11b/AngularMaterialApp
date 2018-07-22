@@ -33,3 +33,7 @@ mat-icon {
   width: $iconWidth;
   line-height: $iconWidth;
 }
+.toolbarList{
+  flex: 1;
+  flex-wrap: wrap-reverse;
+}
