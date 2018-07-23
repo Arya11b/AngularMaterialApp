@@ -4,8 +4,10 @@
 <div *ngIf="hero" >
   <mat-card class="mat-elevation-z10" class="contactCard">
     <mat-icon mat-card-avatar svgIcon="{{hero.picture}}" class="heroesPicLarge"></mat-icon>
-    <mat-card-title>{{hero.firstName}} {{hero.lastName}}</mat-card-title>
-    <mat-card-subtitle>also known as: <span>{{hero.alias}}</span></mat-card-subtitle>
-    <mat-card-content> phone Number: {{hero.phoneNumber}}</mat-card-content>
+    <div class="info">
+    <mat-card-title class="name" >{{hero.firstName | uppercase}} {{hero.lastName | uppercase }}</mat-card-title>
+    <mat-card-subtitle class="alias">Also known as The <span>{{hero.alias | uppercase}}</span></mat-card-subtitle>
+      <mat-card-content class="phone"> Phone: <span class="phone">{{hero.phoneNumber}}</span></mat-card-content>
+    </div>
   </mat-card>
 </div>

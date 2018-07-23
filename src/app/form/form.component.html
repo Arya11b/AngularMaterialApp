@@ -4,7 +4,7 @@
 <mat-dialog-content>
   <mat-form-field appearance="standard" class="forms-item">
     <mat-label>First Name</mat-label>
-    <input matInput placeholder="ex: han" required id="firstName" [(ngModel)]="hero.firstName" name="firstName">
+    <input matInput placeholder="ex: han" required id="firstName" (focus)="grow()" [(ngModel)]="hero.firstName" name="firstName">
     <mat-icon matSuffix svgIcon="form-2"></mat-icon>
   </mat-form-field>
   <mat-form-field appearance="standard" class="forms-item">

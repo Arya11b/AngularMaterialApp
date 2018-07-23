@@ -1,12 +1,43 @@
 .heroesPicLarge {
   border: 2px solid darkslateblue;
-  width: 96px;
-  height: 96px;
-  border-radius: 50px;
+  width: 134px;
+  height: 134px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 100px;
   background: ghostwhite;
   vertical-align: middle;
 }
 .contactCard {
+  margin: auto;
+  display: flex;
+  max-width: 60%;
   flex: 1;
   flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.info{
+  vertical-align: middle;
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
+}
+.name{
+  font-size: 50px;
+  font-weight: bolder;
+  text-align: center;
+}
+.alias{
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+.phone{
+  font-size: 30px;
+  text-align: center;
+}
+span.phone{
+  font-weight: bolder;
 }

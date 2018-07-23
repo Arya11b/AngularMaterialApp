@@ -25,5 +25,4 @@ export class FormComponent implements OnInit {
     console.log('function works');
     this.service.postHero(this.hero);
   }
-
 }

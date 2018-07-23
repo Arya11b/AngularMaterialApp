@@ -1,9 +1,9 @@
 <mat-nav-list>
 <mat-list-item class="item" *ngFor="let hero of heroes" >
       <!--<span>{{hero.id}}</span>-->
-  <div class="heroes">
-  <a matLine [routerLink]="['hero', hero.id]">
-    <mat-icon svgIcon={{hero.picture}} class="heroesPic"></mat-icon> <span class="heroes">{{ hero.alias }}</span>
+  <div >
+  <a matLine [routerLink]="['hero', hero.id]" class="heroes">
+    <mat-icon svgIcon={{hero.picture}} class="heroesPic"></mat-icon> <span class="heroes">{{ hero.alias | uppercase }}</span>
   </a>
   </div>
       <!--<span>{{hero.phoneNumber}}</span>-->

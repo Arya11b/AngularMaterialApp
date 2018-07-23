@@ -5,16 +5,16 @@
 }
 .heroesPic {
   border: 2px solid darkslateblue;
-  width: 48px;
-  height: 48px;
-  border-radius: 25px;
+  width: 56px;
+  height: 56px;
+  border-radius: 50px;
   background: ghostwhite;
   vertical-align: middle;
 }
 .heroesText {
-  font-size: 15px;
 }
-.heroes .badge {
+.heroes {
+
 }
 .minipro{
   border: solid 1px;
@@ -26,4 +26,8 @@ span.heroes {
   display: inline-block;
   vertical-align: middle;
   line-height: normal;
+  font-size: 15px;
+  font-weight: bold;
+
+
 }
