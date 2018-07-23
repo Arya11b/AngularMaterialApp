@@ -1,4 +1,6 @@
 import {Component, Output, EventEmitter, OnInit} from '@angular/core';
+import {MatDialog} from "@angular/material";
+import {FormComponent} from "../form/form.component";
 
 @Component({
   selector: 'app-toolbar',
@@ -7,9 +9,11 @@ import {Component, Output, EventEmitter, OnInit} from '@angular/core';
 })
 export class ToolbarComponent implements OnInit {
   @Output() toggleSideNav = new EventEmitter<void>();
-  constructor() { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit() {
   }
-
+  openDialog(){
+    let dialogRef = this.dialog.open(FormComponent, {width: '450px'});
+  }
 }

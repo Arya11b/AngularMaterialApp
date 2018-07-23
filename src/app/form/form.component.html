@@ -1,0 +1,28 @@
+<h1 mat-dialog-title>
+  Add New Superheroes
+</h1>
+<mat-dialog-content>
+  <mat-form-field appearance="standard" class="forms-item">
+    <mat-label>First Name</mat-label>
+    <input matInput placeholder="ex: han" required id="firstName" [(ngModel)]="hero.firstName" name="firstName">
+    <mat-icon matSuffix svgIcon="form-2"></mat-icon>
+  </mat-form-field>
+  <mat-form-field appearance="standard" class="forms-item">
+    <mat-label>Last Name</mat-label>
+    <input matInput placeholder="ex: solo" required [(ngModel)]="hero.lastName" name="lastName">
+    <mat-icon matSuffix svgIcon="form-1"></mat-icon>
+  </mat-form-field>
+  <mat-form-field appearance="standard" class="forms-item">
+    <mat-label>Alias</mat-label>
+    <input matInput placeholder="ex: ishotfirst" required [(ngModel)]="hero.alias" name="alias">
+    <mat-icon matSuffix svgIcon="form-3"></mat-icon>
+  </mat-form-field>
+  <mat-form-field appearance="standard" class="forms-item">
+    <mat-label>Phone Number</mat-label>
+    <input matInput placeholder="ex: 537892" required [(ngModel)]="hero.phoneNumber" name="phoneNumber">
+    <mat-icon matSuffix svgIcon="form-4"></mat-icon>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button class="forms-button" (click)="addHero()" mat-button>Submit</button>
+</mat-dialog-actions>

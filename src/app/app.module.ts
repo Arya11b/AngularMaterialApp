@@ -14,6 +14,7 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import {HttpClientModule} from '@angular/common/http';
 import {HeroService} from './hero.service';
+import { FormComponent } from './form/form.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +23,8 @@ import {HeroService} from './hero.service';
     MessagesComponent,
     HomeComponent,
     MenuComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    FormComponent
   ],
   imports: [
     BrowserModule,
@@ -32,6 +34,9 @@ import {HeroService} from './hero.service';
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule
+  ],
+  entryComponents: [
+    FormComponent
   ],
   providers: [HeroService],
   bootstrap: [AppComponent]
