@@ -2,10 +2,14 @@ import { Injectable } from '@angular/core';
 import {Hero} from './Hero';
 import {BehaviorSubject, Observable, of} from 'rxjs'; // for handling async data sync :)
 import { MessageService } from './message.service';
-import {HttpClient} from '@angular/common/http'; // for handling messages and shit
-import { HttpHeaders } from '@angular/common/http';
-
+import {HttpClient, HttpHeaders} from '@angular/common/http'; // for handling messages and shit
+//
 // service in service scenario common
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Access-Control-Allow-Origin' : 'https://localhost:8080'
+})
+};
 @Injectable({
   providedIn: 'root'
 })
@@ -47,8 +51,12 @@ export class HeroService {
       hero.id = this.getValidId();
       hero.picture = this.assignAvatar();
       this.dataStore.heroes.push(hero);
-      this.http.post(heroesUrl, hero);
-      this._Heroes.next(Object.assign({}, this.dataStore).heroes);
+      this.http.post(heroesUrl, hero, httpOptions).subscribe(
+        hero => {
+          this._Heroes.next(Object.assign({}, this.dataStore).heroes);
+          console.log(hero);
+        }
+      );
       resolver(hero);
       }
     );
