@@ -36,11 +36,36 @@ export class HeroService {
         console.log(console.log(error));
       });
   }
+  deleteHero(hero: Hero){
+    console.log(hero);
+    const heroesUrlDel = 'https://localhost:44392/api/hero/' + hero.id;
+    const heroesUrl = 'https://localhost:44392/api/hero';
+    console.log(heroesUrlDel);
+    return new Promise((resolver, reject) => {
+        this.http.delete(heroesUrlDel).subscribe(
+          hero => {
+            console.log(hero);
+            this.http.get<Hero[]>(heroesUrl)
+              .subscribe(
+                data => {
+                  this.dataStore.heroes = data;
+                  this._Heroes.next(Object.assign({}, this.dataStore).heroes);
+                }, error => {
+                  console.log(console.log(error));
+                });
+          }
+        );
+        resolver(hero);
+      }
+    );
+  }
   getHeroes(): Observable<Hero[]> {
     return this._Heroes.asObservable();
   }
   getValidId(): number {
-    return this.dataStore.heroes.length + 1;
+    let id = 1;
+    while(this.dataStore.heroes.find(x => x.id == id)) id++;
+    return id;
   }
   assignAvatar(): string {
     return  'svg-' + (Math.floor(Math.random() * 12) + 1);

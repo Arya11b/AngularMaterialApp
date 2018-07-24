@@ -17,7 +17,7 @@ export class MenuComponent implements OnInit {
     this.router.events.subscribe(() => {
       if(this.isScreenSmall())
         this.sidenav.close();
-    })
+    });
   }
   isScreenSmall(): boolean {
     return this.mediaMatcher.matches;

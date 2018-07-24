@@ -8,10 +8,14 @@
     <mat-card-title class="name" >{{hero.firstName | uppercase}} {{hero.lastName | uppercase }}</mat-card-title>
     <mat-card-subtitle class="alias">Also known as The <span>{{hero.alias | uppercase}}</span></mat-card-subtitle>
       <mat-card-content class="phone"> Phone: <span class="phone">{{hero.phoneNumber}}</span></mat-card-content>
+      <div class="minibutton">
+        <button (click)="deleteHero()" matLine [routerLink]="['/']" class="minibutton"><mat-icon>delete</mat-icon></button>
+        <button matLine [routerLink]="['/']" class="minibutton"><mat-icon>edit</mat-icon></button>
+      </div>
     </div>
     <!--<div>-->
       <!--<button (click)="updateForm()" matLine><mat-icon>update</mat-icon></button>-->
-      <!--<button (click)="deleteHero()" matLine><mat-icon>delete</mat-icon></button>-->
+
     <!--</div>-->
   </mat-card>
 </div>

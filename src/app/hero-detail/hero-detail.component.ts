@@ -25,4 +25,7 @@ export class HeroDetailComponent implements OnInit {
   updateForm(){
     let dialogRef = this.dialog.open(FormComponent, {width: '450px'});
   }
+  deleteHero(){
+    this.service.deleteHero(this.hero);
+  }
 }
