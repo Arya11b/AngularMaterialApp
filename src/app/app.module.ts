@@ -15,6 +15,7 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
 import {HttpClientModule} from '@angular/common/http';
 import {HeroService} from './hero.service';
 import { FormComponent } from './form/form.component';
+import { HeroEditComponent } from './hero-edit/hero-edit.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +25,8 @@ import { FormComponent } from './form/form.component';
     HomeComponent,
     MenuComponent,
     ToolbarComponent,
-    FormComponent
+    FormComponent,
+    HeroEditComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,48 @@
+<div *ngIf="!hero">
+  <mat-spinner></mat-spinner>
+</div>
+<div *ngIf="hero">
+  <mat-card class="mat-elevation-z10" class="contactCard">
+    <div class="avatar">
+    <mat-icon mat-card-avatar (click)="changeAvatar()" svgIcon="{{hero.picture}}" class="heroesPicLarge"></mat-icon>
+    <p class="avatar"> don't like the avatar ? click on it!</p>
+    </div>
+    <div class="info">
+        <mat-form-field appearance="standard" class="forms-item">
+          <mat-label>First Name</mat-label>
+          <input matInput placeholder="ex: han" required id="firstName" [(ngModel)]="hero.firstName" name="firstName">
+          <mat-error>enter first name</mat-error>
+          <mat-icon matSuffix svgIcon="form-2"></mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="standard" class="forms-item">
+          <mat-label>Last Name</mat-label>
+          <input matInput placeholder="ex: solo" required [(ngModel)]="hero.lastName" name="lastName">
+          <mat-error>enter last name</mat-error>
+          <mat-icon matSuffix svgIcon="form-1"></mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="standard" class="forms-item">
+          <mat-label>Alias</mat-label>
+          <input matInput placeholder="ex: ishotfirst" required [(ngModel)]="hero.alias" name="alias">
+          <mat-error>enter alias</mat-error>
+          <mat-icon matSuffix svgIcon="form-3"></mat-icon>
+        </mat-form-field>
+        <mat-form-field appearance="standard" class="forms-item">
+        <mat-label >Phone Number</mat-label>
+        <input matInput placeholder="ex: 537892" required [(ngModel)]="hero.phoneNumber" name="phoneNumber">
+        <mat-error>must enter a phone number (this is a phonebook app for god's sake!)</mat-error>
+        <mat-icon matSuffix svgIcon="form-4"></mat-icon>
+      </mat-form-field>
+      <div >
+      </div>
+    </div>
+    <button (click)="updateHero()" class="minibutton" [routerLink]="['/hero',hero.id]">
+      <mat-icon class="minibutton">
+        update
+      </mat-icon>
+    </button>
+    <!--<div>-->
+    <!--<button (click)="updateForm()" matLine><mat-icon>update</mat-icon></button>-->
+
+    <!--</div>-->
+  </mat-card>
+</div>

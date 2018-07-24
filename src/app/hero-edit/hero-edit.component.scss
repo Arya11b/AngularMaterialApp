@@ -8,6 +8,16 @@
   background: ghostwhite;
   vertical-align: middle;
 }
+.avatar {
+  align-items: center;
+  width: 50%;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+p.avatar{
+  text-align: center;
+}
 .contactCard {
   margin: auto;
   display: flex;
@@ -18,6 +28,7 @@
   flex-wrap: wrap;
 }
 .info{
+  width: 50%;
   vertical-align: middle;
   display: flex;
   flex-direction: column;
@@ -51,7 +62,15 @@ div.minibutton{
   background: none;
   border: none;
   color: whitesmoke;
+  width: auto;
+  height: auto;
   margin: auto;
 }
-mat-icon.minibutton{
+.minibutton{
+  background: none;
+  border: none;
+  color: whitesmoke;
+  width: auto;
+  height: auto;
+  margin: auto;
 }

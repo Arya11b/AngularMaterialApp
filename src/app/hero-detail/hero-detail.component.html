@@ -10,7 +10,7 @@
       <mat-card-content class="phone"> Phone: <span class="phone">{{hero.phoneNumber}}</span></mat-card-content>
       <div class="minibutton">
         <button (click)="deleteHero()" matLine [routerLink]="['/']" class="minibutton"><mat-icon>delete</mat-icon></button>
-        <button matLine [routerLink]="['/']" class="minibutton"><mat-icon>edit</mat-icon></button>
+        <button matLine [routerLink]="['/hero',hero.id,'edit']" class="minibutton"><mat-icon>edit</mat-icon></button>
       </div>
     </div>
     <!--<div>-->

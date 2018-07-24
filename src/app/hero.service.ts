@@ -59,6 +59,29 @@ export class HeroService {
       }
     );
   }
+  updateHero(id: number,hero: Hero){
+    console.log(hero);
+    const heroesUrlDel = 'https://localhost:44392/api/hero/' + id;
+    const heroesUrl = 'https://localhost:44392/api/hero';
+    console.log(heroesUrlDel);
+    return new Promise((resolver, reject) => {
+        this.http.put(heroesUrlDel,hero).subscribe(
+          hero => {
+            console.log(hero);
+            this.http.get<Hero[]>(heroesUrl)
+              .subscribe(
+                data => {
+                  this.dataStore.heroes = data;
+                  this._Heroes.next(Object.assign({}, this.dataStore).heroes);
+                }, error => {
+                  console.log(console.log(error));
+                });
+          }
+        );
+        resolver(hero);
+      }
+    );
+  }
   getHeroes(): Observable<Hero[]> {
     return this._Heroes.asObservable();
   }
