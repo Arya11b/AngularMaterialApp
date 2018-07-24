@@ -4,6 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {HeroService} from '../hero.service';
 import {FormComponent} from "../form/form.component";
 import {MatDialog} from "@angular/material";
+import {MessagesComponent} from "../messages/messages.component";
 @Component({
   selector: 'app-hero-detail',
   templateUrl: './hero-detail.component.html',
@@ -22,10 +23,16 @@ export class HeroDetailComponent implements OnInit {
       });
     });
   }
-  updateForm(){
-    let dialogRef = this.dialog.open(FormComponent, {width: '450px'});
-  }
   deleteHero(){
-    this.service.deleteHero(this.hero);
+    // delete hero dialog
+    let dialogRef = this.dialog.open(MessagesComponent,{
+      width: 'auto'
+    });
+    dialogRef.afterClosed().subscribe(result =>{
+        if(result == 'yes')
+          this.service.deleteHero(this.hero);
+      }
+    );
+      // this.service.deleteHero(this.hero);
   }
 }

@@ -1,8 +1,9 @@
-<div *ngIf="messageService.messages.length">
+<div>
 
-  <h2>Messages</h2>
-  <button class="clear"
-          (click)="messageService.clear()">clear</button>
-  <div *ngFor='let message of messageService.messages'> {{message}} </div>
-
+  <h2 class="center" >Alert</h2>
+  <p class="center"> Are you sure you want to delete this user</p>
+  <div class="buttonRow">
+  <button mat-raised-button (click)="closeDialog()" > No </button>
+  <button mat-raised-button (click)="doAction()" color="warn" [routerLink]="['/']"> Yes </button>
+  </div>
 </div>

@@ -13,7 +13,7 @@ export class ToolbarComponent implements OnInit {
 
   ngOnInit() {
   }
-  openDialog(){
+  openDialog() {
     let dialogRef = this.dialog.open(FormComponent, {width: '450px'});
   }
 }

@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {Hero} from './Hero';
 import {BehaviorSubject, Observable, of} from 'rxjs'; // for handling async data sync :)
-import { MessageService } from './message.service';
 import {HttpClient, HttpHeaders} from '@angular/common/http'; // for handling messages and shit
 //
 // service in service scenario common
@@ -18,7 +17,7 @@ export class HeroService {
   private dataStore: {
     heroes: Hero[]
   };
-  constructor(private messageService: MessageService, private http: HttpClient) {
+  constructor( private http: HttpClient) {
     this.dataStore = {heroes : []};
     this._Heroes = new BehaviorSubject<Hero[]>([]);
   }
@@ -27,7 +26,6 @@ export class HeroService {
   }
   fetchData() {
     const heroesUrl = 'https://localhost:44392/api/hero';
-    this.messageService.add('HeroService: fetched heroes');
     return this.http.get<Hero[]>(heroesUrl)
       .subscribe(data => {
         this.dataStore.heroes = data;
@@ -59,7 +57,7 @@ export class HeroService {
       }
     );
   }
-  updateHero(id: number,hero: Hero){
+  updateHero(id: number, hero: Hero){
     console.log(hero);
     const heroesUrlDel = 'https://localhost:44392/api/hero/' + id;
     const heroesUrl = 'https://localhost:44392/api/hero';

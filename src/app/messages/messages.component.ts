@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MessageService } from '../message.service';
+import {MatDialogRef} from "@angular/material";
+import {HeroDetailComponent} from "../hero-detail/hero-detail.component";
 @Component({
   selector: 'app-messages',
   templateUrl: './messages.component.html',
@@ -7,9 +8,15 @@ import { MessageService } from '../message.service';
 })
 export class MessagesComponent implements OnInit {
 
-  constructor(public messageService: MessageService) { }
+  constructor(private dialogRef: MatDialogRef<MessagesComponent>) { }
 
   ngOnInit() {
+  }
+  closeDialog() {
+    this.dialogRef.close();
+  }
+  doAction() {
+    this.dialogRef.close('yes')
   }
 
 }
