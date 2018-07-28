@@ -1,5 +1,5 @@
 <mat-sidenav-container class="bar-container">
-  <mat-sidenav #sidenav class="bar-sidenav mat-elevation-z12" [opened]="!isScreenSmall()" [mode]="isScreenSmall()?'over':'side'">
+  <mat-sidenav #sidenav class="bar-sidenav mat-elevation-z12" [opened]="isScreenLarge()" [mode]="getMode()">
     <mat-toolbar color="accent" class="bar-sidenav-title">Superhero Contacts</mat-toolbar>
     <app-heroes></app-heroes>
   </mat-sidenav>

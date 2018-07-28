@@ -22,4 +22,10 @@ export class MenuComponent implements OnInit {
   isScreenSmall(): boolean {
     return this.mediaMatcher.matches;
   }
+  isScreenLarge(): boolean {
+    return !this.isScreenSmall();
+  }
+  getMode(): string {
+    return this.isScreenSmall() ? 'over' : 'side';
+  }
 }
