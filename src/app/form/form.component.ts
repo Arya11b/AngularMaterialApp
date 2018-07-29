@@ -3,6 +3,7 @@ import {Hero} from "../Models/Hero";
 import {HeroService} from "../hero.service";
 import {MatDialogRef} from "@angular/material";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {Phone} from "../Models/Phone";
 
 @Component({
   selector: 'app-form',
@@ -66,9 +67,10 @@ export class FormComponent implements OnInit {
     this.hero.firstName = this.heroForm.value.firstName;
     this.hero.lastName = this.heroForm.value.lastName;
     this.hero.alias = this.heroForm.value.alias;
+    this.hero.phoneNumber = [];
     this.hero.phoneNumber.push({
       id: 0,
-      parentId: this.hero.id,
+      parentId: 0,
       number: this.heroForm.value.phoneNumber,
       code: 'not implemented',
       place: 'not implemented'

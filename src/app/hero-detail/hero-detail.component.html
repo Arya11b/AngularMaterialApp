@@ -7,8 +7,10 @@
     <div class="info">
     <mat-card-title class="name" >{{hero.firstName | uppercase}} {{hero.lastName | uppercase }}</mat-card-title>
     <mat-card-subtitle class="alias">Also known as The <span>{{hero.alias | uppercase}}</span></mat-card-subtitle>
-      <mat-card-content class="phone"> Phone: <span class="phone">{{hero.phoneNumber}}</span></mat-card-content>
-      <div class="minibutton">
+      <div *ngFor="let phone of hero.phoneNumber">
+      <mat-card-content class="phone"> Phone: <span class="phone">{{phone.number}}</span></mat-card-content>
+      </div>
+        <div class="minibutton">
         <button (click)="deleteHero()" matLine class="minibutton"><mat-icon>delete</mat-icon></button>
         <button matLine [routerLink]="['/hero',hero.id,'edit']" class="minibutton"><mat-icon>edit</mat-icon></button>
       </div>

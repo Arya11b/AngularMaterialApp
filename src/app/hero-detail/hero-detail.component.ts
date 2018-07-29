@@ -20,6 +20,8 @@ export class HeroDetailComponent implements OnInit {
       this.service.getHeroes().subscribe(heroes => {
         if (heroes.length == 0) return;
         this.hero = this.service.getHeroById(id);
+        this.hero.phoneNumber = this.service.getPhoneByParentId(id);
+        this.hero.address = this.service.getAddressByParentId(id);
       });
     });
   }
