@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import {Hero} from './Hero';
+import {Hero} from './Models/Hero';
 import {BehaviorSubject, Observable, of} from 'rxjs'; // for handling async data sync :)
 import {HttpClient, HttpHeaders} from '@angular/common/http'; // for handling messages and shit
 //

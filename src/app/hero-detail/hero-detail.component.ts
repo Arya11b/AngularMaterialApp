@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import {Hero} from '../Hero';
+import {Hero} from '../Models/Hero';
 import {ActivatedRoute} from '@angular/router';
 import {HeroService} from '../hero.service';
 import {FormComponent} from "../form/form.component";

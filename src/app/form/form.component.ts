@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {Hero} from "../Hero";
+import {Hero} from "../Models/Hero";
 import {HeroService} from "../hero.service";
 import {MatDialogRef} from "@angular/material";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
@@ -20,7 +20,7 @@ export class FormComponent implements OnInit {
     dirty: 'invalid symbol',
     min: 'too few characters',
     max: 'too many characters',
-    phoneReq: 'must enter a phone number (this is a phonebook app for god\'s sake!)'
+    phoneReq: 'must enter a phone number (this is a phonebook app for god\'s sake!)',
     namePat: 'invalid symbol',
     phonePat: 'invalid symbol only numbers allowed'
   };
@@ -32,7 +32,7 @@ export class FormComponent implements OnInit {
     this.hero = new Hero;
     this.heroForm = new FormGroup({
       'firstName': new FormControl(
-        this.hero.name,
+        '',
         [
           Validators.required,
           Validators.minLength(3),
@@ -40,7 +40,7 @@ export class FormComponent implements OnInit {
         ]
       ),
       'lastName': new FormControl(
-        this.hero.name,
+        '',
         [
           Validators.required,
           Validators.minLength(3),
@@ -48,13 +48,13 @@ export class FormComponent implements OnInit {
         ]
       ),
       'alias': new FormControl(
-        this.hero.alias,
+        '',
         [
           Validators.required,
         ]
       ),
       'phoneNumber': new FormControl(
-        this.hero.phoneNumber,
+        '',
         [
           Validators.required,
           Validators.pattern('[0-9]*')
@@ -66,7 +66,13 @@ export class FormComponent implements OnInit {
     this.hero.firstName = this.heroForm.value.firstName;
     this.hero.lastName = this.heroForm.value.lastName;
     this.hero.alias = this.heroForm.value.alias;
-    this.hero.phoneNumber = this.heroForm.value.phoneNumber;
+    this.hero.phoneNumber.push({
+      id: 0,
+      parentId: this.hero.id,
+      number: this.heroForm.value.phoneNumber,
+      code: 'not implemented',
+      place: 'not implemented'
+    });
     this.addHero();
     this.dialogRef.close();
   }
@@ -76,16 +82,16 @@ export class FormComponent implements OnInit {
   }
 
   // get stuff
-  get firstName(){
+  get firstName() {
     return this.heroForm.get('firstName');
   }
-  get lastName(){
+  get lastName() {
     return this.heroForm.get('lastName');
   }
-  get alias(){
+  get alias() {
     return this.heroForm.get('alias');
   }
-  get phoneNumber(){
+  get phoneNumber() {
     return this.heroForm.get('phoneNumber');
   }
 
