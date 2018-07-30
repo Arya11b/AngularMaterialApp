@@ -17,10 +17,18 @@ export class HeroDetailComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe(params => {
       const id = params['id'];
+      console.log('nginit');
       this.service.getHeroes().subscribe(heroes => {
         if (heroes.length == 0) return;
         this.hero = this.service.getHeroById(id);
+        console.log(this.hero);
+      });
+      this.service.getPhones().subscribe(phones => {
+        if (phones.length == 0) return;
         this.hero.phoneNumber = this.service.getPhoneByParentId(id);
+      });
+      this.service.getPhones().subscribe(addresses => {
+        if (addresses.length == 0) return;
         this.hero.address = this.service.getAddressByParentId(id);
       });
     });

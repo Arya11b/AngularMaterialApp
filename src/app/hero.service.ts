@@ -16,6 +16,7 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class HeroService {
+  // class initialization
   private _Heroes: BehaviorSubject<Hero[]>;
   private _Group: BehaviorSubject<Group[]>;
   private _Phone: BehaviorSubject<Phone[]>;
@@ -33,6 +34,23 @@ export class HeroService {
     this._Address = new BehaviorSubject<Address[]>([]);
     this._Phone = new BehaviorSubject<Phone[]>([]);
   }
+  // class functions
+  getValidId(dataSet): number {
+    let id = 1;
+    while(dataSet.find(x => x.id == id)) id++;
+    return id;
+  }
+  assignAvatar(): string {
+    return  'svg-' + (Math.floor(Math.random() * 12) + 1);
+  }
+  getValidPhoneId(hero): void{
+    for (let phoneNumber of hero.phoneNumber)
+      phoneNumber.id = this.getValidId(this.dataStore.phones);
+  }
+  getValidAddressId(hero): void{
+    for (let address of hero.address)
+      address.id = this.getValidId(this.dataStore.addresses);
+  }
   // get requests
   getHeroById(id) {
     return this.dataStore.heroes.find(x => x.id == id);
@@ -42,6 +60,75 @@ export class HeroService {
   }
   getAddressByParentId(parentId) {
     return this.dataStore.addresses.filter(x => x.parentId == parentId);
+  }
+  // post request
+  postHero(hero: Hero): Promise<Hero> {
+    const heroesUrl = 'https://localhost:44392/api/hero';
+    return new Promise((resolver, reject) => {
+        hero.id = this.getValidId(this.dataStore.heroes);
+        this.getValidPhoneId(hero);
+        this.getValidAddressId(hero);
+        for (let phoneNumber of hero.phoneNumber)
+          phoneNumber.parentId = hero.id;
+        hero.picture = this.assignAvatar();
+        this.dataStore.heroes.push(hero);
+        this.http.post(heroesUrl, hero, httpOptions).subscribe(
+          hero => {
+            this._Heroes.next(Object.assign({}, this.dataStore).heroes);
+            console.log(hero);
+          }
+        );
+        resolver(hero);
+      }
+    );
+  }
+  // put request
+  updateHero(id: number, hero: Hero){
+    console.log(hero);
+    const heroesUrlDel = 'https://localhost:44392/api/hero/' + id;
+    const heroesUrl = 'https://localhost:44392/api/hero';
+    console.log(heroesUrlDel);
+    return new Promise((resolver, reject) => {
+        this.http.put(heroesUrlDel,hero).subscribe(
+          hero => {
+            console.log(hero);
+            this.http.get<Hero[]>(heroesUrl)
+              .subscribe(
+                data => {
+                  this.dataStore.heroes = data;
+                  this._Heroes.next(Object.assign({}, this.dataStore).heroes);
+                }, error => {
+                  console.log(console.log(error));
+                });
+          }
+        );
+        resolver(hero);
+      }
+    );
+  }
+  // delete request
+  deleteHero(hero: Hero){
+    console.log(hero);
+    const heroesUrlDel = 'https://localhost:44392/api/hero/' + hero.id;
+    const heroesUrl = 'https://localhost:44392/api/hero';
+    console.log(heroesUrlDel);
+    return new Promise((resolver, reject) => {
+        this.http.delete(heroesUrlDel).subscribe(
+          hero => {
+            console.log(hero);
+            this.http.get<Hero[]>(heroesUrl)
+              .subscribe(
+                data => {
+                  this.dataStore.heroes = data;
+                  this._Heroes.next(Object.assign({}, this.dataStore).heroes);
+                }, error => {
+                  console.log(console.log(error));
+                });
+          }
+        );
+        resolver(hero);
+      }
+    );
   }
   // fetch Datas
   fetchHeroes() {
@@ -90,89 +177,17 @@ export class HeroService {
     this.fetchGroups();
     this.fetchPhones();
   }
-  deleteHero(hero: Hero){
-    console.log(hero);
-    const heroesUrlDel = 'https://localhost:44392/api/hero/' + hero.id;
-    const heroesUrl = 'https://localhost:44392/api/hero';
-    console.log(heroesUrlDel);
-    return new Promise((resolver, reject) => {
-        this.http.delete(heroesUrlDel).subscribe(
-          hero => {
-            console.log(hero);
-            this.http.get<Hero[]>(heroesUrl)
-              .subscribe(
-                data => {
-                  this.dataStore.heroes = data;
-                  this._Heroes.next(Object.assign({}, this.dataStore).heroes);
-                }, error => {
-                  console.log(console.log(error));
-                });
-          }
-        );
-        resolver(hero);
-      }
-    );
-  }
-  updateHero(id: number, hero: Hero){
-    console.log(hero);
-    const heroesUrlDel = 'https://localhost:44392/api/hero/' + id;
-    const heroesUrl = 'https://localhost:44392/api/hero';
-    console.log(heroesUrlDel);
-    return new Promise((resolver, reject) => {
-        this.http.put(heroesUrlDel,hero).subscribe(
-          hero => {
-            console.log(hero);
-            this.http.get<Hero[]>(heroesUrl)
-              .subscribe(
-                data => {
-                  this.dataStore.heroes = data;
-                  this._Heroes.next(Object.assign({}, this.dataStore).heroes);
-                }, error => {
-                  console.log(console.log(error));
-                });
-          }
-        );
-        resolver(hero);
-      }
-    );
-  }
+  // observables
   getHeroes(): Observable<Hero[]> {
     return this._Heroes.asObservable();
   }
-  getValidId(dataSet): number {
-    let id = 1;
-    while(dataSet.find(x => x.id == id)) id++;
-    return id;
+  getPhones(): Observable<Phone[]> {
+    return this._Phone.asObservable();
   }
-  assignAvatar(): string {
-    return  'svg-' + (Math.floor(Math.random() * 12) + 1);
+  getAddresses(): Observable<Address[]> {
+    return this._Address.asObservable();
   }
-  getValidPhoneId(hero): void{
-    for (let phoneNumber of hero.phoneNumber)
-      phoneNumber.id = this.getValidId(this.dataStore.phones);
-  }
-  getValidAddressId(hero): void{
-    for (let address of hero.address)
-      address.id = this.getValidId(this.dataStore.addresses);
-  }
-  postHero(hero: Hero): Promise<Hero> {
-    const heroesUrl = 'https://localhost:44392/api/hero';
-    return new Promise((resolver, reject) => {
-      hero.id = this.getValidId(this.dataStore.heroes);
-      this.getValidPhoneId(hero);
-      this.getValidAddressId(hero);
-      for (let phoneNumber of hero.phoneNumber)
-        phoneNumber.parentId = hero.id;
-      hero.picture = this.assignAvatar();
-      this.dataStore.heroes.push(hero);
-      this.http.post(heroesUrl, hero, httpOptions).subscribe(
-        hero => {
-          this._Heroes.next(Object.assign({}, this.dataStore).heroes);
-          console.log(hero);
-        }
-      );
-      resolver(hero);
-      }
-    );
+  getGroups(): Observable<Group[]> {
+    return this._Group.asObservable();
   }
 }
