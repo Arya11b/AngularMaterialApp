@@ -1,55 +1,7 @@
 <h1 mat-dialog-title>
   Add New Superheroes
 </h1>
-<mat-dialog-content>
-  <mat-form-field appearance="standard" class="forms-item">
-    <mat-label>First Name</mat-label>
-    <!--<input matInput placeholder="ex: han" required id="firstName" [(ngModel)]="hero.firstName" name="firstName">-->
-    <div [formGroup]="heroForm">
-    <input matInput placeholder="ex: han" required formControlName="firstName">
-    </div>
-    <mat-error *ngIf="firstName.invalid && (firstName.touched || firstName.dirty)">
-      <div *ngIf="firstName.errors.required"> {{validationMessages.required}}</div>
-      <div *ngIf="firstName.errors.minlength"> {{validationMessages.min}}</div>
-      <div *ngIf="firstName.errors.namePat"> {{validationMessages.min}}</div>
-    </mat-error>
-    <!--<mat-error>enter first name</mat-error>-->
-    <mat-icon matSuffix svgIcon="form-2"></mat-icon>
-  </mat-form-field>
-  <mat-form-field appearance="standard" class="forms-item">
-    <mat-label>Last Name</mat-label>
-    <div [formGroup]="heroForm">
-      <input matInput placeholder="ex: solo" required formControlName="lastName">
-    </div>
-    <mat-error *ngIf="lastName.invalid && (lastName.touched || lastName.dirty)">
-      <div *ngIf="lastName.errors.required"> {{validationMessages.required}}</div>
-      <div *ngIf="lastName.errors.minlength"> {{validationMessages.min}}</div>
-      <div *ngIf="lastName.errors.namePat"> {{validationMessages.min}}</div>
-    </mat-error>
-    <mat-icon matSuffix svgIcon="form-1"></mat-icon>
-  </mat-form-field>
-  <mat-form-field appearance="standard" class="forms-item">
-    <mat-label>Alias</mat-label>
-    <div [formGroup]="heroForm">
-      <input matInput placeholder="ex: ishotfirst" required formControlName="alias">
-    </div>
-    <mat-error *ngIf="alias.invalid && (alias.touched || alias.dirty)">
-      <div *ngIf="alias.errors.required"> {{validationMessages.required}}</div>
-    </mat-error>
-    <mat-icon matSuffix svgIcon="form-3"></mat-icon>
-  </mat-form-field>
-  <mat-form-field appearance="standard" class="forms-item">
-    <mat-label >Phone Number</mat-label>
-    <div [formGroup]="heroForm">
-      <input matInput placeholder="ex: 947312" required formControlName="phoneNumber">
-    </div>
-    <mat-error *ngIf="phoneNumber.invalid && (phoneNumber.touched || phoneNumber.dirty)">
-      <div *ngIf="phoneNumber.errors.required"> {{validationMessages.phoneReq}}</div>
-      <div *ngIf="phoneNumber.errors.pattern"> {{validationMessages.phonePat}}</div>
-    </mat-error>
-    <mat-icon matSuffix svgIcon="form-4"></mat-icon>
-  </mat-form-field>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button class="forms-button" [disabled]="heroForm.invalid" (click)="save()" mat-button>Submit</button>
-</mat-dialog-actions>
+<div *ngFor="let field of fields">
+<app-field [form]="heroForm" [field]="field"></app-field>
+</div>
+<button class="forms-button" [disabled]="disableSubmit()" (click)="save()" mat-button>Submit</button>

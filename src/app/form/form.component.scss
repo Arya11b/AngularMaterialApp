@@ -2,11 +2,30 @@
   width: 50%;
   margin: auto;
 }
-.forms-item{
-   width:100%;
-   margin: auto;
- }
 .forms-button{
   width:100%;
   margin: auto;
+}
+.forms-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+.forms-mini-item{
+  width: 20%;
+  margin: auto;
+}
+.forms-large-item{
+  width: 50%;
+  margin: auto;
+}
+.forms-mini-button{
+  min-width: 10%;
+  min-height: 5%;
+  margin: auto;
+  padding: 0;
+}
+.section-label{
+  border-bottom: medium;
 }

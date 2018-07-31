@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {Hero} from "../Models/Hero";
-import {HeroService} from "../hero.service";
-import {MatDialogRef} from "@angular/material";
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {Phone} from "../Models/Phone";
+import {Hero} from '../Models/Hero';
+import {HeroService} from '../hero.service';
+import {MatDialogRef} from '@angular/material';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {Phone} from '../Models/Phone';
+import {Address} from '../Models/Address';
+import {FieldService} from "../field.service";
+import {equal} from "assert";
 
 @Component({
   selector: 'app-form',
@@ -14,7 +17,6 @@ export class FormComponent implements OnInit {
   submitted = false;
   hero: Hero;
   heroForm: FormGroup;
-
   // validation messages
   validationMessages = {
     required: 'field is required',
@@ -27,63 +29,55 @@ export class FormComponent implements OnInit {
   };
   onSubmit() { this.submitted = true; }
 
-  constructor( private service: HeroService, private dialogRef: MatDialogRef<FormComponent>) {
+  constructor( private heroService: HeroService, private fieldService: FieldService, private dialogRef: MatDialogRef<FormComponent>) {
+  }
+  initHero() {
+    this.hero = new Hero;
+    this.hero.phoneNumber = [];
+    this.hero.phoneNumber.push(new Phone);
+    this.hero.address = [];
+    this.hero.address.push(new Address);
   }
   ngOnInit() {
-    this.hero = new Hero;
-    this.heroForm = new FormGroup({
-      'firstName': new FormControl(
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.pattern('[a-zA-z]*')
-        ]
-      ),
-      'lastName': new FormControl(
-        '',
-        [
-          Validators.required,
-          Validators.minLength(3),
-          Validators.pattern('[a-zA-z]*')
-        ]
-      ),
-      'alias': new FormControl(
-        '',
-        [
-          Validators.required,
-        ]
-      ),
-      'phoneNumber': new FormControl(
-        '',
-        [
-          Validators.required,
-          Validators.pattern('[0-9]*')
-        ]
-      ),
-    });
+    // hero form start
+    this.initHero();
+    // create the form group
+    this.heroForm = new FormGroup({});
+    // for (let field of this.fields)
+    //   this.heroForm.addControl(field.key, new FormControl('', field.validator));
+    this.fields.forEach(
+      (field) => {
+          this.heroForm.addControl(field.key, new FormControl('', field.validators));
+      }
+    );
+    console.log('behold');
+    console.log(this.heroForm);
+    // this.phoneForm = [];
+    // this.phoneForm.push(new PhoneForm);
   }
   save() {
     this.hero.firstName = this.heroForm.value.firstName;
     this.hero.lastName = this.heroForm.value.lastName;
     this.hero.alias = this.heroForm.value.alias;
     this.hero.phoneNumber = [];
-    this.hero.phoneNumber.push({
-      id: 0,
-      parentId: 0,
-      number: this.heroForm.value.phoneNumber,
-      code: 'not implemented',
-      place: 'not implemented'
-    });
+    // this.phoneForm.forEach((p) => {
+    //   this.hero.phoneNumber.push({
+    //     id: 0,
+    //     parentId: 0,
+    //     number: p.phoneNumber,
+    //     code: p.phoneCode,
+    //     place: p.phonePlace
+    //   });
+    // });
     this.addHero();
     this.dialogRef.close();
   }
   addHero() {
     console.log('function works');
-    this.service.postHero(this.hero);
+    this.heroService.postHero(this.hero);
   }
 
-  // get stuff
+  // get stuff from forms
   get firstName() {
     return this.heroForm.get('firstName');
   }
@@ -93,8 +87,16 @@ export class FormComponent implements OnInit {
   get alias() {
     return this.heroForm.get('alias');
   }
-  get phoneNumber() {
-    return this.heroForm.get('phoneNumber');
+  // add stuff
+  addPhone(): void {
+    this.hero.phoneNumber.push(new Phone);
   }
-
+  get fields() {
+    return this.fieldService.fields;
+  }
+  disableSubmit(): boolean {
+    if (this.heroForm.invalid)
+      return true;
+    return false;
+  }
 }

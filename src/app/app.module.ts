@@ -16,6 +16,8 @@ import {HttpClientModule} from '@angular/common/http';
 import {HeroService} from './hero.service';
 import { FormComponent } from './form/form.component';
 import { HeroEditComponent } from './hero-edit/hero-edit.component';
+import { FieldComponent } from './form/field/field.component';
+import {FieldService} from "./field.service";
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +28,8 @@ import { HeroEditComponent } from './hero-edit/hero-edit.component';
     MenuComponent,
     ToolbarComponent,
     FormComponent,
-    HeroEditComponent
+    HeroEditComponent,
+    FieldComponent,
   ],
   imports: [
     BrowserModule,
@@ -41,7 +44,8 @@ import { HeroEditComponent } from './hero-edit/hero-edit.component';
   entryComponents: [
     FormComponent
   ],
-  providers: [HeroService],
+  providers: [HeroService,
+  FieldService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

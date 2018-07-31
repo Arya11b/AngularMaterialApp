@@ -138,7 +138,7 @@ export class HeroService {
         this.dataStore.heroes = data;
         this._Heroes.next(Object.assign({}, this.dataStore).heroes);
       }, error => {
-        console.log(console.log(error));
+        console.log(error);
       });
   }
   fetchAddresses() {
