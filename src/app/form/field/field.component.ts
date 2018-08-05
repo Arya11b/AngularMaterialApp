@@ -22,8 +22,6 @@ export class FieldComponent implements OnInit {
   fieldErrors(key){
     let errorMessages = [];
     let formControl = this.form.get(key);
-    if (key == 'lastName')
-      console.log('ssss');
     if (formControl.errors.required)
       errorMessages.push(key + ' is required');
     if (formControl.errors.minlength) {
@@ -33,7 +31,6 @@ export class FieldComponent implements OnInit {
       errorMessages.push(key + ' has reached maximum character');
     if (formControl.errors.pattern)
       errorMessages.push(key + ' has not valid symbols');
-    // test
     return errorMessages;
   }
 }

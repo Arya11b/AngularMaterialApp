@@ -9,7 +9,5 @@ export class Hero {
   firstName: string;
   lastName: string;
   alias: string;
-  phoneNumber: Phone[];
-  address: Address[];
   picture: string;
 }

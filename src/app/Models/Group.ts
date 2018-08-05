@@ -4,5 +4,5 @@ import {Hero} from "./Hero";
  */
 export class Group {
   id: number;
-  heroesGroup: Hero[];
+  name: string;
 }

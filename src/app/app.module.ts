@@ -13,11 +13,11 @@ import { MenuComponent } from './menu/menu.component';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import {HttpClientModule} from '@angular/common/http';
-import {HeroService} from './hero.service';
+import {HeroService} from './services/hero.service';
 import { FormComponent } from './form/form.component';
 import { HeroEditComponent } from './hero-edit/hero-edit.component';
 import { FieldComponent } from './form/field/field.component';
-import {FieldService} from "./field.service";
+import {FieldService} from "./services/field.service";
 @NgModule({
   declarations: [
     AppComponent,

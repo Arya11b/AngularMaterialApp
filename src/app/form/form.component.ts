@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {Hero} from '../Models/Hero';
-import {HeroService} from '../hero.service';
 import {MatDialogRef} from '@angular/material';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
 import {Phone} from '../Models/Phone';
 import {Address} from '../Models/Address';
-import {FieldService} from "../field.service";
-import {equal} from "assert";
+import {FieldService} from '../services/field.service';
+import {OrmService} from "../services/orm.service";
 
 @Component({
   selector: 'app-form',
@@ -16,65 +15,78 @@ import {equal} from "assert";
 export class FormComponent implements OnInit {
   submitted = false;
   hero: Hero;
+  phones: Phone[];
+  addresses: Address[];
   heroForm: FormGroup;
-  // validation messages
-  validationMessages = {
-    required: 'field is required',
-    dirty: 'invalid symbol',
-    min: 'too few characters',
-    max: 'too many characters',
-    phoneReq: 'must enter a phone number (this is a phonebook app for god\'s sake!)',
-    namePat: 'invalid symbol',
-    phonePat: 'invalid symbol only numbers allowed'
-  };
-  onSubmit() { this.submitted = true; }
-
-  constructor( private heroService: HeroService, private fieldService: FieldService, private dialogRef: MatDialogRef<FormComponent>) {
+  phoneForm: FormGroup;
+  // function helpers
+  phoneCount: number = 0;
+  constructor( private orm: OrmService, private fieldService: FieldService, private dialogRef: MatDialogRef<FormComponent>) {
+    this.phones = [];
+    this.addresses = [];
   }
   initHero() {
     this.hero = new Hero;
-    this.hero.phoneNumber = [];
-    this.hero.phoneNumber.push(new Phone);
-    this.hero.address = [];
-    this.hero.address.push(new Address);
+    // add phone Number
+    // add Address
+  }
+  initHeroForm() {
+    this.heroForm = new FormGroup({});
+    this.fields.forEach(
+      (field) => {
+        this.heroForm.addControl(field.key, new FormControl('', field.validators));
+      }
+    );
+  }
+  initPhoneForm() {
+    this.phoneForm = new FormGroup({});
+    this.phoneFields.forEach(
+      (field) => {
+        this.phoneForm.addControl(field.key, new FormControl('', field.validators));
+      }
+    );
+  }
+  addToPhoneForm() {
+    // needs refinement
+    let newPhone = this.fieldService.newPhone(++this.phoneCount);
+    this.fieldService.phoneFields.push(newPhone);
+    this.phoneForm.addControl(newPhone.key,new FormControl('', newPhone.validators));
+    // this.phoneFields.forEach(
+    //   (field) => {
+    //     console.log(field.key+ (this.phoneCount));
+    //     this.phoneForm.addControl(field.key + (this.phoneCount) , new FormControl('', field.validators));
+    //   }
+    // );
+    console.log(this.phoneForm.controls);
+    console.log(this.fieldService.phoneFields);
   }
   ngOnInit() {
     // hero form start
     this.initHero();
     // create the form group
-    this.heroForm = new FormGroup({});
-    // for (let field of this.fields)
-    //   this.heroForm.addControl(field.key, new FormControl('', field.validator));
-    this.fields.forEach(
-      (field) => {
-          this.heroForm.addControl(field.key, new FormControl('', field.validators));
-      }
-    );
-    console.log('behold');
-    console.log(this.heroForm);
-    // this.phoneForm = [];
-    // this.phoneForm.push(new PhoneForm);
+    this.initHeroForm();
+    this.initPhoneForm();
   }
   save() {
     this.hero.firstName = this.heroForm.value.firstName;
     this.hero.lastName = this.heroForm.value.lastName;
     this.hero.alias = this.heroForm.value.alias;
-    this.hero.phoneNumber = [];
-    // this.phoneForm.forEach((p) => {
-    //   this.hero.phoneNumber.push({
-    //     id: 0,
-    //     parentId: 0,
-    //     number: p.phoneNumber,
-    //     code: p.phoneCode,
-    //     place: p.phonePlace
-    //   });
-    // });
+    Object.keys(this.phoneForm.controls).forEach( control => {
+      this.phones.push({
+        id: 0,
+        parentId: 0,
+        number: this.phoneForm.get(control).value.number,
+        code: '000',
+        place: 'neverland'
+      });
+    });
+    //   push new phone Number
     this.addHero();
     this.dialogRef.close();
   }
   addHero() {
-    console.log('function works');
-    this.heroService.postHero(this.hero);
+    console.log(this.hero);
+    this.orm.addHero(this.hero,this.phones,this.addresses);
   }
 
   // get stuff from forms
@@ -89,14 +101,31 @@ export class FormComponent implements OnInit {
   }
   // add stuff
   addPhone(): void {
-    this.hero.phoneNumber.push(new Phone);
+    console.log('clicked');
+    // this.hero.phoneNumber.push(new Phone);
   }
   get fields() {
     return this.fieldService.fields;
+  }
+  get phoneFields() {
+    return this.fieldService.phoneFields;
   }
   disableSubmit(): boolean {
     if (this.heroForm.invalid)
       return true;
     return false;
   }
+  hideAdd(): boolean {
+    if (this.phoneForm.invalid) {
+      return true;
+    }
+    return false;
+  }
+  clickAdd(to): void {
+    switch (to) {
+      case 'phone': this.addToPhoneForm();
+      break;
+    }
+  }
+  onSubmit() { this.submitted = true; }
 }

@@ -1,7 +1,16 @@
 <h1 mat-dialog-title>
   Add New Superheroes
 </h1>
-<div *ngFor="let field of fields">
-<app-field [form]="heroForm" [field]="field"></app-field>
+<mat-dialog-content>
+<div *ngFor="let field of fields" >
+  <app-field [form]="heroForm" [field]="field"></app-field>
 </div>
+<div>
+<div *ngFor="let field of phoneFields let i = index" >
+  <app-field [form]="phoneForm" [field]="field"></app-field>
+</div>
+  <button class="forms-mini-button" (click)="clickAdd('phone')" [hidden]="hideAdd()"> <mat-icon>add</mat-icon></button>
+</div>
+
 <button class="forms-button" [disabled]="disableSubmit()" (click)="save()" mat-button>Submit</button>
+</mat-dialog-content>

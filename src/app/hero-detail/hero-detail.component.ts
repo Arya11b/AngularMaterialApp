@@ -1,10 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {Hero} from '../Models/Hero';
 import {ActivatedRoute} from '@angular/router';
-import {HeroService} from '../hero.service';
+import {HeroService} from '../services/hero.service';
 import {FormComponent} from "../form/form.component";
 import {MatDialog} from "@angular/material";
 import {MessagesComponent} from "../messages/messages.component";
+import {OrmService} from "../services/orm.service";
+import {Phone} from "../Models/Phone";
+import {Address} from "../Models/Address";
 @Component({
   selector: 'app-hero-detail',
   templateUrl: './hero-detail.component.html',
@@ -12,9 +15,14 @@ import {MessagesComponent} from "../messages/messages.component";
 })
 export class HeroDetailComponent implements OnInit {
   hero: Hero;
-  constructor(private route: ActivatedRoute, private service: HeroService,private dialog: MatDialog) { }
+  phones: Phone[];
+  addresses: Address[];
+  constructor(private route: ActivatedRoute, private service: OrmService,private dialog: MatDialog) { }
 
   ngOnInit() {
+    this.phones = [];
+    this.hero = [];
+    this.addresses = [];
     this.route.params.subscribe(params => {
       const id = params['id'];
       console.log('nginit');
@@ -25,11 +33,11 @@ export class HeroDetailComponent implements OnInit {
       });
       this.service.getPhones().subscribe(phones => {
         if (phones.length == 0) return;
-        this.hero.phoneNumber = this.service.getPhoneByParentId(id);
+        this.phones = this.service.getPhoneByParentId(id);
       });
-      this.service.getPhones().subscribe(addresses => {
+      this.service.getAddresses().subscribe(addresses => {
         if (addresses.length == 0) return;
-        this.hero.address = this.service.getAddressByParentId(id);
+        this.addresses = this.service.getAddressByParentId(id);
       });
     });
   }
@@ -40,7 +48,7 @@ export class HeroDetailComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe(result =>{
         if(result == 'yes')
-          this.service.deleteHero(this.hero);
+          this.service.deleteHero(this.hero,this.phones,this.addresses);
       }
     );
       // this.service.deleteHero(this.hero);
