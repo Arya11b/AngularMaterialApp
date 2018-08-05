@@ -28,17 +28,21 @@ export class OrmService {
   // crud
   addHero(hero, phones, addresses) {
     hero.id = this.getValidId(this.heroService.heroSet);
+    this.heroService.postHero(hero);
     phones.forEach(phone => {
       phone.id = this.getValidId(this.phoneService.phoneSet);
+      console.log('id: ' + phone.id);
       phone.parentId = hero.id;
+      this.phoneService.postPhone(phone);
     });
     addresses.forEach(address => {
       address.id = this.getValidId(this.addressService.addressSet);
+      console.log('id: ' + address.id);
       address.parentId = hero.id;
+      this.addressService.postAddress(address);
     });
-    this.heroService.postHero(hero);
-    this.phoneService.postPhones(phones);
-    this.addressService.postAddresses(addresses);
+    // this.phoneService.postPhones(addresses);
+    // this.addressService.postAddresses(addresses);
   }
   updateHero(hero, phones , addresses) {
     this.heroService.updateHero(hero.id, hero);
@@ -74,7 +78,7 @@ export class OrmService {
   // valid id
   getValidId(dataset): number {
     let id = 1;
-    while(dataset.find(x => x.id == id)) id++;
+    while (dataset.find(x => x.id == id)) id++;
     return id;
   }
 }

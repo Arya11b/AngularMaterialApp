@@ -21,7 +21,6 @@ export class HeroDetailComponent implements OnInit {
 
   ngOnInit() {
     this.phones = [];
-    this.hero = [];
     this.addresses = [];
     this.route.params.subscribe(params => {
       const id = params['id'];

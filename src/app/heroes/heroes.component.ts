@@ -21,7 +21,6 @@ export class HeroesComponent implements OnInit {
   }
   ngOnInit() {
     this.getHeroes();
-    console.log('22');
   }
   getHeroes(): void {
     this.oHeroes = this.service.getHeroes();

@@ -7,10 +7,18 @@
     <div class="info">
     <mat-card-title class="name" >{{hero.firstName | uppercase}} {{hero.lastName | uppercase }}</mat-card-title>
     <mat-card-subtitle class="alias">Also known as The <span>{{hero.alias | uppercase}}</span></mat-card-subtitle>
-      <label> Phone: </label>
-      <div *ngFor="let phone of phones">
-      <mat-card-content class="phone"> <span class="phone">{{phone.number}}</span></mat-card-content>
-      </div>
+      <mat-label class="section-label"> Phone: </mat-label>
+      <mat-list *ngFor="let phone of phones" >
+        <mat-list-item class="phone" fxLayout="row" fxLayoutAlign="space-evenly  center">
+          <span class="phone" > {{phone.place}}:&nbsp;</span> {{phone.code}} - {{phone.number}}
+        </mat-list-item>
+      </mat-list>
+      <mat-label class="section-label"> Address: </mat-label>
+      <mat-list *ngFor="let address of addresses" >
+        <mat-list-item class="phone" fxLayout="row" fxLayoutAlign="space-evenly  center">
+          <span class="phone" > {{address.place}}:&nbsp;</span> {{address.addressLoc}}
+        </mat-list-item>
+      </mat-list>
         <div class="minibutton">
         <button (click)="deleteHero()" matLine class="minibutton"><mat-icon>delete</mat-icon></button>
         <button matLine [routerLink]="['/hero',hero.id,'edit']" class="minibutton"><mat-icon>edit</mat-icon></button>

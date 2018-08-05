@@ -18,16 +18,16 @@ export class FormComponent implements OnInit {
   phones: Phone[];
   addresses: Address[];
   heroForm: FormGroup;
-  phoneForm: FormGroup;
+  phoneForms: FormGroup[];
+  addressForms: FormGroup[];
   // function helpers
-  phoneCount: number = 0;
   constructor( private orm: OrmService, private fieldService: FieldService, private dialogRef: MatDialogRef<FormComponent>) {
     this.phones = [];
     this.addresses = [];
   }
   initHero() {
     this.hero = new Hero;
-    // add phone Number
+    // add address Number
     // add Address
   }
   initHeroForm() {
@@ -39,26 +39,34 @@ export class FormComponent implements OnInit {
     );
   }
   initPhoneForm() {
-    this.phoneForm = new FormGroup({});
-    this.phoneFields.forEach(
-      (field) => {
-        this.phoneForm.addControl(field.key, new FormControl('', field.validators));
-      }
-    );
+    this.phoneForms = [];
+    this.addToPhoneForm();
+  }
+  initAddressForm() {
+    this.addressForms = [];
+    this.addToAddressForm();
   }
   addToPhoneForm() {
-    // needs refinement
-    let newPhone = this.fieldService.newPhone(++this.phoneCount);
-    this.fieldService.phoneFields.push(newPhone);
-    this.phoneForm.addControl(newPhone.key,new FormControl('', newPhone.validators));
-    // this.phoneFields.forEach(
-    //   (field) => {
-    //     console.log(field.key+ (this.phoneCount));
-    //     this.phoneForm.addControl(field.key + (this.phoneCount) , new FormControl('', field.validators));
-    //   }
-    // );
-    console.log(this.phoneForm.controls);
-    console.log(this.fieldService.phoneFields);
+    this.phoneForms.push(new FormGroup({}));
+    this.phoneForms.forEach(
+      phoneForm => {
+        this.phoneFields.forEach(
+          (field) => {
+            phoneForm.addControl(field.key, new FormControl('', field.validators));
+          }
+        );
+      });
+  }
+  addToAddressForm() {
+    this.addressForms.push(new FormGroup({}));
+    this.addressForms.forEach(
+      addressForm => {
+        this.addressFields.forEach(
+          (field) => {
+            addressForm.addControl(field.key, new FormControl('', field.validators));
+          }
+        );
+      });
   }
   ngOnInit() {
     // hero form start
@@ -66,27 +74,40 @@ export class FormComponent implements OnInit {
     // create the form group
     this.initHeroForm();
     this.initPhoneForm();
+    this.initAddressForm();
   }
   save() {
     this.hero.firstName = this.heroForm.value.firstName;
     this.hero.lastName = this.heroForm.value.lastName;
     this.hero.alias = this.heroForm.value.alias;
-    Object.keys(this.phoneForm.controls).forEach( control => {
+    this.phoneForms.forEach(
+      phoneForm => {
       this.phones.push({
         id: 0,
         parentId: 0,
-        number: this.phoneForm.get(control).value.number,
-        code: '000',
-        place: 'neverland'
+        number: phoneForm.value.phoneNumber,
+        code: phoneForm.value.phoneCode,
+        place: phoneForm.value.phonePlace
       });
-    });
-    //   push new phone Number
+  }
+  );
+    this.addressForms.forEach(
+      addressForm => {
+        this.addresses.push({
+          id: 0,
+          parentId: 0,
+          place: addressForm.value.addressPlace,
+          addressLoc: addressForm.value.addressLoc
+        });
+      }
+    );
+    //   push new address Number
     this.addHero();
     this.dialogRef.close();
   }
   addHero() {
     console.log(this.hero);
-    this.orm.addHero(this.hero,this.phones,this.addresses);
+    this.orm.addHero(this.hero, this.phones, this.addresses);
   }
 
   // get stuff from forms
@@ -100,15 +121,14 @@ export class FormComponent implements OnInit {
     return this.heroForm.get('alias');
   }
   // add stuff
-  addPhone(): void {
-    console.log('clicked');
-    // this.hero.phoneNumber.push(new Phone);
-  }
   get fields() {
     return this.fieldService.fields;
   }
   get phoneFields() {
     return this.fieldService.phoneFields;
+  }
+  get addressFields() {
+    return this.fieldService.addressFields;
   }
   disableSubmit(): boolean {
     if (this.heroForm.invalid)
@@ -116,14 +136,18 @@ export class FormComponent implements OnInit {
     return false;
   }
   hideAdd(): boolean {
-    if (this.phoneForm.invalid) {
-      return true;
-    }
+    this.phoneForms.forEach(
+      phoneForm => {
+        if (phoneForm.invalid) return true;
+      }
+    );
     return false;
   }
   clickAdd(to): void {
     switch (to) {
       case 'phone': this.addToPhoneForm();
+      break;
+      case 'address': this.addToAddressForm();
       break;
     }
   }
