@@ -46,8 +46,24 @@ export class OrmService {
   }
   updateHero(hero, phones , addresses) {
     this.heroService.updateHero(hero.id, hero);
-    this.phoneService.updatePhones(phones);
-    this.addressService.updateAddresses(addresses);
+    this.getPhoneByParentId(hero.id).forEach(phone => {
+      this.phoneService.deletePhone(phone);
+    });
+    this.getAddressByParentId(hero.id).forEach(address => {
+      this.addressService.deleteAddress(address);
+    });
+    phones.forEach(phone => {
+      phone.id = this.getValidId(this.phoneService.phoneSet);
+      console.log('id: ' + phone.id);
+      phone.parentId = hero.id;
+      this.phoneService.postPhone(phone);
+    });
+    addresses.forEach(address => {
+      address.id = this.getValidId(this.addressService.addressSet);
+      console.log('id: ' + address.id);
+      address.parentId = hero.id;
+      this.addressService.postAddress(address);
+    });    // this.phoneService.updatePhones(phones);
   }
   deleteHero(hero, phones, addresses) {
     this.heroService.deleteHero(hero);

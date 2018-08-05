@@ -3,37 +3,28 @@
 </div>
 <div *ngIf="hero">
   <mat-card class="mat-elevation-z10" class="contactCard">
+    <div *ngFor="let field of fields" >
+      <app-field [form]="heroForm" [field]="field"></app-field>
+    </div>
     <div class="avatar">
     <mat-icon mat-card-avatar (click)="changeAvatar()" svgIcon="{{hero.picture}}" class="heroesPicLarge"></mat-icon>
     <p class="avatar"> don't like the avatar ? click on it!</p>
     </div>
     <div class="info">
-        <mat-form-field appearance="standard" class="forms-item">
-          <mat-label>First Name</mat-label>
-          <input matInput placeholder="ex: han" required id="firstName" [(ngModel)]="hero.firstName" name="firstName">
-          <mat-error>enter first name</mat-error>
-          <mat-icon matSuffix svgIcon="form-2"></mat-icon>
-        </mat-form-field>
-        <mat-form-field appearance="standard" class="forms-item">
-          <mat-label>Last Name</mat-label>
-          <input matInput placeholder="ex: solo" required [(ngModel)]="hero.lastName" name="lastName">
-          <mat-error>enter last name</mat-error>
-          <mat-icon matSuffix svgIcon="form-1"></mat-icon>
-        </mat-form-field>
-        <mat-form-field appearance="standard" class="forms-item">
-          <mat-label>Alias</mat-label>
-          <input matInput placeholder="ex: ishotfirst" required [(ngModel)]="hero.alias" name="alias">
-          <mat-error>enter alias</mat-error>
-          <mat-icon matSuffix svgIcon="form-3"></mat-icon>
-        </mat-form-field>
-        <mat-form-field appearance="standard" class="forms-item">
-        <mat-label >Phone Number</mat-label>
-        <input matInput placeholder="ex: 537892" required [(ngModel)]="hero.phoneNumber" name="phoneNumber">
-        <mat-error>must enter a phone number (this is a phonebook app for god's sake!)</mat-error>
-        <mat-icon matSuffix svgIcon="form-4"></mat-icon>
-      </mat-form-field>
-      <div >
+      <mat-label> Phone: </mat-label>
+      <div *ngFor="let phoneForm of phoneForms">
+        <div *ngFor="let field of phoneFields" >
+          <app-field [form]="phoneForm" [field]="field"></app-field>
+        </div>
       </div>
+      <button class="forms-mini-button" (click)="clickAdd('phone')" [hidden]="hideAdd()"> <mat-icon>add</mat-icon></button>
+    <mat-label> Address: </mat-label>
+    <div *ngFor="let addressForm of addressForms">
+      <div *ngFor="let field of addressFields" >
+        <app-field [form]="addressForm" [field]="field"></app-field>
+      </div>
+    </div>
+    <button class="forms-mini-button" (click)="clickAdd('address')" [hidden]="hideAdd()"> <mat-icon>add</mat-icon></button>
     </div>
     <button (click)="updateHero()" class="minibutton" [routerLink]="['/hero',hero.id]">
       <mat-icon class="minibutton">

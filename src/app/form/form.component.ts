@@ -110,16 +110,6 @@ export class FormComponent implements OnInit {
     this.orm.addHero(this.hero, this.phones, this.addresses);
   }
 
-  // get stuff from forms
-  get firstName() {
-    return this.heroForm.get('firstName');
-  }
-  get lastName() {
-    return this.heroForm.get('lastName');
-  }
-  get alias() {
-    return this.heroForm.get('alias');
-  }
   // add stuff
   get fields() {
     return this.fieldService.fields;
