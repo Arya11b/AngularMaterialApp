@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
-import {AddressService} from "./address.service";
-import {GroupService} from "./group.service";
-import {PhoneService} from "./phone.service";
-import {HeroService} from "./hero.service";
-import {Hero} from "../Models/Hero";
-import {Group} from "../Models/Group";
-import {Address} from "../Models/Address";
-import {Phone} from "../Models/Phone";
-import {Observable} from "rxjs/index";
+import {AddressService} from './address.service';
+import {GroupService} from './group.service';
+import {PhoneService} from './phone.service';
+import {HeroService} from './hero.service';
+import {Hero} from '../Models/Hero';
+import {Group} from '../Models/Group';
+import {Address} from '../Models/Address';
+import {Phone} from '../Models/Phone';
+import {Observable} from 'rxjs/index';
 
 @Injectable({
   providedIn: 'root'

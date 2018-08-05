@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Phone} from '../Models/Phone';
 import {BehaviorSubject, Observable} from "rxjs/index";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {environment} from "../../environments/environment";
 
 
 const httpOptions = {
@@ -24,10 +25,10 @@ export class PhoneService {
 
   // post request
   postPhone(phone: Phone): Promise<Phone> {
-    const heroesUrl = 'https://localhost:44392/api/phone';
+    const phonesUrl = environment.apiUrl + 'phone';
     return new Promise((resolver, reject) => {
         this.dataStore.phones.push(phone);
-        this.http.post(heroesUrl, phone, httpOptions).subscribe(
+        this.http.post(phonesUrl, phone, httpOptions).subscribe(
           phone => {
             this._Phones.next(Object.assign({}, this.dataStore).phones);
             console.log(phone);
@@ -51,7 +52,7 @@ export class PhoneService {
     return this._Phones.asObservable();
   }
   fetchPhones() {
-    const url = 'https://localhost:44392/api/phone';
+    const url = environment.apiUrl + 'phone';
     return this.http.get<Phone[]>(url)
       .subscribe(data => {
         this.dataStore.phones = data;
@@ -71,8 +72,8 @@ export class PhoneService {
   }
 
   updatePhone(id: number, phone: Phone) {
-    const phoneIdUrl = 'https://localhost:44392/api/phone/' + id;
-    const phonesUrl = 'https://localhost:44392/api/phone';
+    const phoneIdUrl = environment.apiUrl + 'phone/' + id;
+    const phonesUrl = environment.apiUrl + 'phone';
     console.log(phoneIdUrl);
     return new Promise((resolver, reject) => {
         this.http.put(phoneIdUrl, phone).subscribe(
@@ -100,8 +101,8 @@ export class PhoneService {
   // delete request
   deletePhone(phone: Phone) {
     console.log(phone);
-    const phoneIdUrl = 'https://localhost:44392/api/phone/' + phone.id;
-    const phonesId = 'https://localhost:44392/api/phone';
+    const phoneIdUrl = environment.apiUrl + 'phone/' + phone.id;
+    const phonesId = environment.apiUrl + 'phone';
     return new Promise((resolver, reject) => {
         this.http.delete(phoneIdUrl).subscribe(
           phone => {

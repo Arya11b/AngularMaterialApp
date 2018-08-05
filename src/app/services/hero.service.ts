@@ -4,12 +4,13 @@ import {Phone} from '../Models/Phone';
 import {BehaviorSubject, Observable, of} from 'rxjs'; // for handling async data sync :)
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Group} from '../Models/Group';
-import {Address} from '../Models/Address'; // for handling messages and shit
+import {Address} from '../Models/Address';
+import {environment} from "../../environments/environment"; // for handling messages and shit
 //
 // service in service scenario common
 const httpOptions = {
   headers: new HttpHeaders({
-    'Access-Control-Allow-Origin' : 'https://localhost:8080'
+    'Access-Control-Allow-Origin' : environment.apiUrl
 })
 };
 @Injectable({
@@ -31,7 +32,7 @@ export class HeroService {
 
   // post request
   postHero(hero: Hero): Promise<Hero> {
-    const heroesUrl = 'https://localhost:44392/api/hero';
+    const heroesUrl = environment.apiUrl + 'hero';
     return new Promise((resolver, reject) => {
         hero.picture = this.assignAvatar();
         this.dataStore.heroes.push(hero);
@@ -48,8 +49,8 @@ export class HeroService {
   // put request
   updateHero(id: number, hero: Hero){
     console.log(hero);
-    const heroIdUrl = 'https://localhost:44392/api/hero/' + id;
-    const heroesUrl = 'https://localhost:44392/api/hero';
+    const heroIdUrl = environment.apiUrl + 'hero/' + id;
+    const heroesUrl = environment.apiUrl + 'hero';
     console.log(heroIdUrl);
     return new Promise((resolver, reject) => {
         this.http.put(heroIdUrl,hero).subscribe(
@@ -72,8 +73,8 @@ export class HeroService {
   // delete request
   deleteHero(hero: Hero){
     console.log(hero);
-    const heroesUrlDel = 'https://localhost:44392/api/hero/' + hero.id;
-    const heroesUrl = 'https://localhost:44392/api/hero';
+    const heroesUrlDel =  environment.apiUrl + 'hero/' + hero.id;
+    const heroesUrl = environment.apiUrl + 'hero';
     return new Promise((resolver, reject) => {
         this.http.delete(heroesUrlDel).subscribe(
           hero => {
@@ -93,7 +94,7 @@ export class HeroService {
   }
   // fetch Datas
   fetchHeroes() {
-    const heroesUrl = 'https://localhost:44392/api/hero';
+    const heroesUrl = environment.apiUrl + 'hero';
     return this.http.get<Hero[]>(heroesUrl)
       .subscribe(data => {
         this.dataStore.heroes = data;

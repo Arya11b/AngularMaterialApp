@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {Group} from "../Models/Group";
 import {BehaviorSubject, Observable} from "rxjs/index";
 import {HttpClient} from "@angular/common/http";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -11,14 +12,14 @@ export class GroupService {
   _Groups: BehaviorSubject<Group[]>;
   constructor(private http: HttpClient) {
     this._Groups = new BehaviorSubject<Group[]>([]);
-    this.groups = []
+    this.groups = [];
 
   }
   getGroups(): Observable<Group[]> {
     return this._Groups.asObservable();
   }
   fetchGroups() {
-    const url = 'https://localhost:44392/api/group';
+    const url = environment.apiUrl + 'group';
     return this.http.get<Group[]>(url)
       .subscribe(data => {
         this.groups = data;
