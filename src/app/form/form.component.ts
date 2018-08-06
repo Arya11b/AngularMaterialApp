@@ -121,9 +121,26 @@ export class FormComponent implements OnInit {
     return this.fieldService.addressFields;
   }
   disableSubmit(): boolean {
-    if (this.heroForm.invalid)
-      return true;
+    return this.heroInvalid() || this.phoneInvalid() || this.addressInvalid();
+  }
+  heroInvalid(): boolean {
+    if (this.heroForm.invalid) return true;
     return false;
+  }
+  phoneInvalid(): boolean {
+    let bool = false;
+    this.phoneForms.forEach(phoneForm => {
+      if (phoneForm.invalid) bool = true;
+      }
+    );
+    return bool;
+  }
+  addressInvalid(): boolean {
+    let bool = false
+    this.addressForms.forEach(addressForm => {
+      if (addressForm.invalid) bool = true;
+    });
+    return bool;
   }
   hideAdd(): boolean {
     this.phoneForms.forEach(

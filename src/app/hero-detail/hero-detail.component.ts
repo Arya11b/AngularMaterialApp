@@ -25,11 +25,10 @@ export class HeroDetailComponent implements OnInit {
     this.addresses = [];
     this.route.params.subscribe(params => {
       const id = params['id'];
-      console.log('nginit');
+      console.log(id);
       this.service.getHeroes().subscribe(heroes => {
         if (heroes.length == 0) return;
         this.hero = this.service.getHeroById(id);
-        console.log(this.hero);
       });
       this.service.getPhones().subscribe(phones => {
         if (phones.length == 0) return;
@@ -41,7 +40,7 @@ export class HeroDetailComponent implements OnInit {
       });
     });
   }
-  deleteHero(){
+  deleteHero() {
     // delete hero dialog
     let dialogRef = this.dialog.open(MessagesComponent,{
       width: 'auto'

@@ -113,7 +113,6 @@ export class FieldService {
       order: 2,
       validators: [
         Validators.required,
-        Validators.pattern('[A-Za-z]*')
       ]
     }),
 

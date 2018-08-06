@@ -20,18 +20,21 @@ export class HeroEditComponent implements OnInit {
   phoneForms: FormGroup[];
   addressForms: FormGroup[];
   constructor(private route: ActivatedRoute, private service: OrmService, private fieldService: FieldService) { }
-  initForms() {
+  initHeroForm() {
     this.heroForm = new FormGroup({});
-    this.addressForms = [];
-    this.phoneForms = [];
     this.fields.forEach(
       (field) => {
         this.heroForm.addControl(field.key, new FormControl('', field.validators));
       }
     );
     this.heroForm.get('firstName').setValue(this.hero.firstName);
+    console.log('ss' + this.heroForm.get('firstName'));
     this.heroForm.get('lastName').setValue(this.hero.lastName);
     this.heroForm.get('alias').setValue(this.hero.alias);
+
+  }
+  initPhonesForm() {
+    this.phoneForms = [];
     this.phones.forEach( phone => {
       let formGroup = new FormGroup({});
       this.phoneFields.forEach( field => {
@@ -43,6 +46,10 @@ export class HeroEditComponent implements OnInit {
       this.phoneForms.push(formGroup);
     });
 
+  }
+  initAddressesForm() {
+    this.addressForms = [];
+
     this.addresses.forEach( address => {
       let formGroup = new FormGroup({});
       this.addressFields.forEach( field => {
@@ -52,29 +59,34 @@ export class HeroEditComponent implements OnInit {
       formGroup.get('addressLoc').setValue(address.addressLoc);
       this.addressForms.push(formGroup);
     });
+
+
   }
   ngOnInit() {
     this.phones = [];
     this.addresses = [];
-    this.hero = new Hero;
+    this.hero = {id:0 , parentId: 0 , picture: '' , firstName: '', lastName: '', alias: ''};
     const id = this.route.params.subscribe(params => {
       const id = params['id'];
       this.service.getHeroes().subscribe(heroes => {
         if (heroes.length == 0) return;
         this.hero = this.service.getHeroById(id);
         console.log(this.hero);
+        this.initHeroForm();
       });
       this.service.getPhones().subscribe(phones => {
         if (phones.length == 0) return;
         this.phones = this.service.getPhoneByParentId(id);
-        console.log(this.phones);
+        this.initPhonesForm();
       });
       this.service.getAddresses().subscribe(addresses => {
         if (addresses.length == 0) return;
         this.addresses = this.service.getAddressByParentId(id);
+        this.initAddressesForm();
       });
     });
-    this.initForms();
+    console.log([this.hero, 2]);
+
   }
   updateHero() {
     this.hero.firstName = this.heroForm.value.firstName;
@@ -102,7 +114,6 @@ export class HeroEditComponent implements OnInit {
     this.service.updateHero(this.hero, this.phones, this.addresses);
   }
   changeAvatar() {
-    //console.log('it works');
     const avatarId = Math.floor(Math.random()*12) + 1;
     this.hero.picture = 'svg-' + avatarId;
   }
