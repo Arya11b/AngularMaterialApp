@@ -13,6 +13,7 @@
 <div *ngFor="let field of phoneFields" >
   <app-field [form]="phoneForm" [field]="field"></app-field>
 </div>
+    <button class="forms-mini-button" (click)="clickRemove('phone',phoneForm)" [hidden]="hideRemove()"> <mat-icon>remove</mat-icon></button>
 </div>
   <button class="forms-mini-button" (click)="clickAdd('phone')" [hidden]="hideAdd()"> <mat-icon>add</mat-icon></button>
 </mat-card>
@@ -22,6 +23,7 @@
       <div *ngFor="let field of addressFields" >
         <app-field [form]="addressForm" [field]="field"></app-field>
       </div>
+      <button class="forms-mini-button" (click)="clickRemove('address',addressForm)" [hidden]="hideRemove()"> <mat-icon>remove</mat-icon></button>
     </div>
       <button class="forms-mini-button" (click)="clickAdd('address')" [hidden]="hideAdd()"> <mat-icon>add</mat-icon></button>
   </mat-card>

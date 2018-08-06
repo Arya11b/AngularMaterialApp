@@ -19,7 +19,7 @@ export class FieldComponent implements OnInit {
       return true;
     return false;
   }
-  fieldErrors(key){
+  fieldErrors(key) {
     let errorMessages = [];
     let formControl = this.form.get(key);
     if (formControl.errors.required)

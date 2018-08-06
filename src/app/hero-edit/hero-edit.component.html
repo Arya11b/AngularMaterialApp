@@ -2,8 +2,8 @@
   <mat-spinner></mat-spinner>
 </div>
 <div *ngIf="hero">
-  <mat-card class="mat-elevation-z10" class="contactCard">
-    <div *ngFor="let field of fields" >
+  <mat-card class="mat-elevation-z10" class="contactCard" *ngIf="fetchedHero">
+    <div  *ngFor="let field of fields" >
       <app-field [form]="heroForm" [field]="field"></app-field>
     </div>
     <div class="avatar">
@@ -16,6 +16,8 @@
         <div *ngFor="let field of phoneFields" >
           <app-field [form]="phoneForm" [field]="field"></app-field>
         </div>
+        <button class="forms-mini-button" (click)="clickRemove('phone',phoneForm)" [hidden]="hideRemove()"> <mat-icon>remove</mat-icon></button>
+
       </div>
       <button class="forms-mini-button" (click)="clickAdd('phone')" [hidden]="hideAdd()"> <mat-icon>add</mat-icon></button>
     <mat-label> Address: </mat-label>
@@ -23,11 +25,12 @@
       <div *ngFor="let field of addressFields" >
         <app-field [form]="addressForm" [field]="field"></app-field>
       </div>
+      <button class="forms-mini-button" (click)="clickRemove('address',addressForm)" [hidden]="hideRemove()"> <mat-icon>remove</mat-icon></button>
     </div>
     <button class="forms-mini-button" (click)="clickAdd('address')" [hidden]="hideAdd()"> <mat-icon>add</mat-icon></button>
     </div>
-    <button (click)="updateHero()" class="minibutton" [routerLink]="['/hero',hero.id]">
-      <mat-icon class="minibutton">
+    <button (click)="updateHero()" [disabled]="disableSubmit()" class="minibutton" [routerLink]="['/hero',hero.id]">
+      <mat-icon class="minibutton" >
         update
       </mat-icon>
     </button>

@@ -1,4 +1,4 @@
-import {Component, NgZone, OnInit, ViewChild} from '@angular/core';
+import {Component, EventEmitter, NgZone, OnInit, Output, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {MatSidenav} from "@angular/material";
 const SMALL_SCREEN_BREAKPOINT = 720;
@@ -8,6 +8,7 @@ const SMALL_SCREEN_BREAKPOINT = 720;
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
+  // @Output() toggleRtl =  new EventEmitter<void>();
   private mediaMatcher: MediaQueryList = matchMedia(`(max-width: ${SMALL_SCREEN_BREAKPOINT}px)`);
   constructor(zone: NgZone, private router: Router) {
     this.mediaMatcher.addListener(mql => zone.run(() => this.mediaMatcher = mql));

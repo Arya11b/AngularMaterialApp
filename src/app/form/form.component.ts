@@ -40,34 +40,13 @@ export class FormComponent implements OnInit {
   }
   initPhoneForm() {
     this.phoneForms = [];
-    this.addToPhoneForm();
+    this.addToForm(this.phoneForms, this.phoneFields);
   }
   initAddressForm() {
     this.addressForms = [];
-    this.addToAddressForm();
+    this.addToForm(this.addressForms, this.addressFields);
   }
-  addToPhoneForm() {
-    this.phoneForms.push(new FormGroup({}));
-    this.phoneForms.forEach(
-      phoneForm => {
-        this.phoneFields.forEach(
-          (field) => {
-            phoneForm.addControl(field.key, new FormControl('', field.validators));
-          }
-        );
-      });
-  }
-  addToAddressForm() {
-    this.addressForms.push(new FormGroup({}));
-    this.addressForms.forEach(
-      addressForm => {
-        this.addressFields.forEach(
-          (field) => {
-            addressForm.addControl(field.key, new FormControl('', field.validators));
-          }
-        );
-      });
-  }
+
   ngOnInit() {
     // hero form start
     this.initHero();
@@ -109,6 +88,20 @@ export class FormComponent implements OnInit {
     console.log(this.hero);
     this.orm.addHero(this.hero, this.phones, this.addresses);
   }
+  addToForm(forms, fields) {
+    forms.push(new FormGroup({}));
+    forms.forEach(
+      form => {
+        fields.forEach(
+          (field) => {
+            form.addControl(field.key, new FormControl('', field.validators));
+          }
+        );
+      });
+  }
+  removeForm(form: any, forms: any[]) {
+    forms.splice(forms.indexOf(form), 1);
+  }
 
   // add stuff
   get fields() {
@@ -143,6 +136,8 @@ export class FormComponent implements OnInit {
     return bool;
   }
   hideAdd(): boolean {
+    if(this.phoneInvalid())
+      return true;
     this.phoneForms.forEach(
       phoneForm => {
         if (phoneForm.invalid) return true;
@@ -150,12 +145,25 @@ export class FormComponent implements OnInit {
     );
     return false;
   }
+  hideRemove(): boolean{
+    if (this.phoneForms.length == 1)
+      return true;
+    return false;
+  }
   clickAdd(to): void {
     switch (to) {
-      case 'phone': this.addToPhoneForm();
+      case 'phone': this.addToForm(this.phoneForms, this.phoneFields);
       break;
-      case 'address': this.addToAddressForm();
+      case 'address': this.addToForm(this.addressForms, this.addressFields);
       break;
+    }
+  }
+  clickRemove(from,form): void {
+    switch (from) {
+      case 'phone': this.removeForm(form, this.phoneForms);
+        break;
+      case 'address': this.removeForm(form, this.addressForms);
+        break;
     }
   }
   onSubmit() { this.submitted = true; }
