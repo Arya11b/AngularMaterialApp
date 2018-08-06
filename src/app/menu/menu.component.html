@@ -1,10 +1,10 @@
-<mat-sidenav-container class="bar-container">
+<mat-sidenav-container class="bar-container" [dir]="dir" [class.alternate-theme]="isAlternateTheme">
   <mat-sidenav #sidenav class="bar-sidenav mat-elevation-z12" [opened]="isScreenLarge()" [mode]="getMode()">
     <mat-toolbar color="accent" class="bar-sidenav-title">Superhero Contacts</mat-toolbar>
     <app-heroes></app-heroes>
   </mat-sidenav>
   <div class="bar-sidenav-content">
-    <app-toolbar (toggleSideNav)="sidenav.toggle()"></app-toolbar>
+    <app-toolbar (toggleSideNav)="sidenav.toggle()" (toggleRtl)="toggleRtl()" (toggleTheme)="toggleTheme()"></app-toolbar>
     <mat-card class="card mat-elevation-z8">
       <router-outlet></router-outlet>
     </mat-card>

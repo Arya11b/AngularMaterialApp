@@ -9,6 +9,9 @@ import {FormComponent} from "../form/form.component";
 })
 export class ToolbarComponent implements OnInit {
   @Output() toggleSideNav = new EventEmitter<void>();
+  @Output() toggleTheme =  new EventEmitter<void>();
+  @Output() toggleRtl =  new EventEmitter<void>();
+
   constructor(private dialog: MatDialog) { }
 
   ngOnInit() {

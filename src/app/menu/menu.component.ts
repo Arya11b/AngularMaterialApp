@@ -8,7 +8,8 @@ const SMALL_SCREEN_BREAKPOINT = 720;
   styleUrls: ['./menu.component.scss']
 })
 export class MenuComponent implements OnInit {
-  // @Output() toggleRtl =  new EventEmitter<void>();
+  dir = 'ltr';
+  isAlternateTheme = false;
   private mediaMatcher: MediaQueryList = matchMedia(`(max-width: ${SMALL_SCREEN_BREAKPOINT}px)`);
   constructor(zone: NgZone, private router: Router) {
     this.mediaMatcher.addListener(mql => zone.run(() => this.mediaMatcher = mql));
@@ -28,5 +29,11 @@ export class MenuComponent implements OnInit {
   }
   getMode(): string {
     return this.isScreenSmall() ? 'over' : 'side';
+  }
+  toggleRtl() {
+    this.dir = this.dir == 'ltr' ? 'rtl' : 'ltr';
+  }
+  toggleTheme() {
+    this.isAlternateTheme = ! this.isAlternateTheme;
   }
 }

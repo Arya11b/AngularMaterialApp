@@ -9,6 +9,8 @@
   </button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item (click)="openDialog()">Add a Hero</button>
+    <button mat-menu-item (click)="toggleRtl.emit()">lang change</button>
+    <button mat-menu-item (click)="toggleTheme.emit()">theme change</button>
   </mat-menu>
   </mat-toolbar-row>
 </mat-toolbar>
