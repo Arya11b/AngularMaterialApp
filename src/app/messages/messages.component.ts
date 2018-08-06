@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialogRef} from "@angular/material";
-import {HeroDetailComponent} from "../hero-detail/hero-detail.component";
 @Component({
   selector: 'app-messages',
   templateUrl: './messages.component.html',
