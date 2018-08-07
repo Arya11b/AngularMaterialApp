@@ -8,12 +8,12 @@
       <mat-icon mat-card-avatar svgIcon="{{hero.picture}}" class="hero-pic-large"></mat-icon>
       <div>
       <mat-card-title class="name">{{hero.firstName | uppercase}} {{hero.lastName | uppercase }}</mat-card-title>
-      <mat-card-subtitle class="alias">Also known as The <span>{{hero.alias | uppercase}}</span></mat-card-subtitle>
+      <mat-card-subtitle class="alias">{{heroDetailText.subtitle}} <span>{{hero.alias | uppercase}}</span></mat-card-subtitle>
       </div>
     </div>
     <div class="card-col">
       <mat-card>
-        <mat-label class="section-label"> Phone:</mat-label>
+        <mat-label class="section-label"> {{heroDetailText.phone}}</mat-label>
         <mat-list *ngFor="let phone of phones">
           <mat-list-item class="phone" fxLayout="row" fxLayoutAlign="space-evenly  center">
             <span class="phone"> {{phone.place}}:&nbsp;</span> {{phone.code}} - {{phone.number}}
@@ -21,7 +21,7 @@
         </mat-list>
       </mat-card>
       <mat-card>
-        <mat-label class="section-label"> Address:</mat-label>
+        <mat-label class="section-label"> {{heroDetailText.address}} :</mat-label>
         <mat-list *ngFor="let address of addresses">
           <mat-list-item class="phone" fxLayout="row" fxLayoutAlign="space-evenly  center">
             <span class="phone"> {{address.place}}:&nbsp;</span> {{address.addressLoc}}

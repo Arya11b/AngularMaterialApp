@@ -1,5 +1,6 @@
-<h1> Home</h1>
-<div>
-  <p> welcome to super-hero phone book app! click on the upper left menu to start saving new contacts.</p>
-  <p>your existing contacts are shown on the left sidebar.</p>
+<h1>{{homeText.title}}</h1>
+<div *ngFor="let paragraph of homeText.text">
+  <p>
+    {{paragraph}}
+  </p>
 </div>

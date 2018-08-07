@@ -8,6 +8,8 @@ import {OrmService} from '../services/orm.service';
 import {Phone} from '../Models/Phone';
 import {Address} from '../Models/Address';
 import {MatDialog} from '@angular/material';
+import {LanguageService} from "../services/language.service";
+import {lang} from "../../resources/lang";
 
 @Component({
   selector: 'app-hero-detail',
@@ -18,7 +20,7 @@ export class HeroDetailComponent implements OnInit {
   hero: Hero;
   phones: Phone[];
   addresses: Address[];
-  constructor(private route: ActivatedRoute, private service: OrmService,private dialog: MatDialog) { }
+  constructor(private route: ActivatedRoute, private service: OrmService,private dialog: MatDialog, private languageService: LanguageService) { }
 
   ngOnInit() {
     this.phones = [];
@@ -51,5 +53,8 @@ export class HeroDetailComponent implements OnInit {
       }
     );
       // this.service.deleteHero(this.hero);
+  }
+  get heroDetailText() {
+    return lang[this.languageService.getLang()].heroDetail;
   }
 }

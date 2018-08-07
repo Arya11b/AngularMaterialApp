@@ -12,12 +12,12 @@
       </mat-card>
       <mat-card class="avatar mat-elevation-z10">
         <mat-icon mat-card-avatar (click)="changeAvatar()" svgIcon="{{hero.picture}}" class="hero-pic-large"></mat-icon>
-        <p class="avatar"> don't like the avatar ? click on it!</p>
+        <p class="avatar"> {{heroEditText.avatar}}</p>
       </mat-card>
     </div>
     <div class="card-row">
       <mat-card class="mini-card mat-elevation-z5">
-        <mat-label> Phone:</mat-label>
+        <mat-label> {{heroEditText.phone}}: </mat-label>
         <div *ngFor="let phoneForm of phoneForms">
           <div *ngFor="let field of phoneFields">
             <app-field [form]="phoneForm" [field]="field"></app-field>
@@ -32,7 +32,7 @@
         </button>
       </mat-card>
       <mat-card class="mini-card mat-elevation-z12">
-        <mat-label> Address:</mat-label>
+        <mat-label> {{heroEditText.address}}: </mat-label>
         <div *ngFor="let addressForm of addressForms">
           <div *ngFor="let field of addressFields">
             <app-field [form]="addressForm" [field]="field"></app-field>

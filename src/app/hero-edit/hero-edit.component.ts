@@ -6,6 +6,8 @@ import {Address} from "../Models/Address";
 import {Phone} from "../Models/Phone";
 import {FormControl, FormGroup} from "@angular/forms";
 import {FieldService} from "../services/field.service";
+import {lang} from "../../resources/lang";
+import {LanguageService} from "../services/language.service";
 
 @Component({
   selector: 'app-hero-edit',
@@ -23,7 +25,7 @@ export class HeroEditComponent implements OnInit {
   fetchedHero: boolean = false;
   fetchedAddress: boolean = false;
   fetchedPhone: boolean = false;
-  constructor(private route: ActivatedRoute, private service: OrmService, private fieldService: FieldService) { }
+  constructor(private route: ActivatedRoute, private service: OrmService, private fieldService: FieldService, private languageService: LanguageService) { }
   initHeroForm() {
     this.fields.forEach(
       (field) => {
@@ -198,6 +200,9 @@ export class HeroEditComponent implements OnInit {
       case 'address': this.removeForm(form, this.addressForms);
         break;
     }
+  }
+  get heroEditText() {
+    return lang[this.languageService.getLang()].heroEdit;
   }
 
 }

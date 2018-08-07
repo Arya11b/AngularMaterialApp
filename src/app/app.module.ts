@@ -45,7 +45,7 @@ import {FieldService} from "./services/field.service";
     FormComponent
   ],
   providers: [HeroService,
-  FieldService],
+  FieldService, MenuComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
