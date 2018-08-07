@@ -1,4 +1,4 @@
-.heroesPicLarge {
+.hero-pic-large {
   border: 2px solid darkslateblue;
   width: 134px;
   height: 134px;
@@ -11,31 +11,45 @@
   vertical-align: middle;
 }
 .avatar {
+  margin: 1%;
   align-items: center;
-  width: 50%;
   display: flex;
   flex: 1;
   flex-direction: column;
 }
 p.avatar{
   text-align: center;
+  font-size: 30px;
+  font-weight: bolder;
 }
-.contactCard {
-  margin: auto;
+.contact-card {
   display: flex;
-  max-width: 60%;
+  max-width: 100%;
+  width: 80%;
+  flex: 1;
+  align-items: center;
+
+  flex-direction: column;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.card-row {
+  margin: 1%;
+  display: flex;
+  max-width: 80%;
+  width: 80%;
   flex: 1;
   flex-direction: row;
   justify-content: space-between;
   flex-wrap: wrap;
+
 }
 .info{
   width: 50%;
   vertical-align: middle;
   display: flex;
-  flex-direction: column;
-  margin-left: auto;
-  margin-right: auto;
+  flex-direction: row;
+  margin: auto;
 }
 .name{
   font-size: 50px;
@@ -54,13 +68,13 @@ p.avatar{
 span.phone{
   font-weight: bolder;
 }
-div.minibutton{
+div.mini-button{
   display: flex;
   align-items: flex-end;
   align-self: flex-end;
   align-content: flex-end;
 }
-.minibutton{
+.mini-button{
   background: none;
   border: none;
   color: whitesmoke;
@@ -77,3 +91,12 @@ div.minibutton{
   padding: 0;
   color: whitesmoke;
 }
+.mini-card{
+  margin: 1%;
+  width: 60%;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+

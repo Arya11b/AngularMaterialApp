@@ -1,36 +1,54 @@
 <div *ngIf="!hero">
   <mat-spinner></mat-spinner>
+  <p> somethings wrong try again later</p>
 </div>
 <div *ngIf="hero">
-  <mat-card class="mat-elevation-z10" class="contactCard" *ngIf="fetchedHero">
-    <div  *ngFor="let field of fields" >
-      <app-field [form]="heroForm" [field]="field"></app-field>
-    </div>
-    <div class="avatar">
-    <mat-icon mat-card-avatar (click)="changeAvatar()" svgIcon="{{hero.picture}}" class="heroesPicLarge"></mat-icon>
-    <p class="avatar"> don't like the avatar ? click on it!</p>
-    </div>
-    <div class="info">
-      <mat-label> Phone: </mat-label>
-      <div *ngFor="let phoneForm of phoneForms">
-        <div *ngFor="let field of phoneFields" >
-          <app-field [form]="phoneForm" [field]="field"></app-field>
+  <mat-card class="mat-elevation-z10" class="contact-card" *ngIf="fetchedHero">
+    <div class="card-row">
+      <mat-card class="mini-card mat-elevation-z15">
+        <div *ngFor="let field of fields">
+          <app-field [form]="heroForm" [field]="field"></app-field>
         </div>
-        <button class="forms-mini-button" (click)="clickRemove('phone',phoneForm)" [hidden]="hideRemove()"> <mat-icon>remove</mat-icon></button>
+      </mat-card>
+      <mat-card class="avatar mat-elevation-z10">
+        <mat-icon mat-card-avatar (click)="changeAvatar()" svgIcon="{{hero.picture}}" class="hero-pic-large"></mat-icon>
+        <p class="avatar"> don't like the avatar ? click on it!</p>
+      </mat-card>
+    </div>
+    <div class="card-row">
+      <mat-card class="mini-card mat-elevation-z5">
+        <mat-label> Phone:</mat-label>
+        <div *ngFor="let phoneForm of phoneForms">
+          <div *ngFor="let field of phoneFields">
+            <app-field [form]="phoneForm" [field]="field"></app-field>
+          </div>
+          <button class="forms-mini-button" (click)="clickRemove('phone',phoneForm)" [hidden]="hideRemove(phoneForms)">
+            <mat-icon>remove</mat-icon>
+          </button>
 
-      </div>
-      <button class="forms-mini-button" (click)="clickAdd('phone')" [hidden]="hideAdd()"> <mat-icon>add</mat-icon></button>
-    <mat-label> Address: </mat-label>
-    <div *ngFor="let addressForm of addressForms">
-      <div *ngFor="let field of addressFields" >
-        <app-field [form]="addressForm" [field]="field"></app-field>
-      </div>
-      <button class="forms-mini-button" (click)="clickRemove('address',addressForm)" [hidden]="hideRemove()"> <mat-icon>remove</mat-icon></button>
+        </div>
+        <button class="forms-mini-button" (click)="clickAdd('phone')" [hidden]="hideAdd(phoneForms)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-card>
+      <mat-card class="mini-card mat-elevation-z12">
+        <mat-label> Address:</mat-label>
+        <div *ngFor="let addressForm of addressForms">
+          <div *ngFor="let field of addressFields">
+            <app-field [form]="addressForm" [field]="field"></app-field>
+          </div>
+          <button class="forms-mini-button" (click)="clickRemove('address',addressForm)"
+                  [hidden]="hideRemove(addressForms)">
+            <mat-icon>remove</mat-icon>
+          </button>
+        </div>
+        <button class="forms-mini-button" (click)="clickAdd('address')" [hidden]="hideAdd(addressForms)">
+          <mat-icon>add</mat-icon>
+        </button>
+      </mat-card>
     </div>
-    <button class="forms-mini-button" (click)="clickAdd('address')" [hidden]="hideAdd()"> <mat-icon>add</mat-icon></button>
-    </div>
-    <button (click)="updateHero()" [disabled]="disableSubmit()" class="minibutton" [routerLink]="['/hero',hero.id]">
-      <mat-icon class="minibutton" >
+    <button (click)="updateHero()" [disabled]="disableSubmit()" class="mini-button" [routerLink]="['/hero',hero.id]">
+      <mat-icon class="mini-button">
         update
       </mat-icon>
     </button>

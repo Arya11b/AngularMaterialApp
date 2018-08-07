@@ -10,15 +10,19 @@ import {FormGroup} from "@angular/forms";
 export class FieldComponent implements OnInit {
   @Input() field: FieldBase<any>;
   @Input() form: FormGroup;
-  constructor() { }
+
+  constructor() {
+  }
 
   ngOnInit() {
   }
+
   fieldHasError(key): boolean {
     if (this.form.get(key).invalid && (this.form.get(key).touched || this.form.get(key).dirty))
       return true;
     return false;
   }
+
   fieldErrors(key) {
     let errorMessages = [];
     let formControl = this.form.get(key);

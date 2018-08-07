@@ -14,7 +14,7 @@ $my-app-theme: mat-dark-theme($my-app-primary, $my-app-accent, $my-app-warn);
   $alternate-accent:  mat-palette($mat-pink, 500, 900, A100);
   $alternate-warn:    mat-palette($mat-deep-orange);
 
-  $alternate-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
+  $alternate-theme: mat-light-theme($alternate-primary, $alternate-accent, $alternate-warn);
 
   @include angular-material-theme($alternate-theme);
 }

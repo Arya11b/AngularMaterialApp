@@ -95,7 +95,7 @@ export class FieldService {
       label: 'Place',
       value: '',
       placeHolder: 'ex: Home',
-      icon: 'form-4',
+      icon: 'form-5',
       order: 1,
       validators: [
         Validators.required,
@@ -109,7 +109,7 @@ export class FieldService {
       label: 'Location',
       value: '',
       placeHolder: 'ex: Gurrero Street',
-      icon: 'form-4',
+      icon: 'form-5',
       order: 2,
       validators: [
         Validators.required,

@@ -1,5 +1,5 @@
 $iconWidth: 56px;
-.mainImg{
+.main-img{
   -webkit-user-select: none;
   height: auto;
   width: auto;
@@ -9,7 +9,7 @@ $iconWidth: 56px;
 .main{
   flex-direction: row;
 }
-.mainTitle{
+.main-title{
   margin-top: 0px;
   font-size: 50px;
   font-family: "Microsoft JhengHei";
@@ -33,10 +33,13 @@ mat-icon {
   width: $iconWidth;
   line-height: $iconWidth;
 }
-.toolbarList{
+.toolbar-list{
   flex: 1;
   flex-direction: row;
 }
 .spacer {
   flex: 1 1 auto;
+}
+dropdown-menu{
+  width: 100%;
 }

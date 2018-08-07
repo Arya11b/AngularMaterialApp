@@ -1,7 +1,7 @@
-<mat-form-field appearance="standard" *ngIf="field">
+<mat-form-field appearance="standard" *ngIf="field" class="forms-item">
   <mat-label>{{field.label}}</mat-label>
-  <div [formGroup]="form">
-    <input matInput placeholder={{field.placeHolder}} required formControlName={{field.key}}>
+  <div [formGroup]="form" >
+    <input matInput  placeholder={{field.placeHolder}} required formControlName={{field.key}}>
   </div>
   <mat-error *ngIf="fieldHasError(field.key)">
     <div *ngFor="let error of fieldErrors(field.key)">

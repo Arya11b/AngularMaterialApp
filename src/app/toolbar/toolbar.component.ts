@@ -1,6 +1,7 @@
-import {Component, Output, EventEmitter, OnInit} from '@angular/core';
+import {Component, Output, EventEmitter, OnInit, Input} from '@angular/core';
 import {MatDialog} from "@angular/material";
 import {FormComponent} from "../form/form.component";
+import {lang} from "../../resources/lang";
 
 @Component({
   selector: 'app-toolbar',
@@ -11,6 +12,7 @@ export class ToolbarComponent implements OnInit {
   @Output() toggleSideNav = new EventEmitter<void>();
   @Output() toggleTheme =  new EventEmitter<void>();
   @Output() toggleRtl =  new EventEmitter<void>();
+  @Input() lang = [];
 
   constructor(private dialog: MatDialog) { }
 

@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { AppComponent } from './app.component';
 import {MenuComponent} from "./menu/menu.component";
-import {MatSidenav, MatToolbar} from "@angular/material";
+import {MatMenu, MatSidenav, MatToolbar} from "@angular/material";
 import {HeroesComponent} from "./heroes/heroes.component";
 import {ToolbarComponent} from "./toolbar/toolbar.component";
 import {AppRoutingModule} from "./app-routing.module";

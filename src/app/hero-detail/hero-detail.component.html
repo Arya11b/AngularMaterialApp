@@ -1,32 +1,41 @@
 <div *ngIf="!hero">
   <mat-spinner></mat-spinner>
+  <p> somethings wrong try again later</p>
 </div>
-<div *ngIf="hero" >
-  <mat-card class="mat-elevation-z10" class="contactCard">
-    <mat-icon mat-card-avatar svgIcon="{{hero.picture}}" class="heroesPicLarge"></mat-icon>
-    <div class="info">
-    <mat-card-title class="name" >{{hero.firstName | uppercase}} {{hero.lastName | uppercase }}</mat-card-title>
-    <mat-card-subtitle class="alias">Also known as The <span>{{hero.alias | uppercase}}</span></mat-card-subtitle>
-      <mat-label class="section-label"> Phone: </mat-label>
-      <mat-list *ngFor="let phone of phones" >
-        <mat-list-item class="phone" fxLayout="row" fxLayoutAlign="space-evenly  center">
-          <span class="phone" > {{phone.place}}:&nbsp;</span> {{phone.code}} - {{phone.number}}
-        </mat-list-item>
-      </mat-list>
-      <mat-label class="section-label"> Address: </mat-label>
-      <mat-list *ngFor="let address of addresses" >
-        <mat-list-item class="phone" fxLayout="row" fxLayoutAlign="space-evenly  center">
-          <span class="phone" > {{address.place}}:&nbsp;</span> {{address.addressLoc}}
-        </mat-list-item>
-      </mat-list>
-        <div class="minibutton">
-        <button (click)="deleteHero()" matLine class="minibutton"><mat-icon>delete</mat-icon></button>
-        <button matLine [routerLink]="['/hero',hero.id,'edit']" class="minibutton"><mat-icon>edit</mat-icon></button>
+<div *ngIf="hero">
+  <mat-card class="mat-elevation-z10 contact-card">
+    <div class="card-col">
+      <mat-icon mat-card-avatar svgIcon="{{hero.picture}}" class="hero-pic-large"></mat-icon>
+      <div>
+      <mat-card-title class="name">{{hero.firstName | uppercase}} {{hero.lastName | uppercase }}</mat-card-title>
+      <mat-card-subtitle class="alias">Also known as The <span>{{hero.alias | uppercase}}</span></mat-card-subtitle>
       </div>
     </div>
-    <!--<div>-->
-      <!--<button (click)="updateForm()" matLine><mat-icon>update</mat-icon></button>-->
-
-    <!--</div>-->
+    <div class="card-col">
+      <mat-card>
+        <mat-label class="section-label"> Phone:</mat-label>
+        <mat-list *ngFor="let phone of phones">
+          <mat-list-item class="phone" fxLayout="row" fxLayoutAlign="space-evenly  center">
+            <span class="phone"> {{phone.place}}:&nbsp;</span> {{phone.code}} - {{phone.number}}
+          </mat-list-item>
+        </mat-list>
+      </mat-card>
+      <mat-card>
+        <mat-label class="section-label"> Address:</mat-label>
+        <mat-list *ngFor="let address of addresses">
+          <mat-list-item class="phone" fxLayout="row" fxLayoutAlign="space-evenly  center">
+            <span class="phone"> {{address.place}}:&nbsp;</span> {{address.addressLoc}}
+          </mat-list-item>
+        </mat-list>
+      </mat-card>
+    </div>
+    <div class="mini-button">
+      <button (click)="deleteHero()" matLine class="mini-button">
+        <mat-icon>delete</mat-icon>
+      </button>
+      <button matLine [routerLink]="['/hero',hero.id,'edit']" class="mini-button">
+        <mat-icon>edit</mat-icon>
+      </button>
+    </div>
   </mat-card>
 </div>

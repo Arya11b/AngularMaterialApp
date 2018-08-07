@@ -153,39 +153,33 @@ export class HeroEditComponent implements OnInit {
 
   // add stuff
   disableSubmit(): boolean {
-    return this.heroInvalid() || this.phoneInvalid() || this.addressInvalid();
+    return this.heroInvalid() || this.formsInvalid(this.phoneForms) || this.formsInvalid(this.addressForms);
   }
   heroInvalid(): boolean {
     if (this.heroForm.invalid) return true;
     return false;
   }
-  phoneInvalid(): boolean {
+  formsInvalid(forms): boolean {
     let bool = false;
-    this.phoneForms.forEach(phoneForm => {
-        if (phoneForm.invalid) bool = true;
+    forms.forEach(form => {
+        if (form.invalid) bool = true;
       }
     );
     return bool;
   }
-  addressInvalid(): boolean {
-    let bool = false
-    this.addressForms.forEach(addressForm => {
-      if (addressForm.invalid) bool = true;
-    });
-    return bool;
-  }
-  hideAdd(): boolean {
-    if(this.phoneInvalid())
+  hideAdd(forms): boolean {
+    if(this.formsInvalid(forms))
       return true;
-    this.phoneForms.forEach(
-      phoneForm => {
-        if (phoneForm.invalid) return true;
+    forms.forEach(
+      form => {
+        if (form.invalid) return true;
       }
     );
     return false;
   }
-  hideRemove(): boolean{
-    if (this.phoneForms.length == 1)
+
+  hideRemove(forms): boolean{
+    if (forms.length == 1)
       return true;
     return false;
   }

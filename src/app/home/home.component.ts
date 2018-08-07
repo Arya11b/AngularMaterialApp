@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {} from "../../resources/lang";
+import {MenuComponent} from "../menu/menu.component";
 
 @Component({
   selector: 'app-home',
@@ -8,7 +10,6 @@ import { Component, OnInit } from '@angular/core';
 export class HomeComponent implements OnInit {
   constructor() {
   }
-
   ngOnInit() {
   }
 

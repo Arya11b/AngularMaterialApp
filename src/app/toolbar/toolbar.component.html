@@ -1,4 +1,4 @@
-<mat-toolbar color="primary" class="toolbarList">
+<mat-toolbar color="primary" class="toolbar-list">
   <mat-toolbar-row>
     <button type="button" mat-button class="sidenav-component" (click)="toggleSideNav.emit()">
       <mat-icon> menu </mat-icon>
@@ -7,10 +7,10 @@
   <button mat-button [matMenuTriggerFor]="menu">
     <mat-icon>more_vert</mat-icon>
   </button>
-  <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="openDialog()">Add a Hero</button>
-    <button mat-menu-item (click)="toggleRtl.emit()">lang change</button>
-    <button mat-menu-item (click)="toggleTheme.emit()">theme change</button>
+  <mat-menu #menu="matMenu" class="dropdown-menu">
+    <button mat-menu-item (click)="openDialog()">{{lang.add}}</button>
+    <button mat-menu-item (click)="toggleRtl.emit()">{{lang.lang}}</button>
+    <button mat-menu-item (click)="toggleTheme.emit()">{{lang.theme}}</button>
   </mat-menu>
   </mat-toolbar-row>
 </mat-toolbar>

@@ -1,6 +1,7 @@
 import {Component, EventEmitter, NgZone, OnInit, Output, ViewChild} from '@angular/core';
 import {Router} from "@angular/router";
 import {MatSidenav} from "@angular/material";
+import {lang} from "../../resources/lang";
 const SMALL_SCREEN_BREAKPOINT = 720;
 @Component({
   selector: 'app-menu',
@@ -9,6 +10,7 @@ const SMALL_SCREEN_BREAKPOINT = 720;
 })
 export class MenuComponent implements OnInit {
   dir = 'ltr';
+  lang = 'en';
   isAlternateTheme = false;
   private mediaMatcher: MediaQueryList = matchMedia(`(max-width: ${SMALL_SCREEN_BREAKPOINT}px)`);
   constructor(zone: NgZone, private router: Router) {
@@ -32,8 +34,13 @@ export class MenuComponent implements OnInit {
   }
   toggleRtl() {
     this.dir = this.dir == 'ltr' ? 'rtl' : 'ltr';
+    this.lang = this.lang == 'en' ? 'fa' : 'en';
+    this.sidenav.toggle().then(() => this.sidenav.toggle());
   }
   toggleTheme() {
     this.isAlternateTheme = ! this.isAlternateTheme;
+  }
+  getLang() {
+    return lang[this.lang];
   }
 }
