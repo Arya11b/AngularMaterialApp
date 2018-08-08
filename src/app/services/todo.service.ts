@@ -43,7 +43,7 @@ export class TodoService {
     );
   }
   // put request
-  updateToDo(id: number, todo: ToDo){
+  updateTodo(id: number, todo: ToDo){
     console.log(todo);
     const todoIdUrl = environment.apiUrl + 'todo/' + id;
     const todosUrl = environment.apiUrl + 'todo';
@@ -67,7 +67,7 @@ export class TodoService {
     );
   }
   // delete request
-  deleteToDo(todo: ToDo) {
+  deleteTodo(todo: ToDo) {
     console.log(todo);
     const todosUrlDel =  environment.apiUrl + 'todo/' + todo.id;
     const todosUrl = environment.apiUrl + 'todo';

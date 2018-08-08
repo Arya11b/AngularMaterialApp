@@ -67,6 +67,9 @@ export class OrmService {
       this.addressService.postAddress(address);
     });    // this.phoneService.updatePhones(phones);
   }
+  updateTodo(todo) {
+    this.todoService.updateTodo(todo.id, todo);
+  }
   deleteHero(hero, phones, addresses) {
     this.heroService.deleteHero(hero);
     this.phoneService.deletePhones(phones);
@@ -75,6 +78,9 @@ export class OrmService {
   // get requests
   getHeroById(id) {
     return this.heroService.heroSet.find(x => x.id == id);
+  }
+  getTodoById(id) {
+    return this.todoService.todoSet.find(x => x.id == id);
   }
   getAddressByParentId(parentId) {
     return this.addressService.addressSet.filter(x => x.parentId == parentId);

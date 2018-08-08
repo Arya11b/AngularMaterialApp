@@ -6,5 +6,6 @@ export class ToDo {
   parentId: number;
   note: string;
   due: string;
+  done: boolean;
 
 }
