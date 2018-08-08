@@ -4,13 +4,13 @@
 <mat-dialog-content>
 
   <mat-card>
-    <mat-label> Personal Info: </mat-label>
+    <mat-label> {{formText.info}} </mat-label>
     <div *ngFor="let field of fields" >
   <app-field [form]="heroForm" [field]="field"></app-field>
 </div>
   </mat-card>
 <mat-card>
-  <mat-label> Phone: </mat-label>
+  <mat-label> {{formText.phone}} </mat-label>
   <div *ngFor="let phoneForm of phoneForms">
 <div *ngFor="let field of phoneFields" >
   <app-field [form]="phoneForm" [field]="field"></app-field>
@@ -20,7 +20,7 @@
   <button class="forms-mini-button" (click)="clickAdd('phone')" [hidden]="hideAdd(phoneForms)"> <mat-icon>add</mat-icon></button>
 </mat-card>
   <mat-card>
-    <mat-label> Address: </mat-label>
+    <mat-label> {{formText.address}} </mat-label>
     <div *ngFor="let addressForm of addressForms">
       <div *ngFor="let field of addressFields" >
         <app-field [form]="addressForm" [field]="field"></app-field>
@@ -29,5 +29,5 @@
     </div>
       <button class="forms-mini-button" (click)="clickAdd('address')" [hidden]="hideAdd(addressForms)"> <mat-icon>add</mat-icon></button>
   </mat-card>
-<button class="forms-button" [disabled]="disableSubmit()" (click)="save()" mat-button>Submit</button>
+<button class="forms-button" [disabled]="disableSubmit()" (click)="save()" mat-button>{{formText.submit}}</button>
 </mat-dialog-content>

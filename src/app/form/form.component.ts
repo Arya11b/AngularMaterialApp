@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Hero} from '../Models/Hero';
 import {MatDialogRef} from '@angular/material';
 import {FormControl, FormGroup} from '@angular/forms';
@@ -6,6 +6,8 @@ import {Phone} from '../Models/Phone';
 import {Address} from '../Models/Address';
 import {FieldService} from '../services/field.service';
 import {OrmService} from "../services/orm.service";
+import {LanguageService} from "../services/language.service";
+import {lang} from "../../resources/lang";
 
 @Component({
   selector: 'app-form',
@@ -21,15 +23,17 @@ export class FormComponent implements OnInit {
   phoneForms: FormGroup[];
   addressForms: FormGroup[];
   // function helpers
-  constructor( private orm: OrmService, private fieldService: FieldService, private dialogRef: MatDialogRef<FormComponent>) {
+  constructor(private orm: OrmService, private fieldService: FieldService, private dialogRef: MatDialogRef<FormComponent>, private languageService: LanguageService) {
     this.phones = [];
     this.addresses = [];
   }
+
   initHero() {
     this.hero = new Hero;
     // add address Number
     // add Address
   }
+
   initHeroForm() {
     this.heroForm = new FormGroup({});
     this.fields.forEach(
@@ -38,10 +42,12 @@ export class FormComponent implements OnInit {
       }
     );
   }
+
   initPhoneForm() {
     this.phoneForms = [];
     this.addToForm(this.phoneForms, this.phoneFields);
   }
+
   initAddressForm() {
     this.addressForms = [];
     this.addToForm(this.addressForms, this.addressFields);
@@ -55,21 +61,22 @@ export class FormComponent implements OnInit {
     this.initPhoneForm();
     this.initAddressForm();
   }
+
   save() {
     this.hero.firstName = this.heroForm.value.firstName;
     this.hero.lastName = this.heroForm.value.lastName;
     this.hero.alias = this.heroForm.value.alias;
     this.phoneForms.forEach(
       phoneForm => {
-      this.phones.push({
-        id: 0,
-        parentId: 0,
-        number: phoneForm.value.phoneNumber,
-        code: phoneForm.value.phoneCode,
-        place: phoneForm.value.phonePlace
-      });
-  }
-  );
+        this.phones.push({
+          id: 0,
+          parentId: 0,
+          number: phoneForm.value.phoneNumber,
+          code: phoneForm.value.phoneCode,
+          place: phoneForm.value.phonePlace
+        });
+      }
+    );
     this.addressForms.forEach(
       addressForm => {
         this.addresses.push({
@@ -84,10 +91,12 @@ export class FormComponent implements OnInit {
     this.addHero();
     this.dialogRef.close();
   }
+
   addHero() {
     console.log(this.hero);
     this.orm.addHero(this.hero, this.phones, this.addresses);
   }
+
   addToForm(forms, fields) {
     forms.push(new FormGroup({}));
     forms.forEach(
@@ -99,6 +108,7 @@ export class FormComponent implements OnInit {
         );
       });
   }
+
   removeForm(form: any, forms: any[]) {
     forms.splice(forms.indexOf(form), 1);
   }
@@ -107,19 +117,24 @@ export class FormComponent implements OnInit {
   get fields() {
     return this.fieldService.fields;
   }
+
   get phoneFields() {
     return this.fieldService.phoneFields;
   }
+
   get addressFields() {
     return this.fieldService.addressFields;
   }
+
   disableSubmit(): boolean {
     return this.heroInvalid() || this.formsInvalid(this.phoneForms) || this.formsInvalid(this.addressForms);
   }
+
   heroInvalid(): boolean {
     if (this.heroForm.invalid) return true;
     return false;
   }
+
   formsInvalid(forms): boolean {
     let bool = false;
     forms.forEach(form => {
@@ -128,8 +143,9 @@ export class FormComponent implements OnInit {
     );
     return bool;
   }
+
   hideAdd(forms): boolean {
-    if(this.formsInvalid(forms))
+    if (this.formsInvalid(forms))
       return true;
     forms.forEach(
       form => {
@@ -139,26 +155,39 @@ export class FormComponent implements OnInit {
     return false;
   }
 
-  hideRemove(forms): boolean{
+  hideRemove(forms): boolean {
     if (forms.length == 1)
       return true;
     return false;
   }
+
   clickAdd(to): void {
     switch (to) {
-      case 'phone': this.addToForm(this.phoneForms, this.phoneFields);
-      break;
-      case 'address': this.addToForm(this.addressForms, this.addressFields);
-      break;
+      case 'phone':
+        this.addToForm(this.phoneForms, this.phoneFields);
+        break;
+      case 'address':
+        this.addToForm(this.addressForms, this.addressFields);
+        break;
     }
   }
+
   clickRemove(from, form): void {
     switch (from) {
-      case 'phone': this.removeForm(form, this.phoneForms);
+      case 'phone':
+        this.removeForm(form, this.phoneForms);
         break;
-      case 'address': this.removeForm(form, this.addressForms);
+      case 'address':
+        this.removeForm(form, this.addressForms);
         break;
     }
   }
-  onSubmit() { this.submitted = true; }
+
+  get formText() {
+    return lang[this.languageService.getLang()].addForm;
+  }
+
+  onSubmit() {
+    this.submitted = true;
+  }
 }

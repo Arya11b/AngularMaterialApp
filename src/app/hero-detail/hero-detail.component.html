@@ -3,39 +3,44 @@
   <p> somethings wrong try again later</p>
 </div>
 <div *ngIf="hero">
-  <mat-card class="mat-elevation-z10 contact-card">
-    <div class="card-col">
-      <mat-icon mat-card-avatar svgIcon="{{hero.picture}}" class="hero-pic-large"></mat-icon>
-      <div>
-      <mat-card-title class="name">{{hero.firstName | uppercase}} {{hero.lastName | uppercase }}</mat-card-title>
-      <mat-card-subtitle class="alias">{{heroDetailText.subtitle}} <span>{{hero.alias | uppercase}}</span></mat-card-subtitle>
-      </div>
-    </div>
-    <div class="card-col">
-      <mat-card>
-        <mat-label class="section-label"> {{heroDetailText.phone}}</mat-label>
-        <mat-list *ngFor="let phone of phones">
-          <mat-list-item class="phone" fxLayout="row" fxLayoutAlign="space-evenly  center">
-            <span class="phone"> {{phone.place}}:&nbsp;</span> {{phone.code}} - {{phone.number}}
-          </mat-list-item>
-        </mat-list>
+  <mat-tab-group>
+    <mat-tab>
+      <mat-card class="mat-elevation-z10 contact-card">
+        <div class="card-col">
+          <mat-icon mat-card-avatar svgIcon="{{hero.picture}}" class="hero-pic-large"></mat-icon>
+          <div>
+            <mat-card-title class="name">{{hero.firstName | uppercase}} {{hero.lastName | uppercase }}</mat-card-title>
+            <mat-card-subtitle class="alias">{{heroDetailText.subtitle}} <span>{{hero.alias | uppercase}}</span>
+            </mat-card-subtitle>
+          </div>
+        </div>
+        <div class="card-col">
+          <mat-card>
+            <mat-label class="section-label"> {{heroDetailText.phone}}</mat-label>
+            <mat-list *ngFor="let phone of phones">
+              <mat-list-item class="card-item" fxLayoutAlign="space-evenly center">
+                <span class="card-item"> {{phone.place}}:&nbsp;</span> {{phone.code}} - {{phone.number}}
+              </mat-list-item>
+            </mat-list>
+          </mat-card>
+          <mat-card>
+            <mat-label class="section-label"> {{heroDetailText.address}} :</mat-label>
+            <mat-list *ngFor="let address of addresses">
+              <mat-list-item class="card-item" fxLayout="row" fxLayoutAlign="space-evenly  center">
+                <span class="card-item"> {{address.place}}:&nbsp;</span> {{address.addressLoc}}
+              </mat-list-item>
+            </mat-list>
+          </mat-card>
+        </div>
+        <div class="mini-button">
+          <button (click)="deleteHero()" matLine class="mini-button">
+            <mat-icon>delete</mat-icon>
+          </button>
+          <button matLine [routerLink]="['/hero',hero.id,'edit']" class="mini-button">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </div>
       </mat-card>
-      <mat-card>
-        <mat-label class="section-label"> {{heroDetailText.address}} :</mat-label>
-        <mat-list *ngFor="let address of addresses">
-          <mat-list-item class="phone" fxLayout="row" fxLayoutAlign="space-evenly  center">
-            <span class="phone"> {{address.place}}:&nbsp;</span> {{address.addressLoc}}
-          </mat-list-item>
-        </mat-list>
-      </mat-card>
-    </div>
-    <div class="mini-button">
-      <button (click)="deleteHero()" matLine class="mini-button">
-        <mat-icon>delete</mat-icon>
-      </button>
-      <button matLine [routerLink]="['/hero',hero.id,'edit']" class="mini-button">
-        <mat-icon>edit</mat-icon>
-      </button>
-    </div>
-  </mat-card>
+    </mat-tab>
+  </mat-tab-group>
 </div>

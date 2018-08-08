@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {MatDialogRef} from "@angular/material";
+import {lang} from "../../resources/lang";
+import {LanguageService} from "../services/language.service";
 @Component({
   selector: 'app-messages',
   templateUrl: './messages.component.html',
@@ -7,7 +9,7 @@ import {MatDialogRef} from "@angular/material";
 })
 export class MessagesComponent implements OnInit {
 
-  constructor(private dialogRef: MatDialogRef<MessagesComponent>) { }
+  constructor(private dialogRef: MatDialogRef<MessagesComponent>, private languageService: LanguageService) { }
 
   ngOnInit() {
   }
@@ -16,6 +18,9 @@ export class MessagesComponent implements OnInit {
   }
   doAction() {
     this.dialogRef.close('yes')
+  }
+  get deleteMsgText() {
+    return lang[this.languageService.getLang()].deleteMsg;
   }
 
 }

@@ -2,16 +2,19 @@ import { Injectable } from '@angular/core';
 import {FieldBase} from '../form/models/FieldBase';
 import {FieldTextBox} from '../form/models/FieldTextBox';
 import {Validators} from '@angular/forms';
+import {LanguageService} from "./language.service";
+import {lang} from "../../resources/lang";
 
 @Injectable()
 export class FieldService {
-    // remove required
+  constructor(private languageService: LanguageService) {
+  }
     public fields: FieldBase<any>[] = [
       new FieldTextBox({
         key: 'firstName',
-        label: 'First name',
+        label: this.fieldsText.firstName.label,
         value: '',
-        placeHolder: 'ex: han',
+        placeHolder: this.fieldsText.firstName.placeHolder,
         icon: 'form-2',
         order: 1,
         validators: [
@@ -22,9 +25,9 @@ export class FieldService {
       }),
       new FieldTextBox({
         key: 'lastName',
-        label: 'Last name',
+        label: this.fieldsText.lastName.label,
         value: '',
-        placeHolder: 'ex: solo',
+        placeHolder: this.fieldsText.lastName.placeHolder,
         icon: 'form-1',
         order: 2,
         validators: [
@@ -35,9 +38,9 @@ export class FieldService {
       }),
       new FieldTextBox({
         key: 'alias',
-        label: 'Alias',
+        label: this.fieldsText.alias.label,
         value: '',
-        placeHolder: 'ex: ishotfirst',
+        placeHolder: this.fieldsText.alias.placeHolder,
         icon: 'form-3',
         order: 3,
         validators: [
@@ -50,9 +53,9 @@ export class FieldService {
     public phoneFields: FieldBase<any>[] = [
       new FieldTextBox({
         key: 'phoneCode',
-        label: 'Code',
+        label: this.fieldsText.phoneCode.label,
         value: '',
-        placeHolder: 'ex: 463',
+        placeHolder: this.fieldsText.phoneCode.placeHolder,
         icon: 'form-4',
         order: 1,
         validators: [
@@ -64,9 +67,9 @@ export class FieldService {
       }),
       new FieldTextBox({
         key: 'phoneNumber',
-        label: 'Number',
+        label: this.fieldsText.phoneNumber.label,
         value: '',
-        placeHolder: 'ex: 9338945',
+        placeHolder: this.fieldsText.phoneNumber.placeHolder,
         icon: 'form-4',
         order: 2,
         validators: [
@@ -77,9 +80,9 @@ export class FieldService {
       }),
       new FieldTextBox({
         key: 'phonePlace',
-        label: 'Place',
+        label: this.fieldsText.phonePlace.label,
         value: '',
-        placeHolder: 'ex: Work',
+        placeHolder: this.fieldsText.phonePlace.placeHolder,
         icon: 'form-4',
         order: 3,
         validators: [
@@ -92,9 +95,9 @@ export class FieldService {
   public addressFields: FieldBase<any>[] = [
     new FieldTextBox({
       key: 'addressPlace',
-      label: 'Place',
+      label: this.fieldsText.addressPlace.label,
       value: '',
-      placeHolder: 'ex: Home',
+      placeHolder: this.fieldsText.addressPlace.placeHolder,
       icon: 'form-5',
       order: 1,
       validators: [
@@ -106,9 +109,9 @@ export class FieldService {
     }),
     new FieldTextBox({
       key: 'addressLoc',
-      label: 'Location',
+      label: this.fieldsText.addressLoc.label,
       value: '',
-      placeHolder: 'ex: Gurrero Street',
+      placeHolder: this.fieldsText.addressLoc.placeHolder,
       icon: 'form-5',
       order: 2,
       validators: [
@@ -117,4 +120,7 @@ export class FieldService {
     }),
 
   ];
+  get fieldsText() {
+    return lang[this.languageService.getLang()].fields;
+  }
 }

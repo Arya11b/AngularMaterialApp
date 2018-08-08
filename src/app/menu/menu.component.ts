@@ -3,6 +3,7 @@ import {Router} from "@angular/router";
 import {MatSidenav} from "@angular/material";
 import {lang} from "../../resources/lang";
 import {LanguageService} from "../services/language.service";
+import {FieldService} from "../services/field.service";
 const SMALL_SCREEN_BREAKPOINT = 720;
 @Component({
   selector: 'app-menu',

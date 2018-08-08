@@ -23,6 +23,12 @@ export const lang = {
       phone: 'phone',
       address: 'address'
     },
+    addForm:{
+      info: 'Personal info',
+      phone: 'phone',
+      address: 'address',
+      submit: 'submit'
+    },
     fields: {
       firstName: {
         label: 'First Name',
@@ -56,6 +62,12 @@ export const lang = {
         placeHolder: 'ex: Gurrero Street',
         label: 'Location',
       }
+    },
+    deleteMsg: {
+      alert: 'alert',
+      msg: 'Are you sure you want to delete this user?',
+      yes: 'yes',
+      no: 'no'
     }
   },
   fa: {
@@ -78,6 +90,12 @@ export const lang = {
       avatar: 'برای تغییر عکس روی آن کلیک کنید',
       phone: 'تلفن',
       address: 'آدرس'
+    },
+    addForm: {
+      info: 'اطلاعات شخصی',
+      phone: 'تلفن',
+      address: 'آدرس',
+      submit: 'افزودن'
     },
     fields: {
       firstName: {
@@ -112,6 +130,12 @@ export const lang = {
         placeHolder: 'مثال: Gurrero Street',
         label: 'نشانی',
       }
+    },
+    deleteMsg: {
+      alert: 'هشدار',
+      msg: 'آیا مطمئن هستید که این کاربر را میخواهید پاک کنید؟ ',
+      yes: 'آری',
+      no: 'خیر'
     }
 
   }

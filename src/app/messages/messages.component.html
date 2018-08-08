@@ -1,9 +1,9 @@
 <div>
 
-  <h2 class="center" >Alert</h2>
-  <p class="center"> Are you sure you want to delete this user</p>
+  <h2 class="center" >{{deleteMsgText.alert}}</h2>
+  <p class="center"> {{deleteMsgText.msg}}</p>
   <div class="buttonRow">
-  <button mat-raised-button (click)="closeDialog()" > No </button>
-  <button mat-raised-button (click)="doAction()" color="warn" [routerLink]="['/']"> Yes </button>
+  <button mat-raised-button (click)="closeDialog()" > {{deleteMsgText.no}} </button>
+  <button mat-raised-button (click)="doAction()" color="warn" [routerLink]="['/']"> {{deleteMsgText.yes}} </button>
   </div>
 </div>
