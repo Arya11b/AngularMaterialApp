@@ -18,6 +18,8 @@ import { FormComponent } from './form/form.component';
 import { HeroEditComponent } from './hero-edit/hero-edit.component';
 import { FieldComponent } from './form/field/field.component';
 import {FieldService} from "./services/field.service";
+import { HeroProfileComponent } from './hero-profile/hero-profile.component';
+import { HeroTodoComponent } from './hero-todo/hero-todo.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,6 +32,8 @@ import {FieldService} from "./services/field.service";
     FormComponent,
     HeroEditComponent,
     FieldComponent,
+    HeroProfileComponent,
+    HeroTodoComponent,
   ],
   imports: [
     BrowserModule,

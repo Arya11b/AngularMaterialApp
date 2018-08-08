@@ -8,22 +8,24 @@ import {Group} from '../Models/Group';
 import {Address} from '../Models/Address';
 import {Phone} from '../Models/Phone';
 import {Observable} from 'rxjs/index';
+import {TodoService} from './todo.service';
+import {ToDo} from "../Models/ToDo";
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrmService {
   constructor(private heroService: HeroService, private phoneService: PhoneService,
-              private addressService: AddressService, private groupService: GroupService) { }
+              private addressService: AddressService, private groupService: GroupService,
+              private todoService: TodoService) { }
 
-  getPhoneByParentId(parentId) {
-    return this.phoneService.phoneSet.filter(x => x.parentId == parentId);
-  }
+
   fetchData() {
     this.heroService.fetchHeroes();
     this.addressService.fetchAddresses();
     this.groupService.fetchGroups();
     this.phoneService.fetchPhones();
+    this.todoService.fetchToDos();
   }
   // crud
   addHero(hero, phones, addresses) {
@@ -77,6 +79,15 @@ export class OrmService {
   getAddressByParentId(parentId) {
     return this.addressService.addressSet.filter(x => x.parentId == parentId);
   }
+  getPhoneByParentId(parentId) {
+    return this.phoneService.phoneSet.filter(x => x.parentId == parentId);
+  }
+  getTodoByParentId(parentId) {
+    console.log('ssss');
+    console.log(this.todoService.todoSet);
+    return this.todoService.todoSet.filter(x => x.parentId == parentId);
+  }
+
 
   // get stuff as observable
   getHeroes(): Observable<Hero[]> {
@@ -90,6 +101,9 @@ export class OrmService {
   }
   getAddresses(): Observable<Address[]> {
     return this.addressService._Addresses.asObservable();
+  }
+  getTodos(): Observable<ToDo[]> {
+    return this.todoService._ToDos.asObservable();
   }
   // valid id
   getValidId(dataset): number {

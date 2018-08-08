@@ -1,0 +1,20 @@
+<div *ngIf="!hero">
+  <mat-spinner></mat-spinner>
+  <p> somethings wrong try again later</p>
+</div>
+<div *ngIf="hero">
+  <mat-tab-group>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span class="tab-label">Info</span>
+      </ng-template>
+      <app-hero-detail [hero]="hero" [phones]="phones" [addresses]="addresses"></app-hero-detail>
+    </mat-tab>
+    <mat-tab>
+      <ng-template mat-tab-label>
+        <span class="tab-label">ToDos</span>
+      </ng-template>
+      <app-hero-todo [todos]="todos"></app-hero-todo>
+    </mat-tab>
+  </mat-tab-group>
+</div>
