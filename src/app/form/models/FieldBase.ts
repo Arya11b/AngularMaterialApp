@@ -22,7 +22,7 @@ export class FieldBase<T> {
     key?: string,
     controlType?: string,
     validators?: any[],
-    errorMessages?: any[]
+    errorMessages?: any[],
   } = {}) {
     this.value = options.value;
     this.key = options.key || '';

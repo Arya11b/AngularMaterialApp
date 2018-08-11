@@ -67,6 +67,14 @@ export class OrmService {
       this.addressService.postAddress(address);
     });    // this.phoneService.updatePhones(phones);
   }
+  addTodo(todo, parentId) {
+    todo.parentId = parentId;
+    todo.id = this.getValidId(this.todoService.todoSet);
+    this.todoService.postTodo(todo);
+  }
+  removeTodo(todo) {
+    this.todoService.deleteTodo(todo);
+  }
   updateTodo(todo) {
     this.todoService.updateTodo(todo.id, todo);
   }

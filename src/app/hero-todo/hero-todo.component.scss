@@ -1,8 +1,21 @@
 
 table{
-  width: 100%;
+  width: 95%;
 }
 .crossed{
   text-decoration: line-through;
   text-decoration-color: whitesmoke;
 }
+.round-border{
+  margin: auto;
+  border: solid;
+  border-color: whitesmoke;
+  background-color: white;
+  color: #212121;
+  border-radius: 25px;
+}
+.spacer{
+  margin-top: 5%;
+  margin-bottom: 2%;
+}
+

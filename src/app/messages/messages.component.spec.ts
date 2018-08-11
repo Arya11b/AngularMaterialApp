@@ -7,7 +7,6 @@ import {ToolbarComponent} from "../toolbar/toolbar.component";
 import {FieldComponent} from "../form/field/field.component";
 import {AppComponent} from "../app.component";
 import {MenuComponent} from "../menu/menu.component";
-import {FormComponent} from "../form/form.component";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {MaterialModule} from "../shared/material.module";
 import {AppRoutingModule} from "../app-routing.module";
@@ -23,7 +22,7 @@ describe('MessagesComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-          declarations: [MessagesComponent, HeroEditComponent, AppComponent , MenuComponent, FormComponent, FieldComponent, ToolbarComponent, HeroesComponent, MessagesComponent, HeroDetailComponent, HomeComponent ],
+          declarations: [MessagesComponent, HeroEditComponent, AppComponent , MenuComponent, FieldComponent, ToolbarComponent, HeroesComponent, MessagesComponent, HeroDetailComponent, HomeComponent ],
           imports: [AppRoutingModule, MaterialModule, BrowserAnimationsModule, HttpClientModule],
           schemas: [NO_ERRORS_SCHEMA],
           providers: [{ provide: MatDialogRef, useValue: {} } , {provide: APP_BASE_HREF, useValue : '/' }]

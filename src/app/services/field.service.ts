@@ -4,7 +4,7 @@ import {FieldTextBox} from '../form/models/FieldTextBox';
 import {Validators} from '@angular/forms';
 import {LanguageService} from "./language.service";
 import {lang} from "../../resources/lang";
-
+import {FieldDate} from "../form/models/FieldDate";
 @Injectable()
 export class FieldService {
   constructor(private languageService: LanguageService) {
@@ -94,7 +94,7 @@ export class FieldService {
     ];
   public addressFields: FieldBase<any>[] = [
     new FieldTextBox({
-      key: 'addressPlace',
+      key: 'todo',
       label: this.fieldsText.addressPlace.label,
       value: '',
       placeHolder: this.fieldsText.addressPlace.placeHolder,
@@ -113,6 +113,31 @@ export class FieldService {
       value: '',
       placeHolder: this.fieldsText.addressLoc.placeHolder,
       icon: 'form-5',
+      order: 2,
+      validators: [
+        Validators.required,
+      ]
+    }),
+
+  ];
+  public todoFields: FieldBase<any>[] = [
+    new FieldTextBox({
+      key: 'note',
+      label: 'ToDo',
+      value: '',
+      placeHolder: 'ex: save the world',
+      icon: '',
+      order: 1,
+      validators: [
+        Validators.required,
+      ]
+    }),
+    new FieldDate({
+      key: 'due',
+      label: 'Due date',
+      type: 'date',
+      value: '',
+      placeHolder: 'pick a date',
       order: 2,
       validators: [
         Validators.required,

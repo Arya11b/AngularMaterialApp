@@ -1,7 +1,7 @@
 import {Component, Output, EventEmitter, OnInit, Input} from '@angular/core';
 import {MatDialog} from "@angular/material";
-import {FormComponent} from "../form/form.component";
 import {lang} from "../../resources/lang";
+import {SignFormComponent} from "../sign-form/sign-form.component";
 
 @Component({
   selector: 'app-toolbar',
@@ -19,6 +19,6 @@ export class ToolbarComponent implements OnInit {
   ngOnInit() {
   }
   openDialog() {
-    let dialogRef = this.dialog.open(FormComponent, {width: '450px'});
+    let dialogRef = this.dialog.open(SignFormComponent, {width: '450px'});
   }
 }

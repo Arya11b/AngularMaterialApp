@@ -3,7 +3,6 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { FieldComponent } from './field.component';
 import {AppComponent} from "../../app.component";
 import {MenuComponent} from "../../menu/menu.component";
-import {FormComponent} from "../form.component";
 import {ToolbarComponent} from "../../toolbar/toolbar.component";
 import {HeroesComponent} from "../../heroes/heroes.component";
 import {MessagesComponent} from "../../messages/messages.component";
@@ -23,7 +22,7 @@ describe('FieldComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-          declarations: [AppComponent , MenuComponent, FormComponent, FieldComponent, ToolbarComponent, HeroesComponent, MessagesComponent, HeroDetailComponent, HeroEditComponent, HomeComponent ],
+          declarations: [AppComponent , MenuComponent, FieldComponent, ToolbarComponent, HeroesComponent, MessagesComponent, HeroDetailComponent, HeroEditComponent, HomeComponent ],
           imports: [AppRoutingModule, MaterialModule, BrowserAnimationsModule, HttpClientModule],
           schemas: [NO_ERRORS_SCHEMA],
           providers: [{provide: APP_BASE_HREF, useValue : '/' }]

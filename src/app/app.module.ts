@@ -14,12 +14,13 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import {HttpClientModule} from '@angular/common/http';
 import {HeroService} from './services/hero.service';
-import { FormComponent } from './form/form.component';
 import { HeroEditComponent } from './hero-edit/hero-edit.component';
 import { FieldComponent } from './form/field/field.component';
 import {FieldService} from "./services/field.service";
 import { HeroProfileComponent } from './hero-profile/hero-profile.component';
 import { HeroTodoComponent } from './hero-todo/hero-todo.component';
+import { SignFormComponent } from './sign-form/sign-form.component';
+import { DateComponent } from './date/date.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,11 +30,12 @@ import { HeroTodoComponent } from './hero-todo/hero-todo.component';
     HomeComponent,
     MenuComponent,
     ToolbarComponent,
-    FormComponent,
     HeroEditComponent,
     FieldComponent,
     HeroProfileComponent,
     HeroTodoComponent,
+    SignFormComponent,
+    DateComponent,
   ],
   imports: [
     BrowserModule,
@@ -46,7 +48,7 @@ import { HeroTodoComponent } from './hero-todo/hero-todo.component';
     FlexLayoutModule
   ],
   entryComponents: [
-    FormComponent
+    SignFormComponent
   ],
   providers: [HeroService,
   FieldService, MenuComponent],

@@ -11,7 +11,6 @@ import {HeroDetailComponent} from "./hero-detail/hero-detail.component";
 import {HeroEditComponent} from "./hero-edit/hero-edit.component";
 import {HomeComponent} from "./home/home.component";
 import {MaterialModule} from "./shared/material.module";
-import {FormComponent} from "./form/form.component";
 import {FieldComponent} from "./form/field/field.component";
 import {NO_ERRORS_SCHEMA} from "@angular/core";
 import {APP_BASE_HREF} from "@angular/common";
@@ -24,7 +23,7 @@ describe('AppComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
           // MatSidenav, MatToolbar,
-          declarations: [AppComponent , MenuComponent, FormComponent, FieldComponent, ToolbarComponent, HeroesComponent, MessagesComponent, HeroDetailComponent, HeroEditComponent, HomeComponent ],
+          declarations: [AppComponent , MenuComponent, FieldComponent, ToolbarComponent, HeroesComponent, MessagesComponent, HeroDetailComponent, HeroEditComponent, HomeComponent ],
           imports: [AppRoutingModule, MaterialModule, BrowserAnimationsModule, HttpClientModule],
           schemas: [NO_ERRORS_SCHEMA],
           providers: [{provide: APP_BASE_HREF, useValue : '/' }]

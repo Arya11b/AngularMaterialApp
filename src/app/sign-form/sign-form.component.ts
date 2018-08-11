@@ -10,11 +10,11 @@ import {LanguageService} from "../services/language.service";
 import {lang} from "../../resources/lang";
 
 @Component({
-  selector: 'app-form',
-  templateUrl: './form.component.html',
-  styleUrls: ['./form.component.scss']
+  selector: 'app-sign-form',
+  templateUrl: './sign-form.component.html',
+  styleUrls: ['./sign-form.component.scss']
 })
-export class FormComponent implements OnInit {
+export class SignFormComponent implements OnInit {
   submitted = false;
   hero: Hero;
   phones: Phone[];
@@ -23,7 +23,7 @@ export class FormComponent implements OnInit {
   phoneForms: FormGroup[];
   addressForms: FormGroup[];
   // function helpers
-  constructor(private orm: OrmService, private fieldService: FieldService, private dialogRef: MatDialogRef<FormComponent>, private languageService: LanguageService) {
+  constructor(private orm: OrmService, private fieldService: FieldService, private dialogRef: MatDialogRef<any>, private languageService: LanguageService) {
     this.phones = [];
     this.addresses = [];
   }
@@ -127,12 +127,7 @@ export class FormComponent implements OnInit {
   }
 
   disableSubmit(): boolean {
-    return this.heroInvalid() || this.formsInvalid(this.phoneForms) || this.formsInvalid(this.addressForms);
-  }
-
-  heroInvalid(): boolean {
-    if (this.heroForm.invalid) return true;
-    return false;
+    return this.heroForm.invalid || this.formsInvalid(this.phoneForms) || this.formsInvalid(this.addressForms);
   }
 
   formsInvalid(forms): boolean {
