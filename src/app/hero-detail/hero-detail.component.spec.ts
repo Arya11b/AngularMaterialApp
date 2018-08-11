@@ -10,6 +10,7 @@ import {NO_ERRORS_SCHEMA} from "@angular/core";
 import {MessagesComponent} from "../messages/messages.component";
 import {HeroEditComponent} from "../hero-edit/hero-edit.component";
 import {HomeComponent} from "../home/home.component";
+import {HeroProfileComponent} from "../hero-profile/hero-profile.component";
 
 describe('HeroDetailComponent', () => {
     let component: HeroDetailComponent;
@@ -17,7 +18,7 @@ describe('HeroDetailComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-          declarations: [HeroDetailComponent, HomeComponent , MessagesComponent/*e*/, HeroEditComponent /*e*/ ],
+          declarations: [HeroDetailComponent, HeroProfileComponent , HomeComponent , MessagesComponent/*e*/, HeroEditComponent /*e*/ ],
           imports: [AppRoutingModule, MaterialModule, BrowserAnimationsModule, HttpClientModule],
           schemas: [NO_ERRORS_SCHEMA],
           providers: [{provide: APP_BASE_HREF, useValue : '/' }]

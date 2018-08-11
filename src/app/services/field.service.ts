@@ -94,7 +94,7 @@ export class FieldService {
     ];
   public addressFields: FieldBase<any>[] = [
     new FieldTextBox({
-      key: 'todo',
+      key: 'addressPlace',
       label: this.fieldsText.addressPlace.label,
       value: '',
       placeHolder: this.fieldsText.addressPlace.placeHolder,

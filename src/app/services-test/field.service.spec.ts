@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { FieldService } from './field.service';
+import { FieldService } from '../services/field.service';
 
 describe('FieldService', () => {
   beforeEach(() => {

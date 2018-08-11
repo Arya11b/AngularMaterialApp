@@ -1,6 +1,6 @@
 import { TestBed, inject } from '@angular/core/testing';
 
-import { OrmService } from './orm.service';
+import { PhoneService } from '../services/phone.service';
 import {HomeComponent} from "../home/home.component";
 import {HeroEditComponent} from "../hero-edit/hero-edit.component";
 import {HeroDetailComponent} from "../hero-detail/hero-detail.component";
@@ -16,18 +16,19 @@ import {AppRoutingModule} from "../app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
 import {NO_ERRORS_SCHEMA} from "@angular/core";
 import {APP_BASE_HREF} from "@angular/common";
+import {HeroProfileComponent} from "../hero-profile/hero-profile.component";
 
-describe('OrmService', () => {
+describe('PhoneService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AppComponent , MenuComponent, FieldComponent, ToolbarComponent, HeroesComponent, MessagesComponent, HeroDetailComponent, HeroEditComponent, HomeComponent ],
+      declarations: [AppComponent , MenuComponent, HeroProfileComponent , FieldComponent, ToolbarComponent, HeroesComponent, MessagesComponent, HeroDetailComponent, HeroEditComponent, HomeComponent ],
       imports: [AppRoutingModule, MaterialModule, BrowserAnimationsModule, HttpClientModule],
       schemas: [NO_ERRORS_SCHEMA],
-      providers: [OrmService, {provide: APP_BASE_HREF, useValue : '/' }]
+      providers: [PhoneService, {provide: APP_BASE_HREF, useValue : '/' }]
     });
   });
 
-  it('should be created', inject([OrmService], (service: OrmService) => {
+  it('should be created', inject([PhoneService], (service: PhoneService) => {
     expect(service).toBeTruthy();
   }));
 });

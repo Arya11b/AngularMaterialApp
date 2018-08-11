@@ -29,5 +29,5 @@
     </div>
     <button class="forms-mini-button" (click)="clickAdd('address')" [hidden]="hideAdd(addressForms)"> <mat-icon>add</mat-icon></button>
   </mat-card>
-  <button class="forms-button" [disabled]="disableSubmit()" (click)="save()" mat-button>{{formText.submit}}</button>
+  <button class="forms-button" [disabled]="disableSubmit()" (click)="saveAndClose()" mat-button>{{formText.submit}}</button>
 </mat-dialog-content>

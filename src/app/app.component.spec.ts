@@ -16,6 +16,7 @@ import {NO_ERRORS_SCHEMA} from "@angular/core";
 import {APP_BASE_HREF} from "@angular/common";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HttpClientModule} from "@angular/common/http";
+import {HeroProfileComponent} from "./hero-profile/hero-profile.component";
 describe('AppComponent', () => {
     let component: AppComponent;
     let fixture: ComponentFixture<AppComponent>;
@@ -23,7 +24,7 @@ describe('AppComponent', () => {
     beforeEach(async(() => {
         TestBed.configureTestingModule({
           // MatSidenav, MatToolbar,
-          declarations: [AppComponent , MenuComponent, FieldComponent, ToolbarComponent, HeroesComponent, MessagesComponent, HeroDetailComponent, HeroEditComponent, HomeComponent ],
+          declarations: [AppComponent ,HeroProfileComponent  , MenuComponent, FieldComponent, ToolbarComponent, HeroesComponent, MessagesComponent, HeroDetailComponent, HeroEditComponent, HomeComponent ],
           imports: [AppRoutingModule, MaterialModule, BrowserAnimationsModule, HttpClientModule],
           schemas: [NO_ERRORS_SCHEMA],
           providers: [{provide: APP_BASE_HREF, useValue : '/' }]

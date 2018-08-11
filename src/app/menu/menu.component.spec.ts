@@ -11,6 +11,7 @@ import {MessagesComponent} from '../messages/messages.component';
 import {HeroEditComponent} from '../hero-edit/hero-edit.component';
 import {HeroDetailComponent} from '../hero-detail/hero-detail.component';
 import {HomeComponent} from '../home/home.component';
+import {HeroProfileComponent} from "../hero-profile/hero-profile.component";
 
 describe('MenuComponent', () => {
     let component: MenuComponent;
@@ -18,7 +19,7 @@ describe('MenuComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [MenuComponent, MessagesComponent , HeroEditComponent, HeroDetailComponent, HomeComponent],
+            declarations: [MenuComponent, HeroProfileComponent , MessagesComponent , HeroEditComponent, HeroDetailComponent, HomeComponent],
           imports: [AppRoutingModule, MaterialModule, BrowserAnimationsModule, HttpClientModule],
           schemas: [NO_ERRORS_SCHEMA],
           providers: [{provide: APP_BASE_HREF, useValue : '/' }]

@@ -89,12 +89,24 @@ export class SignFormComponent implements OnInit {
     );
     //   push new address Number
     this.addHero();
+  }
+  saveAndClose() {
+    this.save();
     this.dialogRef.close();
   }
 
   addHero() {
     console.log(this.hero);
     this.orm.addHero(this.hero, this.phones, this.addresses);
+  }
+  getHeroById(id) {
+    return this.orm.getHeroById(id);
+  }
+  getPhoneByParentId(id) {
+    return this.orm.getPhoneByParentId(id);
+  }
+  getAddressByParentId(id) {
+    return this.orm.getAddressByParentId(id);
   }
 
   addToForm(forms, fields) {

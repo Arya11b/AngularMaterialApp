@@ -11,6 +11,7 @@ import {MessagesComponent} from "../messages/messages.component";
 import {HeroDetailComponent} from "../hero-detail/hero-detail.component";
 import {HeroEditComponent} from "../hero-edit/hero-edit.component";
 import {HomeComponent} from "../home/home.component";
+import {HeroProfileComponent} from "../hero-profile/hero-profile.component";
 
 describe('ToolbarComponent', () => {
     let component: ToolbarComponent;
@@ -18,7 +19,7 @@ describe('ToolbarComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ToolbarComponent,MessagesComponent,HeroDetailComponent, HeroEditComponent,HomeComponent],
+            declarations: [ToolbarComponent, HeroProfileComponent ,MessagesComponent,HeroDetailComponent, HeroEditComponent,HomeComponent],
           imports: [AppRoutingModule, MaterialModule, BrowserAnimationsModule, HttpClientModule],
           schemas: [NO_ERRORS_SCHEMA],
           providers: [{provide: APP_BASE_HREF, useValue : '/' }]

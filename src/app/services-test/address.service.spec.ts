@@ -14,13 +14,14 @@ import {AppRoutingModule} from "../app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
 import {NO_ERRORS_SCHEMA} from "@angular/core";
 import {APP_BASE_HREF} from "@angular/common";
-import { AddressService } from './address.service';
+import { AddressService } from '../services/address.service';
 import {HeroEditComponent} from "../hero-edit/hero-edit.component";
+import {HeroProfileComponent} from "../hero-profile/hero-profile.component";
 
 describe('AddressService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [HeroEditComponent, AppComponent , MenuComponent, FieldComponent, ToolbarComponent, HeroesComponent, MessagesComponent, HeroDetailComponent, HeroEditComponent, HomeComponent ],
+      declarations: [HeroEditComponent, HeroProfileComponent , AppComponent , MenuComponent, FieldComponent, ToolbarComponent, HeroesComponent, MessagesComponent, HeroDetailComponent, HeroEditComponent, HomeComponent ],
       imports: [AppRoutingModule, MaterialModule, BrowserAnimationsModule, HttpClientModule],
       schemas: [NO_ERRORS_SCHEMA],
       providers: [AddressService, {provide: APP_BASE_HREF, useValue : '/' }]

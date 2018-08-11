@@ -1,4 +1,4 @@
-import { GroupService } from './group.service';
+import { GroupService } from '../services/group.service';
 import { TestBed, inject } from '@angular/core/testing';
 
 import {HomeComponent} from "../home/home.component";
@@ -16,11 +16,12 @@ import {AppRoutingModule} from "../app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
 import {NO_ERRORS_SCHEMA} from "@angular/core";
 import {APP_BASE_HREF} from "@angular/common";
+import {HeroProfileComponent} from "../hero-profile/hero-profile.component";
 
 describe('GroupService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AppComponent , MenuComponent, FieldComponent, ToolbarComponent, HeroesComponent, MessagesComponent, HeroDetailComponent, HeroEditComponent, HomeComponent ],
+      declarations: [AppComponent , MenuComponent, HeroProfileComponent, FieldComponent, ToolbarComponent, HeroesComponent, MessagesComponent, HeroDetailComponent, HeroEditComponent, HomeComponent ],
       imports: [AppRoutingModule, MaterialModule, BrowserAnimationsModule, HttpClientModule],
       schemas: [NO_ERRORS_SCHEMA],
       providers: [GroupService, {provide: APP_BASE_HREF, useValue : '/' }]

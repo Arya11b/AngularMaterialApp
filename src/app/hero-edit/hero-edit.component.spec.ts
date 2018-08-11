@@ -17,6 +17,7 @@ import {APP_BASE_HREF} from "@angular/common";
 
 import { HeroEditComponent } from './hero-edit.component';
 import {FieldService} from "../services/field.service";
+import {HeroProfileComponent} from "../hero-profile/hero-profile.component";
 
 describe('HeroEditComponent', () => {
     let component: HeroEditComponent;
@@ -24,7 +25,7 @@ describe('HeroEditComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-          declarations: [HeroEditComponent, AppComponent , MenuComponent, FieldComponent, ToolbarComponent, HeroesComponent, MessagesComponent, HeroDetailComponent, HeroEditComponent, HomeComponent ],
+          declarations: [HeroEditComponent, HeroProfileComponent , AppComponent , MenuComponent, FieldComponent, ToolbarComponent, HeroesComponent, MessagesComponent, HeroDetailComponent, HeroEditComponent, HomeComponent ],
           imports: [AppRoutingModule, MaterialModule, BrowserAnimationsModule, HttpClientModule],
           schemas: [NO_ERRORS_SCHEMA],
           providers: [FieldService, {provide: APP_BASE_HREF, useValue : '/' }]

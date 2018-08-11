@@ -1,10 +1,7 @@
+import { HeroService } from '../services/hero.service';
 import { TestBed, inject } from '@angular/core/testing';
-
-import { PhoneService } from './phone.service';
 import {HomeComponent} from "../home/home.component";
-import {HeroEditComponent} from "../hero-edit/hero-edit.component";
 import {HeroDetailComponent} from "../hero-detail/hero-detail.component";
-import {MessagesComponent} from "../messages/messages.component";
 import {HeroesComponent} from "../heroes/heroes.component";
 import {ToolbarComponent} from "../toolbar/toolbar.component";
 import {FieldComponent} from "../form/field/field.component";
@@ -16,18 +13,23 @@ import {AppRoutingModule} from "../app-routing.module";
 import {HttpClientModule} from "@angular/common/http";
 import {NO_ERRORS_SCHEMA} from "@angular/core";
 import {APP_BASE_HREF} from "@angular/common";
+import {MessagesComponent} from "../messages/messages.component";
+import {HeroEditComponent} from "../hero-edit/hero-edit.component";
+import {HeroProfileComponent} from "../hero-profile/hero-profile.component";
 
-describe('PhoneService', () => {
+
+describe('HeroService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [AppComponent , MenuComponent, FieldComponent, ToolbarComponent, HeroesComponent, MessagesComponent, HeroDetailComponent, HeroEditComponent, HomeComponent ],
+      declarations: [HeroEditComponent /*e*/, HeroProfileComponent , MessagesComponent, AppComponent , MenuComponent, FieldComponent, ToolbarComponent, HeroesComponent, HeroDetailComponent, HomeComponent ],
       imports: [AppRoutingModule, MaterialModule, BrowserAnimationsModule, HttpClientModule],
       schemas: [NO_ERRORS_SCHEMA],
-      providers: [PhoneService, {provide: APP_BASE_HREF, useValue : '/' }]
+      providers: [HeroService, {provide: APP_BASE_HREF, useValue : '/' }]
+
     });
   });
 
-  it('should be created', inject([PhoneService], (service: PhoneService) => {
+  it('should be created', inject([HeroService], (service: HeroService) => {
     expect(service).toBeTruthy();
   }));
 });

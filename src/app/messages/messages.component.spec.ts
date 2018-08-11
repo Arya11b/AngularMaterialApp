@@ -15,6 +15,7 @@ import {NO_ERRORS_SCHEMA} from "@angular/core";
 import {APP_BASE_HREF} from "@angular/common";
 import {HeroEditComponent} from "../hero-edit/hero-edit.component";
 import {MatDialogRef} from "@angular/material";
+import {HeroProfileComponent} from "../hero-profile/hero-profile.component";
 
 describe('MessagesComponent', () => {
     let component: MessagesComponent;
@@ -22,7 +23,7 @@ describe('MessagesComponent', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-          declarations: [MessagesComponent, HeroEditComponent, AppComponent , MenuComponent, FieldComponent, ToolbarComponent, HeroesComponent, MessagesComponent, HeroDetailComponent, HomeComponent ],
+          declarations: [MessagesComponent, HeroProfileComponent , HeroEditComponent, AppComponent , MenuComponent, FieldComponent, ToolbarComponent, HeroesComponent, MessagesComponent, HeroDetailComponent, HomeComponent ],
           imports: [AppRoutingModule, MaterialModule, BrowserAnimationsModule, HttpClientModule],
           schemas: [NO_ERRORS_SCHEMA],
           providers: [{ provide: MatDialogRef, useValue: {} } , {provide: APP_BASE_HREF, useValue : '/' }]
