@@ -31,11 +31,11 @@ export class TodoService {
   postTodo(todo: ToDo): Promise<ToDo> {
     const todosUrl = environment.apiUrl + 'todo';
     return new Promise((resolver, reject) => {
-        this.dataStore.todos.push(todo);
+        // this.dataStore.todos.push(todo);
         this.http.post(todosUrl, todo, httpOptions).subscribe(
           todo => {
             this._ToDos.next(Object.assign({}, this.dataStore).todos);
-            console.log(todo);
+            this.fetchTodos();
           }
         );
         resolver(todo);
@@ -70,18 +70,10 @@ export class TodoService {
   deleteTodo(todo: ToDo) {
     console.log(todo);
     const todosUrlDel =  environment.apiUrl + 'todo/' + todo.id;
-    const todosUrl = environment.apiUrl + 'todo';
     return new Promise((resolver, reject) => {
         this.http.delete(todosUrlDel).subscribe(
           todo => {
-            this.http.get<ToDo[]>(todosUrl)
-              .subscribe(
-                data => {
-                  this.dataStore.todos = data;
-                  this._ToDos.next(Object.assign({}, this.dataStore).todos);
-                }, error => {
-                  console.log(console.log(error));
-                });
+            this.fetchTodos();
           }
         );
         resolver(todo);
@@ -89,10 +81,11 @@ export class TodoService {
     );
   }
   // fetch Datas
-  fetchToDos() {
+  fetchTodos() {
     const todosUrl = environment.apiUrl + 'todo';
     return this.http.get<ToDo[]>(todosUrl)
       .subscribe(data => {
+        console.log(data);
         this.dataStore.todos = data;
         this._ToDos.next(Object.assign({}, this.dataStore).todos);
       }, error => {

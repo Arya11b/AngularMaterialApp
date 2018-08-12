@@ -25,8 +25,8 @@
   <tr mat-row *matRowDef="let row; columns: todoCols;"></tr>
 </table>
   <div fxLayout="row" fxLayoutAlign="space-between center">
-  <div *ngFor="let todoField of fields" >
-  <app-field [form]="todoForm" [field]="todoField"></app-field>
+  <div *ngFor="let todoField of fields">
+  <app-field [form]="todoForm" [field]="todoField" ></app-field>
   </div>
   <button mat-button [disabled]="disableSubmit()" (click)="addTodo()" class="spacer"> add a new Item <mat-icon class="round-border">add</mat-icon></button>
   </div>

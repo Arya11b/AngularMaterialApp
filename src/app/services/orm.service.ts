@@ -25,7 +25,7 @@ export class OrmService {
     this.addressService.fetchAddresses();
     this.groupService.fetchGroups();
     this.phoneService.fetchPhones();
-    this.todoService.fetchToDos();
+    this.todoService.fetchTodos();
   }
   // crud
   addHero(hero, phones, addresses) {
@@ -70,6 +70,7 @@ export class OrmService {
   addTodo(todo, parentId) {
     todo.parentId = parentId;
     todo.id = this.getValidId(this.todoService.todoSet);
+    console.log(todo);
     this.todoService.postTodo(todo);
   }
   removeTodo(todo) {
@@ -97,7 +98,6 @@ export class OrmService {
     return this.phoneService.phoneSet.filter(x => x.parentId == parentId);
   }
   getTodoByParentId(parentId) {
-    console.log('ssss');
     console.log(this.todoService.todoSet);
     return this.todoService.todoSet.filter(x => x.parentId == parentId);
   }

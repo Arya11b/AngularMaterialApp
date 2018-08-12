@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChildren} from '@angular/core';
 import {OrmService} from "../services/orm.service";
 import {FormControl, FormGroup} from "@angular/forms";
 import {FieldService} from "../services/field.service";
@@ -45,6 +45,7 @@ export class HeroTodoComponent implements OnInit {
     this.todo.due = this.todoForm.value.due;
     this.todo.note = this.todoForm.value.note;
     this.service.addTodo(this.todo, this.hero.id);
+    this.todoForm.reset();
   }
   removeTodo(id){
     let todo = this.service.getTodoById(id);

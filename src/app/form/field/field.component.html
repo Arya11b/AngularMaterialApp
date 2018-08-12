@@ -1,7 +1,8 @@
+<div [ngSwitch]="field.controlType">
 <mat-form-field appearance="standard" *ngIf="field" class="forms-item">
   <mat-label>{{field.label}}</mat-label>
-  <div [formGroup]="form" >
-    <input matInput  placeholder={{field.placeHolder}} required formControlName={{field.key}} [type]="field.type">
+  <div [formGroup]="form"  >
+    <input matInput placeholder={{field.placeHolder}} required [formControlName]="field.key" [type]="field.type">
   </div>
   <mat-error *ngIf="fieldHasError(field.key)">
     <div *ngFor="let error of fieldErrors(field.key)">
@@ -10,3 +11,4 @@
   </mat-error>
   <mat-icon matSuffix svgIcon={{field.icon}}></mat-icon>
 </mat-form-field>
+</div>

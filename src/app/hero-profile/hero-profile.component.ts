@@ -40,7 +40,7 @@ export class HeroProfileComponent implements OnInit {
         this.addresses = this.service.getAddressByParentId(id);
       });
       this.service.getTodos().subscribe(todos => {
-        if (todos.length == 0) return;
+        if (todos.length < 0) return;
         this.todos = this.service.getTodoByParentId(id);
       });
     });

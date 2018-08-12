@@ -5,6 +5,7 @@ import {Validators} from '@angular/forms';
 import {LanguageService} from "./language.service";
 import {lang} from "../../resources/lang";
 import {FieldDate} from "../form/models/FieldDate";
+import {FieldDropdown} from "../form/models/FieldDropdown";
 @Injectable()
 export class FieldService {
   constructor(private languageService: LanguageService) {
@@ -42,6 +43,22 @@ export class FieldService {
         value: '',
         placeHolder: this.fieldsText.alias.placeHolder,
         icon: 'form-3',
+        order: 3,
+        validators: [
+          Validators.required,
+          Validators.pattern('[A-Za-z0-9]*')
+        ]
+      }),
+      new FieldDropdown({
+        key: 'superpower',
+        label: 'Super Power', // to be bilingual
+        value: '',
+        placeHolder: 'dropdown', // to be bilingual
+        icon: 'form-3',
+        options: [
+          {key: 'wind' , value: 'wind'},
+          {key: 'water' , value: 'Water'}
+          ],
         order: 3,
         validators: [
           Validators.required,
