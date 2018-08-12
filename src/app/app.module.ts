@@ -20,7 +20,8 @@ import {FieldService} from "./services/field.service";
 import { HeroProfileComponent } from './hero-profile/hero-profile.component';
 import { HeroTodoComponent } from './hero-todo/hero-todo.component';
 import { SignFormComponent } from './sign-form/sign-form.component';
-import { DateComponent } from './date/date.component';
+import { DateComponent } from './components/date/date.component';
+import { TextFieldComponent } from './components/text-field/text-field.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,6 +37,7 @@ import { DateComponent } from './date/date.component';
     HeroTodoComponent,
     SignFormComponent,
     DateComponent,
+    TextFieldComponent,
   ],
   imports: [
     BrowserModule,

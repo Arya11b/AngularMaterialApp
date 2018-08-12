@@ -139,6 +139,7 @@ export class SignFormComponent implements OnInit {
   }
 
   disableSubmit(): boolean {
+    console.log('h' + this.heroForm.invalid);
     return this.heroForm.invalid || this.formsInvalid(this.phoneForms) || this.formsInvalid(this.addressForms);
   }
 

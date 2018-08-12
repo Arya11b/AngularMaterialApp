@@ -1,14 +1,12 @@
 <div [ngSwitch]="field.controlType">
-<mat-form-field appearance="standard" *ngIf="field" class="forms-item">
-  <mat-label>{{field.label}}</mat-label>
-  <div [formGroup]="form"  >
-    <input matInput placeholder={{field.placeHolder}} required [formControlName]="field.key" [type]="field.type">
+  <div *ngSwitchCase="'textbox'">
+    <app-text-field [form]="form" [field]="field"></app-text-field>
   </div>
-  <mat-error *ngIf="fieldHasError(field.key)">
-    <div *ngFor="let error of fieldErrors(field.key)">
-      {{error}}
-    </div>
-  </mat-error>
-  <mat-icon matSuffix svgIcon={{field.icon}}></mat-icon>
-</mat-form-field>
+  <div *ngSwitchCase="'date'">
+    <app-date [form]="form" [field]="field"></app-date>
+  </div>
+  <!--<div *ngSwitchCase="'dropdown'">-->
+    <!--<app-date></app-date>-->
+  <!--</div>-->
 </div>
+
