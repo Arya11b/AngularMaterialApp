@@ -55,5 +55,8 @@ export class HeroTodoComponent implements OnInit {
   disableSubmit(): boolean {
     return this.todoForm.invalid ;
   }
+  getBeautifiedDate(date): string {
+    return date.slice(0,10).replace('-',' / ').replace('-',' / ');
+  }
 
 }
