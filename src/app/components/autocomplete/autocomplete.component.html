@@ -1,0 +1,10 @@
+<mat-form-field class="forms-item">
+  <div [formGroup]="form">
+    <input matInput [placeholder]="field.placeHolder" aria-label="State" [matAutocomplete]="auto" [formControlName]="field.key">
+    <mat-autocomplete #auto="matAutocomplete">
+      <mat-option *ngFor="let option of field.options " [value]="option">
+        <span>{{option}}</span>
+      </mat-option>
+    </mat-autocomplete>
+  </div>
+</mat-form-field>

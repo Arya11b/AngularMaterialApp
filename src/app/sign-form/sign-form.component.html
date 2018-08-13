@@ -29,5 +29,15 @@
     </div>
     <button class="forms-mini-button" (click)="clickAdd('address')" [hidden]="hideAdd(addressForms)"> <mat-icon>add</mat-icon></button>
   </mat-card>
+  <mat-card>
+    <mat-label> city info:  </mat-label>
+    <div *ngFor="let cityForm of cityForms">
+      <div *ngFor="let field of cityFields" >
+        <app-field [form]="cityForm" [field]="field"></app-field>
+      </div>
+      <button class="forms-mini-button" (click)="clickRemove('city',cityForm)" [hidden]="hideRemove(cityForms)"> <mat-icon>remove</mat-icon></button>
+    </div>
+    <button class="forms-mini-button" (click)="clickAdd('city')" [hidden]="hideAdd(cityForms)"> <mat-icon>add</mat-icon></button>
+  </mat-card>
   <button class="forms-button" [disabled]="disableSubmit()" (click)="saveAndClose()" mat-button>{{formText.submit}}</button>
 </mat-dialog-content>

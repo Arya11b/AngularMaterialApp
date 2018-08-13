@@ -137,6 +137,7 @@ export class OrmService {
   getCities(): Observable<City[]> {
     return this.cityService._Cities.asObservable();
   }
+  // superpower methods
   getSuperPowerCategories(): string[] {
     let categories = [];
     this.superPowerService.superPowerSet.forEach(superPower => {
@@ -169,6 +170,25 @@ export class OrmService {
     this.superPowerService.superPowerSet.filter(x => x.category === category && x.type === type)
       .forEach(superpower => superPowers.push(superpower.power));
     return superPowers;
+  }
+  // CT methods (goshadism :))
+  getCitiesByProvince(province): string[] {
+    let cities: string[] = [];
+    this.cityService.citySet.filter(x => x.province == province).forEach(city => cities.push(city.city));
+    return cities;
+  }
+  getAllCities(): string[] {
+    let cities: string[] = [];
+    this.cityService.citySet.forEach(city => cities.push(city.city));
+    return cities;
+  }
+  getProvinces(): string[] {
+    let provinces: string[] = [];
+    this.cityService.citySet.forEach(city => {
+      if (provinces.indexOf(city.province) === -1)
+        provinces.push(city.province);
+    });
+    return provinces;
   }
   // valid id
   getValidId(dataset): number {

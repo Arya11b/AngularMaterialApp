@@ -23,6 +23,7 @@ import { SignFormComponent } from './sign-form/sign-form.component';
 import { DateComponent } from './components/date/date.component';
 import { TextFieldComponent } from './components/text-field/text-field.component';
 import { DropdownComponent } from './components/dropdown-multiple/dropdown-multiple.component';
+import { AutocompleteComponent } from './components/autocomplete/autocomplete.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,6 +41,7 @@ import { DropdownComponent } from './components/dropdown-multiple/dropdown-multi
     DateComponent,
     TextFieldComponent,
     DropdownComponent,
+    AutocompleteComponent,
   ],
   imports: [
     BrowserModule,

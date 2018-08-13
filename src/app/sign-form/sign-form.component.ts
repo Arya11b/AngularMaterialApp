@@ -22,6 +22,7 @@ export class SignFormComponent implements OnInit {
   heroForm: FormGroup;
   phoneForms: FormGroup[];
   addressForms: FormGroup[];
+  cityForms: FormGroup[];
   // function helpers
   constructor(private orm: OrmService, private fieldService: FieldService, private dialogRef: MatDialogRef<any>, private languageService: LanguageService) {
     this.phones = [];
@@ -52,6 +53,10 @@ export class SignFormComponent implements OnInit {
     this.addressForms = [];
     this.addToForm(this.addressForms, this.addressFields);
   }
+  initCityForm() {
+    this.cityForms = [];
+    this.addToForm(this.cityForms, this.cityFields);
+  }
 
   ngOnInit() {
     // hero form start
@@ -60,6 +65,7 @@ export class SignFormComponent implements OnInit {
     this.initHeroForm();
     this.initPhoneForm();
     this.initAddressForm();
+    this.initCityForm();
   }
 
   save() {
@@ -87,6 +93,7 @@ export class SignFormComponent implements OnInit {
         });
       }
     );
+    // save city
     //   push new address Number
     this.addHero();
   }
@@ -137,6 +144,9 @@ export class SignFormComponent implements OnInit {
   get addressFields() {
     return this.fieldService.addressFields;
   }
+  get cityFields() {
+    return this.fieldService.cityFields;
+  }
 
   disableSubmit(): boolean {
     return this.heroForm.invalid || this.formsInvalid(this.phoneForms) || this.formsInvalid(this.addressForms);
@@ -176,6 +186,9 @@ export class SignFormComponent implements OnInit {
       case 'address':
         this.addToForm(this.addressForms, this.addressFields);
         break;
+      case 'city':
+        this.addToForm(this.cityForms, this.cityFields);
+        break;
     }
   }
 
@@ -186,6 +199,9 @@ export class SignFormComponent implements OnInit {
         break;
       case 'address':
         this.removeForm(form, this.addressForms);
+        break;
+      case 'city':
+        this.removeForm(form, this.cityForms);
         break;
     }
   }

@@ -7,6 +7,7 @@ import {lang} from "../../resources/lang";
 import {FieldDate} from "../form/models/FieldDate";
 import {FieldDropdown} from "../form/models/FieldDropdown";
 import {OrmService} from "./orm.service";
+import {FieldAutoComplete} from "../form/models/FieldAutoComplete";
 @Injectable()
 export class FieldService {
   constructor(private languageService: LanguageService, private ormService: OrmService) {
@@ -161,6 +162,32 @@ export class FieldService {
     }),
 
   ];
+  public cityFields: FieldBase<any>[] = [
+    new FieldAutoComplete({
+      key: 'province',
+      label: 'Province',
+      value: '',
+      placeHolder: 'choose a province',
+      icon: '',
+      options: this.getProvinces(),
+      order: 1,
+      validators: [
+        Validators.required,
+      ]
+    }),
+    new FieldAutoComplete({
+      key: 'city',
+      label: 'City',
+      value: '',
+      placeHolder: 'choose a city',
+      options: this.getCities(),
+      order: 2,
+      validators: [
+        Validators.required,
+      ]
+    }),
+
+  ];
   get fieldsText() {
     return lang[this.languageService.getLang()].fields;
   }
@@ -178,5 +205,13 @@ export class FieldService {
     console.log(opt);
     return opt;
   }
+  getProvinces() {
+    return this.ormService.getProvinces();
+  }
+
+  getCities() {
+    return this.ormService.getAllCities();
+  }
 }
+
 
