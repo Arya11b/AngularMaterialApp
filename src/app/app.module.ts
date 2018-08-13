@@ -22,7 +22,7 @@ import { HeroTodoComponent } from './hero-todo/hero-todo.component';
 import { SignFormComponent } from './sign-form/sign-form.component';
 import { DateComponent } from './components/date/date.component';
 import { TextFieldComponent } from './components/text-field/text-field.component';
-import { DropdownComponent } from './components/dropdown/dropdown.component';
+import { DropdownComponent } from './components/dropdown-multiple/dropdown-multiple.component';
 @NgModule({
   declarations: [
     AppComponent,

@@ -36,8 +36,8 @@ export class OrmService {
     this.todoService.fetchTodos();
     this.superPowerService.fetchSuperPowers();
     this.cityService.fetchCities();
-    this.citiesListService.fetchCitiesLists();
-    this.superPowersListService.fetchSuperPowersLists();
+    // this.citiesListService.fetchCitiesLists();
+    // this.superPowersListService.fetchSuperPowersLists();
   }
   // crud
   addHero(hero, phones, addresses) {
@@ -136,6 +136,39 @@ export class OrmService {
   }
   getCities(): Observable<City[]> {
     return this.cityService._Cities.asObservable();
+  }
+  getSuperPowerCategories(): string[] {
+    let categories = [];
+    this.superPowerService.superPowerSet.forEach(superPower => {
+      if (categories.indexOf(superPower.category) == -1) {
+        categories.push(superPower.category);
+      }
+    });
+    console.log('cat: ' + categories);
+    return categories;
+  }
+  getSuperPowerTypes(): string[] {
+    let types = [];
+    this.superPowerService.superPowerSet.forEach(superPower => {
+      if (types.indexOf(superPower.type) === -1)
+        types.push(superPower.type);
+    });
+    return types;
+  }
+  getSuperPowerTypeByCategory(category) {
+    let types = [];
+    this.superPowerService.superPowerSet.filter(x => x.category === category)
+      .forEach(superpower => {
+        if(types.indexOf(superpower.type) === -1)
+          types.push(superpower.type);
+      });
+    return types;
+  }
+  getSuperPowerByCategoryType(category, type) {
+    let superPowers = [];
+    this.superPowerService.superPowerSet.filter(x => x.category === category && x.type === type)
+      .forEach(superpower => superPowers.push(superpower.power));
+    return superPowers;
   }
   // valid id
   getValidId(dataset): number {

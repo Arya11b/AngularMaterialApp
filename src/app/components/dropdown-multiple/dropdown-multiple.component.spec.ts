@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DropdownComponent } from './dropdown.component';
+import { DropdownComponent } from './dropdown-multiple.component';
 
 describe('DropdownComponent', () => {
   let component: DropdownComponent;

@@ -6,9 +6,10 @@ import {LanguageService} from "./language.service";
 import {lang} from "../../resources/lang";
 import {FieldDate} from "../form/models/FieldDate";
 import {FieldDropdown} from "../form/models/FieldDropdown";
+import {OrmService} from "./orm.service";
 @Injectable()
 export class FieldService {
-  constructor(private languageService: LanguageService) {
+  constructor(private languageService: LanguageService, private ormService: OrmService) {
   }
     public fields: FieldBase<any>[] = [
       new FieldTextBox({
@@ -53,12 +54,10 @@ export class FieldService {
         key: 'superpower',
         label: 'Super Power', // to be bilingual
         value: '',
-        placeHolder: 'dropdown', // to be bilingual
+        placeHolder: 'dropdown-multiple', // to be bilingual
         icon: 'form-3',
-        options: [
-          {key: 'wind' , value: 'wind'},
-          {key: 'water' , value: 'Water'}
-          ],
+        options: this.getSuperPowerCategories(),
+        // options: [{key: 'ss',value:'bb'}] + this.getSuperPowerCategories(),
         order: 3,
         validators: [
           Validators.required,
@@ -165,4 +164,19 @@ export class FieldService {
   get fieldsText() {
     return lang[this.languageService.getLang()].fields;
   }
+  getSuperPowerCategories() {
+    let opt: {key: string, value: string, subCat: any[]}[] = [];
+    this.ormService.getSuperPowerCategories().forEach( category => {
+      let subCat: any[] = [];
+      this.ormService.getSuperPowerTypeByCategory(category).forEach(type => {
+        let powers: string[] = [];
+        this.ormService.getSuperPowerByCategoryType(category,type).forEach(power => powers.push(power));
+        subCat.push({key: type, value: type, subCat: powers});
+      });
+      opt.push({key: category, value: category, subCat: subCat});
+    });
+    console.log(opt);
+    return opt;
+  }
 }
+
