@@ -47,7 +47,7 @@ export class HeroTodoComponent implements OnInit {
     this.service.addTodo(this.todo, this.hero.id);
     this.todoForm.reset();
   }
-  removeTodo(id){
+  removeTodo(id) {
     let todo = this.service.getTodoById(id);
     this.service.removeTodo(todo);
 
@@ -56,7 +56,7 @@ export class HeroTodoComponent implements OnInit {
     return this.todoForm.invalid ;
   }
   getBeautifiedDate(date): string {
-    return date.slice(0,10).replace('-',' / ').replace('-',' / ');
+    return date.slice(0, 10).replace('-', ' / ').replace('-', ' / ');
   }
 
 }

@@ -1,5 +1,6 @@
-import {Address} from "./Address";
-import {Phone} from "./Phone";
+import {SuperPowersList} from "./SuperPowersList";
+import {CitiesList} from "./CitiesList";
+
 /**
  * Created by Arya on 7/14/2018.
  */
@@ -10,4 +11,6 @@ export class Hero {
   lastName: string;
   alias: string;
   picture: string;
+  cityId: CitiesList[];
+  superPowerId: SuperPowersList[];
 }

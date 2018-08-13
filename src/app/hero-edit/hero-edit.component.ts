@@ -73,7 +73,7 @@ export class HeroEditComponent implements OnInit {
 
     this.phones = [];
     this.addresses = [];
-    this.hero = {id:0 , parentId: 0 , picture: '' , firstName: '', lastName: '', alias: ''};
+    this.hero = {id:0 , parentId: 0 , picture: '' , firstName: '', lastName: '', alias: '', cityId: [], superPowerId: []};
     const id = this.route.params.subscribe(params => {
       const id = params['id'];
       this.service.getHeroes().subscribe(heroes => {

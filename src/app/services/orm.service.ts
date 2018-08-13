@@ -10,6 +10,12 @@ import {Phone} from '../Models/Phone';
 import {Observable} from 'rxjs/index';
 import {TodoService} from './todo.service';
 import {ToDo} from "../Models/ToDo";
+import {SuperpowerService} from "./superpower.service";
+import {SuperPower} from "../Models/SuperPower";
+import {CityService} from "./city.service";
+import {SuperpowerslistService} from "./superpowerslist.service";
+import {CitieslistService} from "./citieslist.service";
+import {City} from "../Models/City";
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +23,9 @@ import {ToDo} from "../Models/ToDo";
 export class OrmService {
   constructor(private heroService: HeroService, private phoneService: PhoneService,
               private addressService: AddressService, private groupService: GroupService,
-              private todoService: TodoService) { }
+              private todoService: TodoService, private superPowerService: SuperpowerService,
+              private cityService: CityService, private superPowersListService: SuperpowerslistService,
+              private citiesListService: CitieslistService) { }
 
 
   fetchData() {
@@ -26,6 +34,10 @@ export class OrmService {
     this.groupService.fetchGroups();
     this.phoneService.fetchPhones();
     this.todoService.fetchTodos();
+    this.superPowerService.fetchSuperPowers();
+    this.cityService.fetchCities();
+    this.citiesListService.fetchCitiesLists();
+    this.superPowersListService.fetchSuperPowersLists();
   }
   // crud
   addHero(hero, phones, addresses) {
@@ -43,8 +55,7 @@ export class OrmService {
       address.parentId = hero.id;
       this.addressService.postAddress(address);
     });
-    // this.phoneService.postPhones(addresses);
-    // this.addressService.postAddresses(addresses);
+    // add superpowers
   }
   updateHero(hero, phones , addresses) {
     this.heroService.updateHero(hero.id, hero);
@@ -66,6 +77,7 @@ export class OrmService {
       address.parentId = hero.id;
       this.addressService.postAddress(address);
     });    // this.phoneService.updatePhones(phones);
+    // update superpowers
   }
   addTodo(todo, parentId) {
     todo.parentId = parentId;
@@ -118,6 +130,12 @@ export class OrmService {
   }
   getTodos(): Observable<ToDo[]> {
     return this.todoService._ToDos.asObservable();
+  }
+  getSuperPowers(): Observable<SuperPower[]> {
+    return this.superPowerService._SuperPowers.asObservable();
+  }
+  getCities(): Observable<City[]> {
+    return this.cityService._Cities.asObservable();
   }
   // valid id
   getValidId(dataset): number {

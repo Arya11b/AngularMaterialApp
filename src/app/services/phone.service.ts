@@ -125,6 +125,4 @@ export class PhoneService {
       this.deletePhone(phone);
     });
   }
-
-
 }
