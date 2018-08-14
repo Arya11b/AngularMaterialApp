@@ -52,9 +52,11 @@ export class HeroProfileComponent implements OnInit {
       });
       this.service.getCitiesLists().subscribe(citiesLists => {
         if (citiesLists.length == 0) return;
-        let cLists = this.service.getCityByParentId(id);
-        this.cities = this.getCityByIds(cLists);
-        console.log('ll' + this.cities);
+        this.service.getCities().subscribe(cities => {
+          let cLists = this.service.getCityByParentId(id);
+          this.cities = this.getCityByIds(cLists);
+          console.log('ll' + this.cities);
+        });
       });
       this.service.getSuperPowersLists().subscribe(superpowersLists => {
         if (superpowersLists.length == 0) return;

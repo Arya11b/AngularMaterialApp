@@ -65,7 +65,6 @@ export class SignFormComponent implements OnInit {
     this.initPhoneForm();
     this.initAddressForm();
     this.initCityForm();
-    console.log(this.heroForm.controls);
   }
 
   save() {
@@ -78,8 +77,6 @@ export class SignFormComponent implements OnInit {
     this.cityForms.forEach(form => {
       this.citiesLists.push({id: 0, cityId: this.orm.getCityId(form.value.city), parentId: 0});
     });
-    console.log('spl: ' + this.superPowersLists);
-    console.log('cl: ' + this.citiesLists);
 
     this.phoneForms.forEach(
       phoneForm => {

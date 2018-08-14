@@ -24,7 +24,7 @@
   <tr mat-header-row *matHeaderRowDef="todoCols"></tr>
   <tr mat-row *matRowDef="let row; columns: todoCols;"></tr>
 </table>
-  <div fxLayout="row" fxLayoutAlign="space-between center">
+  <div fxLayout="column" fxLayoutAlign="space-between center">
   <div *ngFor="let todoField of fields">
   <app-field [form]="todoForm" [field]="todoField" ></app-field>
   </div>

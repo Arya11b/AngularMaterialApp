@@ -220,6 +220,20 @@ export class OrmService {
     });
     return provinces;
   }
+  getCitiesByCitiesList(citiesLists) {
+    let cities = [];
+    citiesLists.forEach(citiesList => {
+      cities.push(this.getCityById(citiesList.cityId));
+    });
+    return cities;
+  }
+  getSuperPowersBySuperPowersList(superPowersLists) {
+    let superpowers = [];
+    superPowersLists.forEach(superPowersList => {
+      superpowers.push(this.getSuperPowerById(superPowersList.superPowerId));
+    });
+    return superpowers;
+  }
   // valid id
   getValidId(dataset): number {
     let id = 1;

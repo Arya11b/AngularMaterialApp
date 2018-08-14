@@ -34,15 +34,9 @@ export class HeroDetailComponent implements OnInit {
     let dialogRef = this.dialog.open(MessagesComponent, {
       width: 'auto'
     });
-    let citiesLists = [];
-    this.cities.forEach(city => {
-      citiesLists.push({parentId: this.hero.id, cityId: city.id});
-    });
-    let superPowersLists = [];
-    this.superPowers.forEach(superpower => {
-      superPowersLists.push({parentId: this.hero.id, superPowerId: superpower.id});
-    });
-    dialogRef.afterClosed().subscribe(result =>{
+    let citiesLists = this.service.getCityByParentId(this.hero.id);
+    let superPowersLists = this.service.getSuperPowerByParentId(this.hero.id);
+    dialogRef.afterClosed().subscribe(result => {
         if(result == 'yes')
           this.service.deleteHero(this.hero, this.phones, this.addresses, superPowersLists, citiesLists);
       }
