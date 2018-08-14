@@ -8,6 +8,8 @@ import {FieldService} from '../services/field.service';
 import {OrmService} from "../services/orm.service";
 import {LanguageService} from "../services/language.service";
 import {lang} from "../../resources/lang";
+import {CitiesList} from "../Models/CitiesList";
+import {SuperPowersList} from "../Models/SuperPowersList";
 
 @Component({
   selector: 'app-sign-form',
@@ -19,6 +21,8 @@ export class SignFormComponent implements OnInit {
   hero: Hero;
   phones: Phone[];
   addresses: Address[];
+  citiesLists: CitiesList[];
+  superPowersLists: SuperPowersList[];
   heroForm: FormGroup;
   phoneForms: FormGroup[];
   addressForms: FormGroup[];
@@ -27,6 +31,8 @@ export class SignFormComponent implements OnInit {
   constructor(private orm: OrmService, private fieldService: FieldService, private dialogRef: MatDialogRef<any>, private languageService: LanguageService) {
     this.phones = [];
     this.addresses = [];
+    this.superPowersLists = [];
+    this.citiesLists = [];
   }
 
   initHero() {
@@ -66,12 +72,20 @@ export class SignFormComponent implements OnInit {
     this.initPhoneForm();
     this.initAddressForm();
     this.initCityForm();
+    console.log(this.heroForm.controls);
   }
 
   save() {
     this.hero.firstName = this.heroForm.value.firstName;
     this.hero.lastName = this.heroForm.value.lastName;
     this.hero.alias = this.heroForm.value.alias;
+    this.heroForm.value.superpower.forEach(superpower => {
+      this.superPowersLists.push({id: this.orm.getSuperPowerId(superpower), parentId: 0});
+    });
+    this.cityForms.forEach(form => {
+      this.citiesLists.push({id: this.orm.getCityId(form.value.city), parentId: 0});
+    });
+
     this.phoneForms.forEach(
       phoneForm => {
         this.phones.push({
@@ -104,7 +118,7 @@ export class SignFormComponent implements OnInit {
 
   addHero() {
     console.log(this.hero);
-    this.orm.addHero(this.hero, this.phones, this.addresses);
+    this.orm.addHero(this.hero, this.phones, this.addresses, this.superPowersLists, this.citiesLists);
   }
   getHeroById(id) {
     return this.orm.getHeroById(id);
@@ -147,7 +161,6 @@ export class SignFormComponent implements OnInit {
   get cityFields() {
     return this.fieldService.cityFields;
   }
-
   disableSubmit(): boolean {
     return this.heroForm.invalid || this.formsInvalid(this.phoneForms) || this.formsInvalid(this.addressForms);
   }
@@ -208,6 +221,9 @@ export class SignFormComponent implements OnInit {
 
   get formText() {
     return lang[this.languageService.getLang()].addForm;
+  }
+  getSuperPowerIds(power) {
+    return this.orm.getSuperPowerId(power);
   }
 
   onSubmit() {

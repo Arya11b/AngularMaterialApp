@@ -3,7 +3,6 @@
  */
 export class SuperPower {
   id: number;
-  type: string;
   category: string;
   power: string;
 }

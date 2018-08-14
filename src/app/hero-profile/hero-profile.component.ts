@@ -1,10 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Hero} from '../Models/Hero';
 import {ActivatedRoute} from '@angular/router';
 import {Address} from '../Models/Address';
 import {Phone} from '../Models/Phone';
 import {OrmService} from '../services/orm.service';
 import {ToDo} from '../Models/ToDo';
+import {CitiesList} from "../Models/CitiesList";
+import {SuperPowersList} from "../Models/SuperPowersList";
+import {City} from "../Models/City";
+import {SuperPower} from "../Models/SuperPower";
 
 @Component({
   selector: 'app-hero-profile',
@@ -16,13 +20,18 @@ export class HeroProfileComponent implements OnInit {
   phones: Phone[];
   addresses: Address[];
   todos: ToDo[];
+  superPowers: SuperPower[];
+  cities: City[];
 
-  constructor(private service: OrmService, private route: ActivatedRoute) { }
+  constructor(private service: OrmService, private route: ActivatedRoute) {
+  }
 
   ngOnInit() {
 
     this.phones = [];
     this.addresses = [];
+    this.superPowers = [];
+    this.cities = [];
     this.todos = [];
 
     this.route.params.subscribe(params => {
@@ -43,7 +52,34 @@ export class HeroProfileComponent implements OnInit {
         if (todos.length < 0) return; // it can be zero
         this.todos = this.service.getTodoByParentId(id);
       });
+      this.service.getCitiesLists().subscribe(citiesLists => {
+        if (citiesLists.length == 0) return;
+        let cLists = this.service.getCityByParentId(id);
+        this.cities = this.getCityByIds(cLists);
+        console.log(citiesLists);
+      });
+      this.service.getSuperPowersLists().subscribe(superpowersLists => {
+        if (superpowersLists.length == 0) return;
+        let spLists = this.service.getSuperPowerByParentId(id);
+        this.superPowers = this.getSuperPowerByIds(spLists);
+      });
     });
+  }
+
+  getSuperPowerByIds(spLists) {
+    let list = [];
+    spLists.forEach(cList => {
+      list.push(this.service.getSuperPowerById(cList.id));
+    });
+    return list;
+  }
+
+  getCityByIds(cLists) {
+    let list = [];
+    cLists.forEach(cList => {
+      list.push(this.service.getCityById(cList.id));
+    });
+    return list;
   }
 
 }

@@ -1,8 +1,8 @@
-<mat-form-field *ngFor="let cat of field.options" class="forms-item">
+<mat-form-field class="forms-item">
   <div [formGroup]="form">
-    <mat-select [placeholder]="cat.value" [formControlName]="field.key" multiple>
-      <mat-optgroup *ngFor="let subCat of cat.subCat" [label]="subCat.value">
-          <mat-option *ngFor="let option of subCat.subCat" [value]="option.key" >{{option}}</mat-option>
+    <mat-select [placeholder]="field.placeHolder" [formControlName]="field.key" multiple>
+      <mat-optgroup *ngFor="let cat of field.options" [label]="cat.category">
+          <mat-option *ngFor="let option of cat.subCat" [value]="option" >{{option}}</mat-option>
       </mat-optgroup>
     </mat-select>
   </div>

@@ -11,6 +11,4 @@ export class Hero {
   lastName: string;
   alias: string;
   picture: string;
-  cityId: CitiesList[];
-  superPowerId: SuperPowersList[];
 }

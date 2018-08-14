@@ -110,6 +110,7 @@ export class CitieslistService {
       }
     );
   }
+
   deleteCitiesLists(citiesLists): void {
     citiesLists.forEach(citiesList => {
       this.deleteCitiesList(citiesList);

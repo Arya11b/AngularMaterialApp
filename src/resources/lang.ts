@@ -16,7 +16,9 @@ export const lang = {
     heroDetail: {
       subtitle: 'also known as the',
       phone: 'phone',
-      address: 'address'
+      address: 'address',
+      power: 'super power',
+      city: 'cities active'
     },
     heroEdit: {
       avatar: 'don\'t like the avatar ? click on it!',
@@ -84,7 +86,9 @@ export const lang = {
     heroDetail: {
       subtitle: ' شناخته شده تحت عنوان',
       phone: 'تلفن',
-      address: 'آدرس'
+      address: 'آدرس',
+      power: 'قدرت',
+      city: 'شهرهای فعالیت'
     },
     heroEdit: {
       avatar: 'برای تغییر عکس روی آن کلیک کنید',

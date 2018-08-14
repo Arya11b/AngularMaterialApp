@@ -16,6 +16,8 @@ import {CityService} from "./city.service";
 import {SuperpowerslistService} from "./superpowerslist.service";
 import {CitieslistService} from "./citieslist.service";
 import {City} from "../Models/City";
+import {SuperPowersList} from "../Models/SuperPowersList";
+import {CitiesList} from "../Models/CitiesList";
 
 @Injectable({
   providedIn: 'root'
@@ -36,12 +38,20 @@ export class OrmService {
     this.todoService.fetchTodos();
     this.superPowerService.fetchSuperPowers();
     this.cityService.fetchCities();
-    // this.citiesListService.fetchCitiesLists();
-    // this.superPowersListService.fetchSuperPowersLists();
+    this.citiesListService.fetchCitiesLists();
+    this.superPowersListService.fetchSuperPowersLists();
   }
   // crud
-  addHero(hero, phones, addresses) {
+  addHero(hero, phones, addresses, superPowersLists, citiesLists) {
     hero.id = this.getValidId(this.heroService.heroSet);
+    superPowersLists.forEach(superpower => {
+      superpower.parentId = hero.id;
+      this.superPowersListService.postSuperPowersList(superpower);
+    });
+    citiesLists.forEach(city => {
+      city.parentId = hero.id;
+      this.citiesListService.postCitiesList(city);
+    });
     this.heroService.postHero(hero);
     phones.forEach(phone => {
       phone.id = this.getValidId(this.phoneService.phoneSet);
@@ -57,13 +67,19 @@ export class OrmService {
     });
     // add superpowers
   }
-  updateHero(hero, phones , addresses) {
+  updateHero(hero, phones , addresses, superPowersLists, citiesLists) {
     this.heroService.updateHero(hero.id, hero);
     this.getPhoneByParentId(hero.id).forEach(phone => {
       this.phoneService.deletePhone(phone);
     });
     this.getAddressByParentId(hero.id).forEach(address => {
       this.addressService.deleteAddress(address);
+    });
+    this.getSuperPowerByParentId(hero.id).forEach(superpower => {
+      this.superPowersListService.deleteSuperPowersList(superpower);
+    });
+    this.getCityByParentId(hero.id).forEach(city => {
+      this.citiesListService.deleteCitiesList(city);
     });
     phones.forEach(phone => {
       phone.id = this.getValidId(this.phoneService.phoneSet);
@@ -76,7 +92,16 @@ export class OrmService {
       console.log('id: ' + address.id);
       address.parentId = hero.id;
       this.addressService.postAddress(address);
-    });    // this.phoneService.updatePhones(phones);
+    });
+    superPowersLists.forEach(superpower => {
+      superpower.parentId = hero.id;
+      this.superPowersListService.postSuperPowersList(superpower);
+    });
+    citiesLists.forEach(city => {
+      city.parentId = hero.id;
+      this.citiesListService.postCitiesList(city);
+    });
+    // this.phoneService.updatePhones(phones);
     // update superpowers
   }
   addTodo(todo, parentId) {
@@ -91,10 +116,12 @@ export class OrmService {
   updateTodo(todo) {
     this.todoService.updateTodo(todo.id, todo);
   }
-  deleteHero(hero, phones, addresses) {
+  deleteHero(hero, phones, addresses, superPowersLists, citiesLists) {
     this.heroService.deleteHero(hero);
     this.phoneService.deletePhones(phones);
     this.addressService.deleteAddresses(addresses);
+    this.superPowersListService.deleteSuperPowersLists(superPowersLists);
+    this.citiesListService.deleteCitiesLists(citiesLists);
   }
   // get requests
   getHeroById(id) {
@@ -137,7 +164,22 @@ export class OrmService {
   getCities(): Observable<City[]> {
     return this.cityService._Cities.asObservable();
   }
+  getCitiesLists(): Observable<CitiesList[]>{
+    return this.citiesListService._CitiesLists.asObservable();
+  }
+  getSuperPowersLists(): Observable<SuperPowersList[]> {
+    return this.superPowersListService._SuperPowersLists.asObservable();
+  }
   // superpower methods
+  getSuperPowerId(power): number {
+    return this.superPowerService.superPowerSet.find(x => x.power == power ).id;
+  }
+  getSuperPowerById(id): SuperPower {
+    return this.superPowerService.superPowerSet.find(x => x.id == id );
+  }
+  getSuperPowerByParentId(heroId): SuperPowersList[] {
+    return this.superPowersListService.superPowersListSet.filter(x => x.parentId == heroId)
+  }
   getSuperPowerCategories(): string[] {
     let categories = [];
     this.superPowerService.superPowerSet.forEach(superPower => {
@@ -148,30 +190,23 @@ export class OrmService {
     console.log('cat: ' + categories);
     return categories;
   }
-  getSuperPowerTypes(): string[] {
-    let types = [];
-    this.superPowerService.superPowerSet.forEach(superPower => {
-      if (types.indexOf(superPower.type) === -1)
-        types.push(superPower.type);
-    });
-    return types;
-  }
-  getSuperPowerTypeByCategory(category) {
-    let types = [];
-    this.superPowerService.superPowerSet.filter(x => x.category === category)
-      .forEach(superpower => {
-        if(types.indexOf(superpower.type) === -1)
-          types.push(superpower.type);
-      });
-    return types;
-  }
-  getSuperPowerByCategoryType(category, type) {
+  getSuperPowerByCategory(category) {
     let superPowers = [];
-    this.superPowerService.superPowerSet.filter(x => x.category === category && x.type === type)
+    this.superPowerService.superPowerSet.filter(x => x.category === category)
       .forEach(superpower => superPowers.push(superpower.power));
     return superPowers;
   }
   // CT methods (goshadism :))
+  getCityId(city): number {
+    return this.cityService.citySet.find(x => x.city == city ).id;
+  }
+  getCityById(id): City {
+    return this.cityService.citySet.find(x => x.id == id );
+  }
+
+  getCityByParentId(heroId): CitiesList[] {
+    return this.citiesListService.citiesListSet.filter(x => x.parentId == heroId);
+  }
   getCitiesByProvince(province): string[] {
     let cities: string[] = [];
     this.cityService.citySet.filter(x => x.province == province).forEach(city => cities.push(city.city));
