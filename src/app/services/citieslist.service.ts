@@ -64,7 +64,6 @@ export class CitieslistService {
   updateCitiesList(id: number, citiesList: CitiesList) {
     const citiesListIdUrl = environment.apiUrl + 'citiesList/' + id;
     const citiesListsUrl = environment.apiUrl + 'citiesList';
-    console.log(citiesListIdUrl);
     return new Promise((resolver, reject) => {
         this.http.put(citiesListIdUrl, citiesList).subscribe(
           citiesList => {
@@ -90,7 +89,6 @@ export class CitieslistService {
 
   // delete request
   deleteCitiesList(citiesList: CitiesList) {
-    console.log(citiesList);
     const citiesListIdUrl = environment.apiUrl + 'citiesList/' + citiesList.id;
     const citiesListsId = environment.apiUrl + 'citiesList';
     return new Promise((resolver, reject) => {

@@ -46,22 +46,22 @@ export class OrmService {
     hero.id = this.getValidId(this.heroService.heroSet);
     superPowersLists.forEach(superpower => {
       superpower.parentId = hero.id;
+      superpower.id = this.getValidId(this.superPowersListService.superPowersListSet);
       this.superPowersListService.postSuperPowersList(superpower);
     });
     citiesLists.forEach(city => {
       city.parentId = hero.id;
+      city.id = this.getValidId(this.citiesListService.citiesListSet);
       this.citiesListService.postCitiesList(city);
     });
     this.heroService.postHero(hero);
     phones.forEach(phone => {
       phone.id = this.getValidId(this.phoneService.phoneSet);
-      console.log('id: ' + phone.id);
       phone.parentId = hero.id;
       this.phoneService.postPhone(phone);
     });
     addresses.forEach(address => {
       address.id = this.getValidId(this.addressService.addressSet);
-      console.log('id: ' + address.id);
       address.parentId = hero.id;
       this.addressService.postAddress(address);
     });
@@ -83,13 +83,11 @@ export class OrmService {
     });
     phones.forEach(phone => {
       phone.id = this.getValidId(this.phoneService.phoneSet);
-      console.log('id: ' + phone.id);
       phone.parentId = hero.id;
       this.phoneService.postPhone(phone);
     });
     addresses.forEach(address => {
       address.id = this.getValidId(this.addressService.addressSet);
-      console.log('id: ' + address.id);
       address.parentId = hero.id;
       this.addressService.postAddress(address);
     });
@@ -107,7 +105,6 @@ export class OrmService {
   addTodo(todo, parentId) {
     todo.parentId = parentId;
     todo.id = this.getValidId(this.todoService.todoSet);
-    console.log(todo);
     this.todoService.postTodo(todo);
   }
   removeTodo(todo) {
@@ -137,7 +134,6 @@ export class OrmService {
     return this.phoneService.phoneSet.filter(x => x.parentId == parentId);
   }
   getTodoByParentId(parentId) {
-    console.log(this.todoService.todoSet);
     return this.todoService.todoSet.filter(x => x.parentId == parentId);
   }
 
@@ -178,7 +174,7 @@ export class OrmService {
     return this.superPowerService.superPowerSet.find(x => x.id == id );
   }
   getSuperPowerByParentId(heroId): SuperPowersList[] {
-    return this.superPowersListService.superPowersListSet.filter(x => x.parentId == heroId)
+    return this.superPowersListService.superPowersListSet.filter(x => x.parentId == heroId);
   }
   getSuperPowerCategories(): string[] {
     let categories = [];
@@ -187,7 +183,6 @@ export class OrmService {
         categories.push(superPower.category);
       }
     });
-    console.log('cat: ' + categories);
     return categories;
   }
   getSuperPowerByCategory(category) {

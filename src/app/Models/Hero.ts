@@ -1,5 +1,3 @@
-import {SuperPowersList} from "./SuperPowersList";
-import {CitiesList} from "./CitiesList";
 
 /**
  * Created by Arya on 7/14/2018.

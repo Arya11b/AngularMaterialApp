@@ -3,5 +3,6 @@
  */
 export class CitiesList {
   id: number;
+  cityId: number;
   parentId: number;
 }

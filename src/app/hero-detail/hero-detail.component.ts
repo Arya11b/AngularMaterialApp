@@ -7,8 +7,6 @@ import {Address} from '../Models/Address';
 import {MatDialog} from '@angular/material';
 import {LanguageService} from "../services/language.service";
 import {lang} from "../../resources/lang";
-import {SuperPowersList} from "../Models/SuperPowersList";
-import {CitiesList} from "../Models/CitiesList";
 import {SuperPower} from "../Models/SuperPower";
 import {City} from "../Models/City";
 
@@ -38,11 +36,11 @@ export class HeroDetailComponent implements OnInit {
     });
     let citiesLists = [];
     this.cities.forEach(city => {
-      citiesLists.push({parentId: this.hero.id, id: city.id});
+      citiesLists.push({parentId: this.hero.id, cityId: city.id});
     });
     let superPowersLists = [];
-    this.superPowers.forEach(city => {
-      superPowersLists.push({parentId: this.hero.id, id: city.id});
+    this.superPowers.forEach(superpower => {
+      superPowersLists.push({parentId: this.hero.id, superPowerId: superpower.id});
     });
     dialogRef.afterClosed().subscribe(result =>{
         if(result == 'yes')

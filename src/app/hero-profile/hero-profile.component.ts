@@ -5,8 +5,6 @@ import {Address} from '../Models/Address';
 import {Phone} from '../Models/Phone';
 import {OrmService} from '../services/orm.service';
 import {ToDo} from '../Models/ToDo';
-import {CitiesList} from "../Models/CitiesList";
-import {SuperPowersList} from "../Models/SuperPowersList";
 import {City} from "../Models/City";
 import {SuperPower} from "../Models/SuperPower";
 
@@ -56,7 +54,7 @@ export class HeroProfileComponent implements OnInit {
         if (citiesLists.length == 0) return;
         let cLists = this.service.getCityByParentId(id);
         this.cities = this.getCityByIds(cLists);
-        console.log(citiesLists);
+        console.log('ll' + this.cities);
       });
       this.service.getSuperPowersLists().subscribe(superpowersLists => {
         if (superpowersLists.length == 0) return;
@@ -68,16 +66,17 @@ export class HeroProfileComponent implements OnInit {
 
   getSuperPowerByIds(spLists) {
     let list = [];
-    spLists.forEach(cList => {
-      list.push(this.service.getSuperPowerById(cList.id));
+    spLists.forEach(spList => {
+      list.push(this.service.getSuperPowerById(spList.superPowerId));
     });
     return list;
   }
 
   getCityByIds(cLists) {
+    console.log(['ccc' , cLists]);
     let list = [];
     cLists.forEach(cList => {
-      list.push(this.service.getCityById(cList.id));
+      list.push(this.service.getCityById(cList.cityId));
     });
     return list;
   }

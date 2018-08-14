@@ -128,7 +128,7 @@ export class HeroEditComponent implements OnInit {
         addressLoc: addressForm.get('addressLoc').value
       });
     });
-    this.service.updateHero(this.hero, this.phones, this.addresses,this.superPowersLists,this.citiesLists);
+    this.service.updateHero(this.hero, this.phones, this.addresses, this.superPowersLists, this.citiesLists);
   }
   changeAvatar() {
     const avatarId = Math.floor(Math.random()*12) + 1;

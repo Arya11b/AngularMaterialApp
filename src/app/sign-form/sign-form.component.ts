@@ -10,7 +10,6 @@ import {LanguageService} from "../services/language.service";
 import {lang} from "../../resources/lang";
 import {CitiesList} from "../Models/CitiesList";
 import {SuperPowersList} from "../Models/SuperPowersList";
-
 @Component({
   selector: 'app-sign-form',
   templateUrl: './sign-form.component.html',
@@ -28,19 +27,16 @@ export class SignFormComponent implements OnInit {
   addressForms: FormGroup[];
   cityForms: FormGroup[];
   // function helpers
-  constructor(private orm: OrmService, private fieldService: FieldService, private dialogRef: MatDialogRef<any>, private languageService: LanguageService) {
+  constructor(private orm: OrmService, private fieldService: FieldService,
+              private dialogRef: MatDialogRef<any>, private languageService: LanguageService) {
     this.phones = [];
     this.addresses = [];
     this.superPowersLists = [];
     this.citiesLists = [];
   }
-
   initHero() {
     this.hero = new Hero;
-    // add address Number
-    // add Address
   }
-
   initHeroForm() {
     this.heroForm = new FormGroup({});
     this.fields.forEach(
@@ -49,12 +45,10 @@ export class SignFormComponent implements OnInit {
       }
     );
   }
-
   initPhoneForm() {
     this.phoneForms = [];
     this.addToForm(this.phoneForms, this.phoneFields);
   }
-
   initAddressForm() {
     this.addressForms = [];
     this.addToForm(this.addressForms, this.addressFields);
@@ -63,7 +57,6 @@ export class SignFormComponent implements OnInit {
     this.cityForms = [];
     this.addToForm(this.cityForms, this.cityFields);
   }
-
   ngOnInit() {
     // hero form start
     this.initHero();
@@ -80,11 +73,13 @@ export class SignFormComponent implements OnInit {
     this.hero.lastName = this.heroForm.value.lastName;
     this.hero.alias = this.heroForm.value.alias;
     this.heroForm.value.superpower.forEach(superpower => {
-      this.superPowersLists.push({id: this.orm.getSuperPowerId(superpower), parentId: 0});
+      this.superPowersLists.push({id: 0, superPowerId: this.orm.getSuperPowerId(superpower), parentId: 0});
     });
     this.cityForms.forEach(form => {
-      this.citiesLists.push({id: this.orm.getCityId(form.value.city), parentId: 0});
+      this.citiesLists.push({id: 0, cityId: this.orm.getCityId(form.value.city), parentId: 0});
     });
+    console.log('spl: ' + this.superPowersLists);
+    console.log('cl: ' + this.citiesLists);
 
     this.phoneForms.forEach(
       phoneForm => {
@@ -117,7 +112,6 @@ export class SignFormComponent implements OnInit {
   }
 
   addHero() {
-    console.log(this.hero);
     this.orm.addHero(this.hero, this.phones, this.addresses, this.superPowersLists, this.citiesLists);
   }
   getHeroById(id) {
@@ -148,6 +142,7 @@ export class SignFormComponent implements OnInit {
 
   // add stuff
   get fields() {
+    this.fieldService.getSuperPowerOptions();
     return this.fieldService.fields;
   }
 
@@ -159,6 +154,8 @@ export class SignFormComponent implements OnInit {
     return this.fieldService.addressFields;
   }
   get cityFields() {
+    this.fieldService.getProvinces();
+    this.fieldService.getCities();
     return this.fieldService.cityFields;
   }
   disableSubmit(): boolean {
