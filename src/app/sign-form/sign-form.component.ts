@@ -66,7 +66,7 @@ export class SignFormComponent implements OnInit {
     this.initAddressForm();
     this.initCityForm();
   }
-
+  // save functions
   save() {
     this.hero.firstName = this.heroForm.value.firstName;
     this.hero.lastName = this.heroForm.value.lastName;
@@ -103,14 +103,14 @@ export class SignFormComponent implements OnInit {
     //   push new address Number
     this.addHero();
   }
-  saveAndClose() {
+  onSubmit() {
     this.save();
     this.dialogRef.close();
   }
-
   addHero() {
     this.orm.addHero(this.hero, this.phones, this.addresses, this.superPowersLists, this.citiesLists);
   }
+
   getHeroById(id) {
     return this.orm.getHeroById(id);
   }
@@ -132,7 +132,6 @@ export class SignFormComponent implements OnInit {
         );
       });
   }
-
   removeForm(form: any, forms: any[]) {
     forms.splice(forms.indexOf(form), 1);
   }
@@ -215,12 +214,5 @@ export class SignFormComponent implements OnInit {
 
   get formText() {
     return lang[this.languageService.getLang()].addForm;
-  }
-  getSuperPowerIds(power) {
-    return this.orm.getSuperPowerId(power);
-  }
-
-  onSubmit() {
-    this.submitted = true;
   }
 }

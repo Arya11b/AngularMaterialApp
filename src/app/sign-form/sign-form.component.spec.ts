@@ -44,6 +44,7 @@ describe('SignFormComponent', () => {
     component.heroForm.controls['firstName'].setValue('bruce');
     component.heroForm.controls['lastName'].setValue('wayne');
     component.heroForm.controls['alias'].setValue('batman');
+    component.heroForm.controls['superpower'].setValue(['hp gen']);
     expect(component.heroForm.valid).toBeTruthy();
     expect(component.phoneForms[0].valid).toBeFalsy();
     component.phoneForms[0].controls['phoneCode'].setValue('312');
@@ -54,6 +55,10 @@ describe('SignFormComponent', () => {
     component.addressForms[0].controls['addressPlace'].setValue('home');
     component.addressForms[0].controls['addressLoc'].setValue('stanton island');
     expect(component.addressForms[0].valid).toBeTruthy();
+    expect(component.cityForms[0].valid).toBeFalsy();
+    component.cityForms[0].controls['province'].setValue('tehran');
+    component.cityForms[0].controls['city'].setValue('tehran');
+    expect(component.cityForms[0].valid).toBeTruthy();
     component.save();
 
     let hero: Hero;

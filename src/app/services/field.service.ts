@@ -195,19 +195,31 @@ export class FieldService {
 
   getSuperPowerOptions() {
     let opt: { category: string, subCat: any[] }[] = [];
-    this.ormService.getSuperPowerCategories().forEach(category => {
-      opt.push({category: category, subCat: this.ormService.getSuperPowerByCategory(category)});
+    this.ormService.getSuperPowers().subscribe(superpowers => {
+      if (superpowers.length == 0) return;
+      this.ormService.getSuperPowerCategories().forEach(category => {
+        opt.push({category: category, subCat: this.ormService.getSuperPowerByCategory(category)});
+      });
     });
-    console.log(opt);
     return opt;
   }
 
   getProvinces() {
-    return this.ormService.getProvinces();
+    let opt : string[] = [];
+    this.ormService.getCities().subscribe(cities => {
+      if (cities.length === 0) return;
+      this.ormService.getProvinces().forEach(province => opt.push(province));
+    });
+    return opt;
   }
 
   getCities() {
-    return this.ormService.getAllCities();
+    let opt : string[] = [];
+    this.ormService.getCities().subscribe(cities => {
+      if (cities.length === 0) return;
+      this.ormService.getAllCities().forEach(city => opt.push(city));
+    });
+    return opt;
   }
 }
 

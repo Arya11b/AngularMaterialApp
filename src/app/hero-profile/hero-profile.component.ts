@@ -17,7 +17,6 @@ export class HeroProfileComponent implements OnInit {
   hero: Hero;
   phones: Phone[];
   addresses: Address[];
-  todos: ToDo[];
   superPowers: SuperPower[];
   cities: City[];
 
@@ -30,7 +29,6 @@ export class HeroProfileComponent implements OnInit {
     this.addresses = [];
     this.superPowers = [];
     this.cities = [];
-    this.todos = [];
 
     this.route.params.subscribe(params => {
       const id = params['id'];
@@ -46,13 +44,12 @@ export class HeroProfileComponent implements OnInit {
         if (addresses.length == 0) return;
         this.addresses = this.service.getAddressByParentId(id);
       });
-      this.service.getTodos().subscribe(todos => {
-        if (todos.length < 0) return; // it can be zero
-        this.todos = this.service.getTodoByParentId(id);
-      });
+
+
       this.service.getCitiesLists().subscribe(citiesLists => {
         if (citiesLists.length == 0) return;
         this.service.getCities().subscribe(cities => {
+          if (cities.length == 0) return;
           let cLists = this.service.getCityByParentId(id);
           this.cities = this.getCityByIds(cLists);
           console.log('ll' + this.cities);
@@ -60,8 +57,11 @@ export class HeroProfileComponent implements OnInit {
       });
       this.service.getSuperPowersLists().subscribe(superpowersLists => {
         if (superpowersLists.length == 0) return;
-        let spLists = this.service.getSuperPowerByParentId(id);
-        this.superPowers = this.getSuperPowerByIds(spLists);
+        this.service.getSuperPowers().subscribe(superpowers => {
+          if (superpowers.length == 0) return;
+          let spLists = this.service.getSuperPowerByParentId(id);
+          this.superPowers = this.getSuperPowerByIds(spLists);
+        });
       });
     });
   }

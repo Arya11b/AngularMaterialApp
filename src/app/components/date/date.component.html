@@ -1,4 +1,4 @@
-<mat-form-field class="forms-item">
+<mat-form-field class="forms-item" *ngIf="field">
   <div [formGroup]="form" fxLayout="row" fxLayoutAlign="space-around center">
     <input matInput [matDatepicker]="picker" placeholder="{{field.placeHolder}}" [formControlName]="field.key">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>

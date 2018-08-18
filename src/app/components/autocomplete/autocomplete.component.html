@@ -1,4 +1,4 @@
-<mat-form-field class="forms-item">
+<mat-form-field class="forms-item" *ngIf="field">
   <div [formGroup]="form">
     <mat-select [placeholder]="field.placeHolder" [formControlName]="field.key">
         <mat-option *ngFor="let option of getFieldOptions(field)" [value]="option" >{{option}}</mat-option>

@@ -136,6 +136,22 @@ export class OrmService {
   getTodoByParentId(parentId) {
     return this.todoService.todoSet.filter(x => x.parentId == parentId);
   }
+  getTodoSearch(query){
+    if(!query) return this.todoService.todoSet;
+    // let queries: string[] = query.split(' ');
+    // let tempResults = [];
+    // let results :ToDo[] = [];
+    // queries.forEach(query => {
+    //   console.log(query);
+    //   tempResults.push( this.todoService.todoSet.filter(x => x.note.includes(query)));
+    // });
+    // tempResults.forEach(tempResult => {
+    //   if (results.indexOf(tempResult) === -1) results.push(tempResult);
+    // });
+    // console.log(results);
+    // return results;
+    return this.todoService.todoSet.filter(x => x.note.includes(query));
+  }
 
 
   // get stuff as observable
@@ -168,7 +184,9 @@ export class OrmService {
   }
   // superpower methods
   getSuperPowerId(power): number {
-    return this.superPowerService.superPowerSet.find(x => x.power == power ).id;
+    if(this.superPowerService.superPowerSet.find(x => x.power == power ))
+      return this.superPowerService.superPowerSet.find(x => x.power == power ).id;
+    return 0;
   }
   getSuperPowerById(id): SuperPower {
     return this.superPowerService.superPowerSet.find(x => x.id == id );
@@ -193,7 +211,9 @@ export class OrmService {
   }
   // CT methods (goshadism :))
   getCityId(city): number {
-    return this.cityService.citySet.find(x => x.city == city ).id;
+    if(this.cityService.citySet.find(x => x.city == city ))
+      return this.cityService.citySet.find(x => x.city == city ).id;
+    return 0;
   }
   getCityById(id): City {
     return this.cityService.citySet.find(x => x.id == id );

@@ -12,15 +12,17 @@ import {ActivatedRoute} from "@angular/router";
   styleUrls: ['./hero-todo.component.scss']
 })
 export class HeroTodoComponent implements OnInit {
-  @Input() todos;
+  todos: ToDo[];
   todoForm: FormGroup;
   todo: ToDo;
   hero: Hero;
   fields;
+  searchQuery: string;
   todoCols = ['position', 'todo', 'due' , 'done', 'remove'];
   constructor(private service: OrmService, private fieldService: FieldService,private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.todos = [];
     this.todo = new ToDo;
     this.hero = new Hero;
     this.fields = this.fieldService.todoFields;
@@ -33,6 +35,10 @@ export class HeroTodoComponent implements OnInit {
       this.service.getHeroes().subscribe(heroes =>{
         if(heroes.length == 0) return;
         this.hero = this.service.getHeroById(id);
+      });
+      this.service.getTodos().subscribe(todos => {
+        if (todos.length < 0) return; // it can be zero
+        this.todos = this.service.getTodoByParentId(id);
       });
     });
   }
@@ -57,6 +63,9 @@ export class HeroTodoComponent implements OnInit {
   }
   getBeautifiedDate(date): string {
     return date.slice(0, 10).replace('-', ' / ').replace('-', ' / ');
+  }
+  search() {
+    this.todos = this.service.getTodoSearch(this.searchQuery);
   }
 
 }

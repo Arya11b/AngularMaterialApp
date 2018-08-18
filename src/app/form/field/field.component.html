@@ -1,3 +1,4 @@
+<div *ngIf="field">
 <div [ngSwitch]="field.controlType">
   <div *ngSwitchCase="'textbox'">
     <app-text-field [form]="form" [field]="field"></app-text-field>
@@ -13,4 +14,4 @@
     <app-autocomplete [field]="field" [form]="form"></app-autocomplete>
   </div>
 </div>
-
+</div>
