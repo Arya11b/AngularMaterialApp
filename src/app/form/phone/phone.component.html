@@ -1,0 +1,12 @@
+<mat-label> Phone Number Info: </mat-label>
+<div *ngFor="let phoneForm of phoneForms">
+  <div *ngFor="let field of phoneFields">
+    <app-field [form]="phoneForm" [field]="field"></app-field>
+  </div>
+  <button class="forms-mini-button" (click)="clickRemove('phone',phoneForm)" [hidden]="hideRemove(phoneForms)">
+    <mat-icon>remove</mat-icon>
+  </button>
+</div>
+<button class="forms-mini-button" (click)="clickAdd('phone')" [hidden]="hideAdd(phoneForms)">
+  <mat-icon>add</mat-icon>
+</button>

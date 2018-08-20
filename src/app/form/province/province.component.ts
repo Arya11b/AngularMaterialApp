@@ -1,8 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
-import {FieldBase} from '../../form/models/FieldBase';
+import {FieldBase} from '../models/FieldBase';
 import {OrmService} from "../../services/orm.service";
 import {FieldService} from "../../services/field.service";
+import {CitiesList} from "../../Models/CitiesList";
 
 @Component({
   selector: 'app-province',
@@ -10,9 +11,9 @@ import {FieldService} from "../../services/field.service";
   styleUrls: ['./province.component.scss']
 })
 export class ProvinceComponent implements OnInit {
+  cityForms: FormGroup[] = [];
   constructor(private service: OrmService, private fieldService: FieldService) {
   }
-  cityForms: FormGroup[] = [];
 
   ngOnInit() {
     this.initCityForm();
@@ -74,7 +75,7 @@ export class ProvinceComponent implements OnInit {
       return true;
     return false;
   }
-  private formsAreInvalid(): boolean {
+  public formsAreInvalid(): boolean {
     let bool = false;
     this.cityForms.forEach(form => {
         if (form.invalid) bool = true;
@@ -82,10 +83,10 @@ export class ProvinceComponent implements OnInit {
     );
     return bool;
   }
-  public getFormDatas(): {city: string, province: string}[] {
+  public getFormDatas(): CitiesList[] {
     let result = [];
     this.cityForms.forEach(form =>{
-      result.push({city: form.value.city, province: form.value.province});
+      result.push({id: 0, cityId: this.service.getCityId(form.value.city), parentId: 0});
     });
     return result;
   }

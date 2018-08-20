@@ -23,8 +23,11 @@ import { SignFormComponent } from './sign-form/sign-form.component';
 import { DateComponent } from './components/date/date.component';
 import { TextFieldComponent } from './components/text-field/text-field.component';
 import { DropdownComponent } from './components/dropdown-multiple/dropdown-multiple.component';
-import { ProvinceComponent } from './components/province/province.component';
+import { ProvinceComponent } from './form/province/province.component';
 import {DpDatePickerModule} from "ng2-jalali-date-picker";
+import { PhoneComponent } from './form/phone/phone.component';
+import { AddressComponent } from './form/address/address.component';
+import { HeroComponent } from './form/hero/hero.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,6 +46,9 @@ import {DpDatePickerModule} from "ng2-jalali-date-picker";
     TextFieldComponent,
     DropdownComponent,
     ProvinceComponent,
+    PhoneComponent,
+    AddressComponent,
+    HeroComponent,
   ],
   imports: [
     BrowserModule,

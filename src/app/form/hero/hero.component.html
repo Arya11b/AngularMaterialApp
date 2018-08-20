@@ -1,0 +1,4 @@
+<mat-label> Personal Info: </mat-label>
+<div *ngFor="let field of fields">
+  <app-field [form]="heroForm" [field]="field"></app-field>
+</div>

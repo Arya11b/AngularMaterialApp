@@ -2,44 +2,16 @@
   Add New Superheroes
 </h1>
 <mat-dialog-content>
-
   <mat-card>
-    <mat-label> {{formText.info}}</mat-label>
-    <div *ngFor="let field of fields">
-      <app-field [form]="heroForm" [field]="field"></app-field>
-    </div>
+    <app-hero #hero></app-hero>
   </mat-card>
   <mat-card>
-    <mat-label> {{formText.phone}}</mat-label>
-    <div *ngFor="let phoneForm of phoneForms">
-      <div *ngFor="let field of phoneFields">
-        <app-field [form]="phoneForm" [field]="field"></app-field>
-      </div>
-      <button class="forms-mini-button" (click)="clickRemove('phone',phoneForm)" [hidden]="hideRemove(phoneForms)">
-        <mat-icon>remove</mat-icon>
-      </button>
-    </div>
-    <button class="forms-mini-button" (click)="clickAdd('phone')" [hidden]="hideAdd(phoneForms)">
-      <mat-icon>add</mat-icon>
-    </button>
+    <app-phone #phone></app-phone>
   </mat-card>
   <mat-card>
-    <mat-label> {{formText.address}}</mat-label>
-    <div *ngFor="let addressForm of addressForms">
-      <div *ngFor="let field of addressFields">
-        <app-field [form]="addressForm" [field]="field"></app-field>
-      </div>
-      <button class="forms-mini-button" (click)="clickRemove('address',addressForm)"
-              [hidden]="hideRemove(addressForms)">
-        <mat-icon>remove</mat-icon>
-      </button>
-    </div>
-    <button class="forms-mini-button" (click)="clickAdd('address')" [hidden]="hideAdd(addressForms)">
-      <mat-icon>add</mat-icon>
-    </button>
+    <app-address #address></app-address>
   </mat-card>
   <mat-card>
-    <mat-label> city info:</mat-label>
     <app-province #province></app-province>
   </mat-card>
   <button class="forms-button" [disabled]="disableSubmit()" (click)="onSubmit()" mat-button>{{formText.submit}}
