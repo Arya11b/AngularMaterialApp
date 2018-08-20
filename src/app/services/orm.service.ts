@@ -81,6 +81,7 @@ export class OrmService {
     this.getCityByParentId(hero.id).forEach(city => {
       this.citiesListService.deleteCitiesList(city);
     });
+    console.log('should be empty' + this.getCityByParentId(hero.id));
     phones.forEach(phone => {
       phone.id = this.getValidId(this.phoneService.phoneSet);
       phone.parentId = hero.id;

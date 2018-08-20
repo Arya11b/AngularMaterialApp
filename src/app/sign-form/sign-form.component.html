@@ -40,17 +40,7 @@
   </mat-card>
   <mat-card>
     <mat-label> city info:</mat-label>
-    <div *ngFor="let cityForm of cityForms">
-      <div *ngFor="let cityField of cityFields">
-        <app-field [form]="cityForm" [field]="cityField"></app-field>
-      </div>
-        <button class="forms-mini-button" (click)="clickRemove('city',cityForm)" [hidden]="hideRemove(cityForms)">
-          <mat-icon>remove</mat-icon>
-        </button>
-    </div>
-    <button class="forms-mini-button" (click)="clickAdd('city')" [hidden]="hideAdd(cityForms)">
-      <mat-icon>add</mat-icon>
-    </button>
+    <app-province #province></app-province>
   </mat-card>
   <button class="forms-button" [disabled]="disableSubmit()" (click)="onSubmit()" mat-button>{{formText.submit}}
   </button>

@@ -1,0 +1,17 @@
+<div *ngFor="let cityForm of cityForms">
+  <mat-form-field *ngFor="let field of cityFields" class="forms-item">
+    <div [formGroup]="cityForm">
+      <mat-select [placeholder]="field.placeHolder" [formControlName]="field.key">
+        <mat-option *ngFor="let option of getFieldOptionsBasedOnProvince(field,cityForm)" [value]="option">{{option}}</mat-option>
+      </mat-select>
+    </div>
+  </mat-form-field>
+  <button class="forms-mini-button" (click)="clickRemove()" [hidden]="hideRemove()">
+    <mat-icon>remove</mat-icon>
+  </button>
+</div>
+<button class="forms-mini-button" (click)="clickAdd()" [hidden]="hideAdd()">
+  <mat-icon>add</mat-icon>
+</button>
+
+

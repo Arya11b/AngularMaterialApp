@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AutocompleteComponent } from './autocomplete.component';
+import { ProvinceComponent } from './province.component';
 import {MessagesComponent} from "../../messages/messages.component";
 import {HeroDetailComponent} from "../../hero-detail/hero-detail.component";
 import {HeroProfileComponent} from "../../hero-profile/hero-profile.component";
@@ -15,13 +15,13 @@ import {HttpClientModule} from "@angular/common/http";
 import {NO_ERRORS_SCHEMA} from "@angular/core";
 import {APP_BASE_HREF} from "@angular/common";
 
-describe('AutocompleteComponent', () => {
-  let component: AutocompleteComponent;
-  let fixture: ComponentFixture<AutocompleteComponent>;
+describe('ProvinceComponent', () => {
+  let component: ProvinceComponent;
+  let fixture: ComponentFixture<ProvinceComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AutocompleteComponent , MessagesComponent , HeroDetailComponent , HeroProfileComponent , HeroEditComponent , SignFormComponent , HeroTodoComponent , HomeComponent   ],
+      declarations: [ ProvinceComponent , MessagesComponent , HeroDetailComponent , HeroProfileComponent , HeroEditComponent , SignFormComponent , HeroTodoComponent , HomeComponent   ],
       imports: [AppRoutingModule, MaterialModule, BrowserAnimationsModule, HttpClientModule],
       schemas: [NO_ERRORS_SCHEMA],
       providers: [{provide: APP_BASE_HREF, useValue : '/' }]
@@ -30,7 +30,7 @@ describe('AutocompleteComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AutocompleteComponent);
+    fixture = TestBed.createComponent(ProvinceComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

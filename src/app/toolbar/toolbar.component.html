@@ -4,13 +4,40 @@
       <mat-icon> menu </mat-icon>
     </button>
     <span class="spacer"></span>
-  <button mat-button [matMenuTriggerFor]="menu">
-    <mat-icon>more_vert</mat-icon>
-  </button>
-  <mat-menu #menu="matMenu" class="dropdown-menu">
-    <button mat-menu-item (click)="openDialog()">{{lang.add}}</button>
-    <button mat-menu-item (click)="toggleRtl.emit()">{{lang.lang}}</button>
-    <button mat-menu-item (click)="toggleTheme.emit()">{{lang.theme}}</button>
-  </mat-menu>
+
+    <!--<button mat-button [matMenuTriggerFor]="menu2">-->
+      <!--<mat-icon>archive</mat-icon>-->
+    <!--</button>-->
+    <!--<mat-menu #menu2="matMenu" class="dropdown-menu">-->
+      <!--<button mat-menu-item *ngFor="let hero of heroes" [matMenuTriggerFor]="subMenu" [matMenuTriggerData]="hero">{{hero.alias}}</button>-->
+    <!--</mat-menu>-->
+<!---->
+    <!--<mat-menu #subMenu="matMenu" class="dropdown-menu">-->
+      <!--<button mat-menu-item [matMenuTriggerFor]="heroMenu">Info</button>-->
+      <!--<button mat-menu-item [matMenuTriggerFor]="phoneMenu">Phone</button>-->
+      <!--<button mat-menu-item [matMenuTriggerFor]="addressMenu">Address</button>-->
+    <!--</mat-menu>-->
+    <!--<mat-menu #heroMenu="matMenu" class="dropdown-menu" *ngIf="heroes">-->
+      <!--<button mat-menu-item>{{heroes[0].firstName}}</button>-->
+      <!--<button mat-menu-item>{{heroes[0].lastName}}</button>-->
+      <!--<button mat-menu-item>{{heroes[0].alias}}</button>-->
+    <!--</mat-menu>-->
+    <!--<mat-menu #phoneMenu="matMenu" class="dropdown-menu">-->
+      <!--<button mat-menu-item *ngFor="let phone of getHeroPhones(2)">{{phone.code}}</button>-->
+      <!--<button mat-menu-item *ngFor="let phone of getHeroPhones(2)">{{phone.number}}</button>-->
+      <!--<button mat-menu-item *ngFor="let phone of getHeroPhones(2)">{{phone.place}}</button>-->
+    <!--</mat-menu>-->
+    <mat-menu #addressMenu="matMenu" class="dropdown-menu">
+      <button mat-menu-item *ngFor="let address of getHeroAddresses(2)">{{address.place}}</button>
+      <button mat-menu-item *ngFor="let address of getHeroAddresses(2)">{{address.addressLoc}}</button>
+    </mat-menu>
+    <button mat-button [matMenuTriggerFor]="menu">
+      <mat-icon>more_vert</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu" class="dropdown-menu">
+      <button mat-menu-item (click)="openDialog()">{{lang.add}}</button>
+      <button mat-menu-item (click)="toggleRtl.emit()">{{lang.lang}}</button>
+      <button mat-menu-item (click)="toggleTheme.emit()">{{lang.theme}}</button>
+    </mat-menu>
   </mat-toolbar-row>
 </mat-toolbar>

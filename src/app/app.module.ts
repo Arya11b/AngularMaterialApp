@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppComponent } from './app.component';
 import { HeroesComponent } from './heroes/heroes.component';
@@ -23,7 +23,8 @@ import { SignFormComponent } from './sign-form/sign-form.component';
 import { DateComponent } from './components/date/date.component';
 import { TextFieldComponent } from './components/text-field/text-field.component';
 import { DropdownComponent } from './components/dropdown-multiple/dropdown-multiple.component';
-import { AutocompleteComponent } from './components/autocomplete/autocomplete.component';
+import { ProvinceComponent } from './components/province/province.component';
+import {DpDatePickerModule} from "ng2-jalali-date-picker";
 @NgModule({
   declarations: [
     AppComponent,
@@ -41,7 +42,7 @@ import { AutocompleteComponent } from './components/autocomplete/autocomplete.co
     DateComponent,
     TextFieldComponent,
     DropdownComponent,
-    AutocompleteComponent,
+    ProvinceComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,13 +52,17 @@ import { AutocompleteComponent } from './components/autocomplete/autocomplete.co
     BrowserAnimationsModule,
     MaterialModule,
     ReactiveFormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    DpDatePickerModule
   ],
   entryComponents: [
     SignFormComponent
   ],
   providers: [HeroService,
-  FieldService, MenuComponent],
+  FieldService, MenuComponent,
+    ProvinceComponent,
+    {provide: LOCALE_ID, useValue: 'fa-IR'},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

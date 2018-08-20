@@ -1,0 +1,32 @@
+.forms-item{
+  width:100%;
+  margin: auto;
+}
+.forms{
+  width: 50%;
+  margin: auto;
+}
+.forms-button{
+  width:100%;
+  margin: auto;
+}
+.forms-row{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+.section-label{
+  border-bottom: medium;
+  font-size: 35px;
+}
+.forms-mini-button{
+  background-color: transparent;
+  border: none;
+  min-width: 10%;
+  min-height: 5%;
+  margin: auto;
+  padding: 0;
+  color: whitesmoke;
+}
+
