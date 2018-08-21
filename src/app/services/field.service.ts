@@ -8,7 +8,7 @@ import {FieldDate} from "../form/models/FieldDate";
 import {FieldDropdown} from "../form/models/FieldDropdown";
 import {OrmService} from "./orm.service";
 import {FieldAutoComplete} from "../form/models/FieldAutoComplete";
-import {catchError} from "rxjs/internal/operators";
+import {FieldTree} from "../form/models/FieldTree";
 @Injectable()
 export class FieldService {
   constructor(private languageService: LanguageService, private ormService: OrmService) {
@@ -59,8 +59,8 @@ export class FieldService {
       value: '',
       placeHolder: 'select your power', // to be bilingual
       icon: 'form-3',
-      options: this.getSuperPowerOptions(),
-      // options: [{key: 'ss',value:'bb'}] + this.getSuperPowerCategories(),
+      options: this.getSpTree(),
+      // options: this.getSuperPowerOptions(),
       order: 3,
       validators: [
         Validators.required,
@@ -204,8 +204,20 @@ export class FieldService {
     return opt;
   }
 
+  getSpTree() {
+    let opt: any = {};
+    this.ormService.getSuperPowers().subscribe(superpowers => {
+      if (superpowers.length == 0) return;
+      this.ormService.getSuperPowerCategories().forEach(category => {
+        opt[category] = this.ormService.getSuperPowerByCategory(category);
+      });
+    });
+    console.log(opt);
+    return opt;
+  }
+
   getProvinces() {
-    let opt : string[] = [];
+    let opt: string[] = [];
     this.ormService.getCities().subscribe(cities => {
       if (cities.length === 0) return;
       this.ormService.getProvinces().forEach(province => opt.push(province));
@@ -214,7 +226,7 @@ export class FieldService {
   }
 
   getCities() {
-    let opt : string[] = [];
+    let opt: string[] = [];
     this.ormService.getCities().subscribe(cities => {
       if (cities.length === 0) return;
       this.ormService.getAllCities().forEach(city => opt.push(city));

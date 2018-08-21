@@ -28,6 +28,8 @@ import {DpDatePickerModule} from "ng2-jalali-date-picker";
 import { PhoneComponent } from './form/phone/phone.component';
 import { AddressComponent } from './form/address/address.component';
 import { HeroComponent } from './form/hero/hero.component';
+import { TreeChecklistComponent } from './components/tree-checklist/tree-checklist.component';
+import { TreeFieldComponent } from './components/tree-field/tree-field.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,6 +51,8 @@ import { HeroComponent } from './form/hero/hero.component';
     PhoneComponent,
     AddressComponent,
     HeroComponent,
+    TreeChecklistComponent,
+    TreeFieldComponent,
   ],
   imports: [
     BrowserModule,

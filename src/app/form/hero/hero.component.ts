@@ -14,7 +14,7 @@ import {OrmService} from "../../services/orm.service";
 export class HeroComponent implements OnInit {
   heroForm: FormGroup;
 
-  constructor(private fieldService: FieldService, private orm:OrmService) {
+  constructor(private fieldService: FieldService, private orm: OrmService) {
   }
 
   initHeroForm() {
