@@ -1,0 +1,3 @@
+<label> {{field.key}} </label>
+<button (click)="toggleButton()" *ngIf="!isOn" matButton> choose a superpower </button>
+<app-tree-checklist #tree *ngIf="isOn" [data]="field.options"></app-tree-checklist>

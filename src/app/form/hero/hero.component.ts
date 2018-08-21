@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {Hero} from "../../Models/Hero";
 import {FieldService} from "../../services/field.service";
 import {SuperPower} from "../../Models/SuperPower";
 import {SuperPowersList} from "../../Models/SuperPowersList";
 import {OrmService} from "../../services/orm.service";
+import {TreeFieldComponent} from "../tree-field/tree-field.component";
 
 @Component({
   selector: 'app-hero',
@@ -31,7 +32,6 @@ export class HeroComponent implements OnInit {
   }
 
   get fields() {
-    this.fieldService.getSuperPowerOptions();
     return this.fieldService.fields;
   }
 
@@ -41,21 +41,13 @@ export class HeroComponent implements OnInit {
 
   public getFormHeroData(): Hero {
     return {
-        id: 0,
-        parentId: 0,
-        firstName: this.heroForm.value.firstName,
-        lastName: this.heroForm.value.lastName,
-        alias: this.heroForm.value.alias,
-        picture: ''
-      };
+      id: 0,
+      parentId: 0,
+      firstName: this.heroForm.value.firstName,
+      lastName: this.heroForm.value.lastName,
+      alias: this.heroForm.value.alias,
+      picture: ''
+    };
   }
-  public getFormSpData(): SuperPowersList[] {
-    let result = [];
-    this.heroForm.value.superpower.forEach(superpower => {
-      result.push({id: 0, superPowerId: this.orm.getSuperPowerId(superpower), parentId: 0});
-    });
-    return result;
-  }
-
-
 }
+

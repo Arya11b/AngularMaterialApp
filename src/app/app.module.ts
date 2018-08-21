@@ -29,7 +29,7 @@ import { PhoneComponent } from './form/phone/phone.component';
 import { AddressComponent } from './form/address/address.component';
 import { HeroComponent } from './form/hero/hero.component';
 import { TreeChecklistComponent } from './components/tree-checklist/tree-checklist.component';
-import { TreeFieldComponent } from './components/tree-field/tree-field.component';
+import { TreeFieldComponent } from './form/tree-field/tree-field.component';
 @NgModule({
   declarations: [
     AppComponent,

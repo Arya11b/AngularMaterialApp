@@ -10,20 +10,10 @@ import {FieldBase} from "../../form/models/FieldBase";
 export class DropdownComponent implements OnInit {
   @Input() field: FieldBase<any>;
   @Input() form: FormGroup;
-  // temp for n level to be removed in latter releases
-  sampleData = {
-  a: ['1','2','3'],
-  b: {
-    h: {
-      g: {
-        h: ['3','6','9']
-      }
-    }
-  }
-  };
   constructor() { }
 
   ngOnInit() {
   }
+
 
 }

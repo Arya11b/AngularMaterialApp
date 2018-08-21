@@ -3,7 +3,7 @@
     <button mat-icon-button disabled></button>
     <mat-checkbox class="checklist-leaf-node"
                   [checked]="checklistSelection.isSelected(node)"
-                  (change)="checklistSelection.toggle(node);">{{node.item}}</mat-checkbox>
+                  (change)="selectNode(node)">{{node.item}}</mat-checkbox>
   </mat-tree-node>
 
   <mat-tree-node *matTreeNodeDef="let node; when: hasNoContent" matTreeNodePadding>
@@ -27,3 +27,4 @@
     <!--<button mat-icon-button (click)="addNewItem(node)"><mat-icon>add</mat-icon></button>-->
   </mat-tree-node>
 </mat-tree>
+  <button matButton (click)="getSelection()">test</button>

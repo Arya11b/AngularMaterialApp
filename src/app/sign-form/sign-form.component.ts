@@ -14,6 +14,7 @@ import {ProvinceComponent} from "../form/province/province.component";
 import {PhoneComponent} from "../form/phone/phone.component";
 import {HeroComponent} from "../form/hero/hero.component";
 import {AddressComponent} from "../form/address/address.component";
+import {TreeFieldComponent} from "../form/tree-field/tree-field.component";
 @Component({
   selector: 'app-sign-form',
   templateUrl: './sign-form.component.html',
@@ -24,6 +25,7 @@ export class SignFormComponent implements OnInit {
   @ViewChild('phone') phoneComponent: PhoneComponent;
   @ViewChild('address') addressComponent: AddressComponent;
   @ViewChild('province') provinceComponent: ProvinceComponent;
+  @ViewChild('superpower') superpowerComponent: TreeFieldComponent; //change the name
   submitted = false;
   hero: Hero;
   phones: Phone[];
@@ -48,7 +50,7 @@ export class SignFormComponent implements OnInit {
   // save functions
   save() {
     this.hero = this.heroComponent.getFormHeroData();
-    this.superPowersLists = this.heroComponent.getFormSpData();
+    this.superPowersLists = this.superpowerComponent.getFormSpData();
     this.citiesLists = this.provinceComponent.getFormDatas();
     this.phones = this.phoneComponent.getFormDatas();
     this.addresses = this.addressComponent.getFormDatas();

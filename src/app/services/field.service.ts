@@ -53,7 +53,9 @@ export class FieldService {
         Validators.pattern('[A-Za-z0-9]*')
       ]
     }),
-    new FieldDropdown({
+  ];
+  public superpowerField: FieldBase<any> =
+    new FieldTree({
       key: 'superpower',
       label: 'SuperPower', // to be bilingual
       value: '',
@@ -63,10 +65,8 @@ export class FieldService {
       // options: this.getSuperPowerOptions(),
       order: 3,
       validators: [
-        Validators.required,
       ]
-    })
-  ];
+    });
   public phoneFields: FieldBase<any>[] = [
     new FieldTextBox({
       key: 'phoneCode',
