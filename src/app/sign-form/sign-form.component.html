@@ -15,7 +15,7 @@
     <app-address #address></app-address>
   </mat-card>
   <mat-card>
-    <app-province #province></app-province>
+    <app-province [options]="provinceOptions" #province></app-province>
   </mat-card>
   <button class="forms-button" [disabled]="disableSubmit()" (click)="onSubmit()" mat-button>{{formText.submit}}
   </button>

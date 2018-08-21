@@ -11,7 +11,9 @@ import {CitiesList} from "../../Models/CitiesList";
   styleUrls: ['./province.component.scss']
 })
 export class ProvinceComponent implements OnInit {
+  @Input() options;
   cityForms: FormGroup[] = [];
+
   constructor(private service: OrmService, private fieldService: FieldService) {
   }
 
@@ -21,7 +23,10 @@ export class ProvinceComponent implements OnInit {
 
   private initCityForm() {
     this.cityForms = [];
-    this.addToForm();
+    for (let _i = 0; _i < this.options.count; _i++) {
+      console.log('som');
+      this.addToForm();
+    }
   }
 
   protected getFieldOptionsBasedOnProvince(field, form) {
@@ -46,6 +51,7 @@ export class ProvinceComponent implements OnInit {
   protected clickRemove(form): void {
     this.removeForm(form, this.cityForms);
   }
+
   private addToForm() {
     this.cityForms.push(new FormGroup({}));
     this.cityForms.forEach(
@@ -57,9 +63,11 @@ export class ProvinceComponent implements OnInit {
         );
       });
   }
+
   private removeForm(form: any, forms: any[]) {
     forms.splice(forms.indexOf(form), 1);
   }
+
   protected hideAdd(): boolean {
     if (this.formsAreInvalid())
       return true;
@@ -70,11 +78,13 @@ export class ProvinceComponent implements OnInit {
     );
     return false;
   }
+
   protected hideRemove(): boolean {
     if (this.cityForms.length == 1)
       return true;
     return false;
   }
+
   public formsAreInvalid(): boolean {
     let bool = false;
     this.cityForms.forEach(form => {
@@ -83,12 +93,23 @@ export class ProvinceComponent implements OnInit {
     );
     return bool;
   }
+
   public getFormDatas(): CitiesList[] {
     let result = [];
-    this.cityForms.forEach(form =>{
+    this.cityForms.forEach(form => {
       result.push({id: 0, cityId: this.service.getCityId(form.value.city), parentId: 0});
     });
     return result;
+  }
+
+  public hideField(fieldKey) {
+    switch (fieldKey) {
+      case 'city':
+        if (this.options.hasCity) return true;
+        return false;
+      case 'province':
+        return true;
+    }
   }
 
 }

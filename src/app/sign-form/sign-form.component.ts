@@ -15,6 +15,7 @@ import {PhoneComponent} from "../form/phone/phone.component";
 import {HeroComponent} from "../form/hero/hero.component";
 import {AddressComponent} from "../form/address/address.component";
 import {TreeFieldComponent} from "../form/tree-field/tree-field.component";
+import {ifTrue} from "codelyzer/util/function";
 @Component({
   selector: 'app-sign-form',
   templateUrl: './sign-form.component.html',
@@ -33,6 +34,7 @@ export class SignFormComponent implements OnInit {
   citiesLists: CitiesList[];
   superPowersLists: SuperPowersList[];
   // for getting values
+  provinceOptions: object;
   // function helpers
   constructor(private orm: OrmService, private fieldService: FieldService,
               private dialogRef: MatDialogRef<any>, private languageService: LanguageService) {
@@ -45,6 +47,7 @@ export class SignFormComponent implements OnInit {
     this.hero = new Hero;
   }
   ngOnInit() {
+    this.provinceOptions = {hasCity: true, isDynamic: false, count: 1};
     this.initHero();
   }
   // save functions
