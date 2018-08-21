@@ -20,7 +20,7 @@ import {FieldService} from "./services/field.service";
 import { HeroProfileComponent } from './hero-profile/hero-profile.component';
 import { HeroTodoComponent } from './hero-todo/hero-todo.component';
 import { SignFormComponent } from './sign-form/sign-form.component';
-import { DateComponent } from './components/date/date.component';
+import {DateComponent, JalaliDateAdapter, MY_DATE_FORMATS} from './components/date/date.component';
 import { TextFieldComponent } from './components/text-field/text-field.component';
 import { DropdownComponent } from './components/dropdown-multiple/dropdown-multiple.component';
 import { ProvinceComponent } from './form/province/province.component';
@@ -30,6 +30,7 @@ import { AddressComponent } from './form/address/address.component';
 import { HeroComponent } from './form/hero/hero.component';
 import { TreeChecklistComponent } from './components/tree-checklist/tree-checklist.component';
 import { TreeFieldComponent } from './form/tree-field/tree-field.component';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from "@angular/material";
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,7 +72,6 @@ import { TreeFieldComponent } from './form/tree-field/tree-field.component';
   providers: [HeroService,
   FieldService, MenuComponent,
     ProvinceComponent,
-    {provide: LOCALE_ID, useValue: 'fa-IR'},
   ],
   bootstrap: [AppComponent]
 })

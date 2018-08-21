@@ -1,8 +1,16 @@
+<!--<mat-form-field class="forms-item" *ngIf="field">-->
+<!--<div [formGroup]="form" fxLayout="row" fxLayoutAlign="space-around center">-->
+<!--<input matInput [matDatepicker]="dp" placeholder="{{field.placeHolder}}" [formControl]="date">-->
+<!--<mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>-->
+<!--<mat-datepicker #dp></mat-datepicker>-->
+<!--</div>-->
+<!--</mat-form-field>-->
 <mat-form-field class="forms-item" *ngIf="field">
   <div [formGroup]="form" fxLayout="row" fxLayoutAlign="space-around center">
-    <input matInput [matDatepicker]="dp" placeholder="{{field.placeHolder}}" [formControl]="date">
-    <mat-datepicker-toggle matSuffix [for]="dp"></mat-datepicker-toggle>
-    <mat-datepicker #dp></mat-datepicker>
+    <input #dateInput matInput [matDatepicker]="picker"
+           (change)=" dateChange($event,dateInput,picker)" [formControlName]="field.key" placeholder="choose a date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
   </div>
 </mat-form-field>
 <!--[formControlName]="field.key"-->

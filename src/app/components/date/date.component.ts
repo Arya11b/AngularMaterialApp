@@ -2,53 +2,57 @@ import {Component, Input, LOCALE_ID, OnInit} from '@angular/core';
 import {FormControl, FormGroup} from "@angular/forms";
 import {FieldBase} from "../../form/models/FieldBase";
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
-import * as _moment from 'moment';
-import * as jMoment from 'moment-jalaali';
-import {default as _rollupMoment} from 'moment';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from "@angular/material";
-const moment = _rollupMoment || _moment ;
+import * as jMoment from 'jalali-moment';
+import {MatDatepickerModule, NativeDateAdapter, DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from "@angular/material";
+import {Platform} from "@angular/cdk/platform";
+import {JALALI_MOMENT_FORMATS} from "../../shared/jalali_moment_formats";
+import {JalaliMomentDateAdapter} from "../../shared/jalali-moment-date-adapter";
+export const MY_DATE_FORMATS = {
+  parse: {
+    dateInput: { month: 'short', year: 'numeric', day: 'numeric' }
+  },
+  display: {
+    dateInput: 'input',
+    monthYearLabel: { year: 'numeric', month: 'short' },
+    dateA11yLabel: { year: 'numeric', month: 'long', day: 'numeric' },
+    monthYearA11yLabel: { year: 'numeric', month: 'long' }
+  }
+};
+
+export class JalaliDateAdapter extends NativeDateAdapter {
+  constructor(matDateLocale: string) {
+    super(matDateLocale, new Platform());
+  }
+  format(date: Date, displayFormat: object): string {
+    var faDate = jMoment(date.toDateString()).locale('fa').format('YYYY/MM/DD');
+    return faDate;
+  }
+}
 @Component({
   selector: 'app-date',
   templateUrl: './date.component.html',
   styleUrls: ['./date.component.scss'],
   providers: [
-    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
-    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+    { provide: MAT_DATE_LOCALE, useValue: 'fa-IR' },
+    {provide: DateAdapter, useClass: JalaliMomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: JALALI_MOMENT_FORMATS},
   ],
 })
-
-export class DateComponent implements OnInit{
+export class DateComponent implements OnInit {
   @Input() field: FieldBase<any>;
   @Input() form: FormGroup;
   date: FormControl = new FormControl();
-  cal = moment();
   ngOnInit() {
-    // this.persianCalInit();
-    // moment().locale('fa');
-    // console.log(this.cal.locale());
-    this.date = new FormControl(this.cal);
   }
-  persianCalInit() {
-    // moment.defineLocale('fa', {parentLocale: 'en'});
-    // moment().transform('-0621--22--02 00:00:00.000');
-    moment.updateLocale('en', {months: this.getPersianMonths(), monthsShort: this.getPersianMonthAbbr(),
-      weekdays: this.getPersianWeeks(), weekdaysMin: this.getPersianWeekdaysMin(), });
+  public dateChange(event: any, dateInput: any,picker:any) {
+    var faDate = dateInput.value;
+    jMoment.locale('fa');
+    var enDateMomentFormat  = jMoment(faDate).locale('en');
+    var enDate = new Date(enDateMomentFormat.toLocaleString());
+    picker._validSelected = enDate;
+    picker.startAt = enDate;
   }
-  getPersianMonths(): string[]{
-    return ['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
-    // return ['Farvardin','Ordibehesht','khordad','Tir','Mordad','Shahrivar','Mehr','Aban','Azar','Dey','Bahman','Esfand'];
-  }
-  getPersianWeeks(): string[]{
-    return ['شنبه','یکشنبه','دوشنبه','سه شنبه','چهارشنبه','پنجشنبه','جمعه'];
-    // return ['shanbe','yekshanbe','doshanbe','seshanbe','chaharshanbe','panjshanber','jome'];
-  }
-  getPersianMonthAbbr(): string[]{
-    // return ['Farvardin','Ordibehesht','khordad','Tir','Mordad','Shahrivar','Mehr','Aban','Azar','Dey','Bahman','Esfand'];
-    return ['فروردین','اردیبهشت','خرداد','تیر','مرداد','شهریور','مهر','آبان','آذر','دی','بهمن','اسفند'];
-  }
-  getPersianWeekdaysMin(): string[]{
-    return ['شنبه','یکشنبه','دوشنبه','سه شنبه','چهارشنبه','پنجشنبه','جمعه'];
-  }
+
 }
 // showShamsiCalender();
 // isShamsiCalender();

@@ -166,9 +166,6 @@ export class TreeChecklistComponent implements OnInit{
     const nestedNode = this.flatNodeMap.get(node);
     this.database.updateItem( nestedNode!, itemValue);
   }
-  getSelection() {
-    console.log(this.database);
-  }
   selectNode(node) {
     this.checklistSelection.toggle(node);
     // console.log('checked');
