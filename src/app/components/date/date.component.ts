@@ -33,7 +33,7 @@ export class JalaliDateAdapter extends NativeDateAdapter {
   templateUrl: './date.component.html',
   styleUrls: ['./date.component.scss'],
   providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'fa-IR' },
+    // { provide: MAT_DATE_LOCALE, useValue: 'fa-IR' },
     {provide: DateAdapter, useClass: JalaliMomentDateAdapter, deps: [MAT_DATE_LOCALE]},
     {provide: MAT_DATE_FORMATS, useValue: JALALI_MOMENT_FORMATS},
   ],
