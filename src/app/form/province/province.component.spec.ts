@@ -14,6 +14,7 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {HttpClientModule} from "@angular/common/http";
 import {NO_ERRORS_SCHEMA} from "@angular/core";
 import {APP_BASE_HREF} from "@angular/common";
+import {FieldService} from "../../services/field.service";
 
 describe('ProvinceComponent', () => {
   let component: ProvinceComponent;
@@ -24,7 +25,7 @@ describe('ProvinceComponent', () => {
       declarations: [ ProvinceComponent , MessagesComponent , HeroDetailComponent , HeroProfileComponent , HeroEditComponent , SignFormComponent , HeroTodoComponent , HomeComponent   ],
       imports: [AppRoutingModule, MaterialModule, BrowserAnimationsModule, HttpClientModule],
       schemas: [NO_ERRORS_SCHEMA],
-      providers: [{provide: APP_BASE_HREF, useValue : '/' }]
+      providers: [{provide: APP_BASE_HREF, useValue : '/' }, FieldService]
     })
     .compileComponents();
   }));

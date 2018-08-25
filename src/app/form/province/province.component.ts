@@ -11,7 +11,11 @@ import {CitiesList} from "../../Models/CitiesList";
   styleUrls: ['./province.component.scss']
 })
 export class ProvinceComponent implements OnInit {
-  @Input() options;
+  @Input() options: {
+    count: number,
+    isDynamic: boolean,
+    hasCity: boolean
+  };
   cityForms: FormGroup[] = [];
 
   constructor(private service: OrmService, private fieldService: FieldService) {
@@ -23,8 +27,8 @@ export class ProvinceComponent implements OnInit {
 
   private initCityForm() {
     this.cityForms = [];
+
     for (let _i = 0; _i < this.options.count; _i++) {
-      console.log('som');
       this.addToForm();
     }
   }

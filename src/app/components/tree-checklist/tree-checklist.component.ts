@@ -181,7 +181,7 @@ export class TreeChecklistComponent implements OnInit {
   hideNode(node) {
     if (this.searchQuery == '')
       return false;
-    if (node.item.indexOf(this.searchQuery) > -1)
+    if (node.item.toLowerCase().indexOf(this.searchQuery.toLowerCase()) > -1)
       return false;
     return true;
   }

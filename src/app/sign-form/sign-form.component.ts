@@ -1,21 +1,19 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Hero} from '../Models/Hero';
 import {MatDialogRef} from '@angular/material';
-import {FormControl, FormGroup} from '@angular/forms';
 import {Phone} from '../Models/Phone';
 import {Address} from '../Models/Address';
 import {FieldService} from '../services/field.service';
-import {OrmService} from "../services/orm.service";
-import {LanguageService} from "../services/language.service";
-import {lang} from "../../resources/lang";
-import {CitiesList} from "../Models/CitiesList";
-import {SuperPowersList} from "../Models/SuperPowersList";
-import {ProvinceComponent} from "../form/province/province.component";
-import {PhoneComponent} from "../form/phone/phone.component";
-import {HeroComponent} from "../form/hero/hero.component";
-import {AddressComponent} from "../form/address/address.component";
-import {TreeFieldComponent} from "../form/tree-field/tree-field.component";
-import {ifTrue} from "codelyzer/util/function";
+import {OrmService} from '../services/orm.service';
+import {LanguageService} from '../services/language.service';
+import {lang} from '../../resources/lang';
+import {CitiesList} from '../Models/CitiesList';
+import {SuperPowersList} from '../Models/SuperPowersList';
+import {ProvinceComponent} from '../form/province/province.component';
+import {PhoneComponent} from '../form/phone/phone.component';
+import {HeroComponent} from '../form/hero/hero.component';
+import {AddressComponent} from '../form/address/address.component';
+import {TreeFieldComponent} from '../form/tree-field/tree-field.component';
 @Component({
   selector: 'app-sign-form',
   templateUrl: './sign-form.component.html',
@@ -27,12 +25,12 @@ export class SignFormComponent implements OnInit {
   @ViewChild('address') addressComponent: AddressComponent;
   @ViewChild('province') provinceComponent: ProvinceComponent;
   @ViewChild('superpower') superpowerComponent: TreeFieldComponent; //change the name
-  submitted = false;
   hero: Hero;
   phones: Phone[];
   addresses: Address[];
   citiesLists: CitiesList[];
   superPowersLists: SuperPowersList[];
+  submitted = false;
   // for getting values
   provinceOptions: object;
   // function helpers
