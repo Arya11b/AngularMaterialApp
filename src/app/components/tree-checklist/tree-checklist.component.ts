@@ -15,8 +15,7 @@ export class TodoItemFlatNode {
 }
 @Injectable()
 export class ChecklistDatabase {
-  TREE_DATA = {
-  };
+  TREE_DATA = {};
   dataChange = new BehaviorSubject<TodoItemNode[]>([]);
 
   get data(): TodoItemNode[] {
@@ -31,6 +30,7 @@ export class ChecklistDatabase {
     const data = this.buildFileTree(this.TREE_DATA, 0);
     this.dataChange.next(data);
   }
+
   buildFileTree(obj: object, level: number): TodoItemNode[] {
     return Object.keys(obj).reduce<TodoItemNode[]>((accumulator, key) => {
       const value = obj[key];
@@ -67,7 +67,7 @@ export class ChecklistDatabase {
   styleUrls: ['./tree-checklist.component.scss'],
   providers: [ChecklistDatabase]
 })
-export class TreeChecklistComponent implements OnInit{
+export class TreeChecklistComponent implements OnInit {
   @Input() data: any;
   searchQuery: string = '';
   selectedData = [];
@@ -86,6 +86,7 @@ export class TreeChecklistComponent implements OnInit{
   dataSource: MatTreeFlatDataSource<TodoItemNode, TodoItemFlatNode>;
 
   checklistSelection = new SelectionModel<TodoItemFlatNode>(true /* multiple */);
+
   ngOnInit() {
     this.database.setData(this.data);
     this.treeFlattener = new MatTreeFlattener(this.transformer, this.getLevel,
@@ -96,6 +97,7 @@ export class TreeChecklistComponent implements OnInit{
       this.dataSource.data = data;
     });
   }
+
   constructor(private database: ChecklistDatabase) {
   }
 
@@ -121,6 +123,7 @@ export class TreeChecklistComponent implements OnInit{
     this.nestedNodeMap.set(node, flatNode);
     return flatNode;
   }
+
   descendantsAllSelected(node: TodoItemFlatNode): boolean {
     const descendants = this.treeControl.getDescendants(node);
     return descendants.every(child => this.checklistSelection.isSelected(child));
@@ -145,7 +148,7 @@ export class TreeChecklistComponent implements OnInit{
     else {
       this.checklistSelection.deselect(...descendants);
       descendants.forEach(descendant => {
-        this.selectedData.splice(this.selectedData.indexOf(descendant.item) , 1);
+        this.selectedData.splice(this.selectedData.indexOf(descendant.item), 1);
       });
     }
   }
@@ -158,24 +161,31 @@ export class TreeChecklistComponent implements OnInit{
 
   saveNode(node: TodoItemFlatNode, itemValue: string) {
     const nestedNode = this.flatNodeMap.get(node);
-    this.database.updateItem( nestedNode!, itemValue);
+    this.database.updateItem(nestedNode!, itemValue);
   }
+
   selectNode(node) {
     this.checklistSelection.toggle(node);
-    if (this.checklistSelection.isSelected(node))
-      this.selectedData.push(node.item);
-    else this.selectedData.splice(this.selectedData.indexOf(node.item) , 1);
+    if (!node.expandable) {
+      if (this.checklistSelection.isSelected(node))
+        this.selectedData.push(node.item);
+      else
+        this.selectedData.splice(this.selectedData.indexOf(node.item), 1);
+    }
   }
+
   getSelectedData() {
     return this.selectedData;
   }
+
   hideNode(node) {
-    if(this.searchQuery == '')
+    if (this.searchQuery == '')
       return false;
     if (node.item.indexOf(this.searchQuery) > -1)
       return false;
     return true;
   }
+
   filterChanged(filter: string): void {
     this.searchQuery = filter;
     if (this.searchQuery === '')
@@ -183,7 +193,9 @@ export class TreeChecklistComponent implements OnInit{
     else
       this.treeControl.expandAll();
   }
+
   toggleAllNodes(): void {
+    console.log(this.nestedNodeMap);
     console.log('ssdad  ');
     this.nestedNodeMap.forEach(node => {
       this.selectNode(node);
