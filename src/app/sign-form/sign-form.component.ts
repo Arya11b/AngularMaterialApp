@@ -47,7 +47,7 @@ export class SignFormComponent implements OnInit {
     this.hero = new Hero;
   }
   ngOnInit() {
-    this.provinceOptions = {hasCity: true, isDynamic: false, count: 1};
+    this.provinceOptions = {hasCity: true, isDynamic: true, count: 1};
     this.initHero();
   }
   // save functions

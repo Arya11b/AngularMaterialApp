@@ -2,9 +2,7 @@ import {SelectionModel} from '@angular/cdk/collections';
 import {FlatTreeControl} from '@angular/cdk/tree';
 import {Component, Injectable, Input, OnInit} from '@angular/core';
 import {MatTreeFlatDataSource, MatTreeFlattener} from '@angular/material/tree';
-import {BehaviorSubject} from 'rxjs';
-import {FieldService} from "../../services/field.service";
-import {nullSafeIsEquivalent} from "@angular/compiler/src/output/output_ast";
+import {BehaviorSubject, Subject} from 'rxjs';
 
 export class TodoItemNode {
   children: TodoItemNode[];
@@ -15,7 +13,6 @@ export class TodoItemFlatNode {
   level: number;
   expandable: boolean;
 }
-
 @Injectable()
 export class ChecklistDatabase {
   TREE_DATA = {
@@ -70,9 +67,9 @@ export class ChecklistDatabase {
   styleUrls: ['./tree-checklist.component.scss'],
   providers: [ChecklistDatabase]
 })
-
 export class TreeChecklistComponent implements OnInit{
   @Input() data: any;
+  searchQuery: string = '';
   selectedData = [];
   //
   flatNodeMap = new Map<TodoItemFlatNode, TodoItemNode>();
@@ -124,7 +121,6 @@ export class TreeChecklistComponent implements OnInit{
     this.nestedNodeMap.set(node, flatNode);
     return flatNode;
   }
-
   descendantsAllSelected(node: TodoItemFlatNode): boolean {
     const descendants = this.treeControl.getDescendants(node);
     return descendants.every(child => this.checklistSelection.isSelected(child));
@@ -144,14 +140,12 @@ export class TreeChecklistComponent implements OnInit{
       descendants.forEach(descendant => {
         // console.log(descendant.item);
         this.selectedData.push(descendant.item);
-        console.log(this.selectedData);
       });
     }
     else {
       this.checklistSelection.deselect(...descendants);
       descendants.forEach(descendant => {
         this.selectedData.splice(this.selectedData.indexOf(descendant.item) , 1);
-        console.log(this.selectedData);
       });
     }
   }
@@ -168,13 +162,24 @@ export class TreeChecklistComponent implements OnInit{
   }
   selectNode(node) {
     this.checklistSelection.toggle(node);
-    // console.log('checked');
     if (this.checklistSelection.isSelected(node))
       this.selectedData.push(node.item);
     else this.selectedData.splice(this.selectedData.indexOf(node.item) , 1);
-    console.log(this.selectedData);
   }
   getSelectedData() {
     return this.selectedData;
+  }
+  hideNode(node) {
+    if(this.searchQuery == '') {
+      return false;
+    }
+    if (node.item.indexOf(this.searchQuery) > -1) {
+      this.treeControl.expandAll();
+      return false;
+    }
+    return true;
+  }
+  filterChanged(filter: string): void {
+    this.searchQuery = filter;
   }
 }
