@@ -1,4 +1,5 @@
 <input matInput class="form-control" (input)="filterChanged($event.target.value)" placeholder="Search Skill" >
+<mat-checkbox (change)="toggleAllNodes()"> select All </mat-checkbox>
 <mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
   <mat-tree-node *matTreeNodeDef="let node" matTreeNodeToggle matTreeNodePadding [class.displayNode]="hideNode(node)">
     <button mat-icon-button disabled></button>

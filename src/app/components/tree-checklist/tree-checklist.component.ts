@@ -170,16 +170,24 @@ export class TreeChecklistComponent implements OnInit{
     return this.selectedData;
   }
   hideNode(node) {
-    if(this.searchQuery == '') {
+    if(this.searchQuery == '')
       return false;
-    }
-    if (node.item.indexOf(this.searchQuery) > -1) {
-      this.treeControl.expandAll();
+    if (node.item.indexOf(this.searchQuery) > -1)
       return false;
-    }
     return true;
   }
   filterChanged(filter: string): void {
     this.searchQuery = filter;
+    if (this.searchQuery === '')
+      this.treeControl.collapseAll();
+    else
+      this.treeControl.expandAll();
+  }
+  toggleAllNodes(): void {
+    console.log('ssdad  ');
+    this.nestedNodeMap.forEach(node => {
+      this.selectNode(node);
+    });
+    console.log(this.selectedData);
   }
 }
